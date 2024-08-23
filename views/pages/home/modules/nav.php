@@ -41,7 +41,7 @@
                     <div class="col-auto col-xxl-3 col-lg-2 text-end d-none d-sm-flex">
                         <div class="header-icon">
                             <div class="d-none d-xxl-inline-block me-25px xxl-me-10px"><div class="alt-font fs-15 xl-fs-13 widget-text fw-500"><span class="w-35px h-35px bg-base-color d-inline-block lh-36 me-10px border-radius-100px"><i class="fa-brands fa-whatsapp me-10px"></i></span><a href="tel:1800222000" class="widget-text text-white-hover">341 - xxxxxxx</a></div></div>
-                            <div class="header-button"><a href="#" class="btn btn-very-small btn-transparent-white-light btn-rounded">¿Reclamos?</a></div>
+                            <div class="header-button"><a href="https://w.app/reclamosfunes" class="btn btn-very-small btn-transparent-white-light btn-rounded">¿Reclamos?</a></div>
                         </div>  
                     </div>
                 </div>

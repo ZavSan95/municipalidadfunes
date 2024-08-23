@@ -1,10 +1,10 @@
         <!-- start page title -->
-        <section class="page-title-big-typography bg-dark-gray ipad-top-space-margin" data-parallax-background-ratio="0.5" style="background-image: url(./images/history/historia_funes3.jpg)">
+        <section class="page-title-big-typography bg-dark-gray ipad-top-space-margin" data-parallax-background-ratio="0.5" style="background-image: url('<?php echo $path ?>/views/assets/images/history/historia_funes3.jpg')">
             <div class="opacity-extra-medium bg-dark-slate-blue"></div>
             <div class="container">
                 <div class="row align-items-center justify-content-center extra-small-screen">
                     <div class="col-12 position-relative text-center page-title-extra-large">
-                        <h1 class="m-auto text-white text-shadow-double-large fw-500 ls-minus-3px xs-ls-minus-2px" data-anime='{ "translateY": [15, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>FUNES</h1>
+                        <h1 class="m-auto text-white text-shadow-double-large fw-500 ls-minus-3px xs-ls-minus-2px" data-anime='{ "translateY": [15, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>Nuestra Historia</h1>
                     </div> 
                     <div class="down-section text-center" data-anime='{ "translateY": [-15, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                         <a href="#down-section" aria-label="scroll down" class="section-link">
@@ -27,14 +27,14 @@
                                 <div class="atropos-rotate">
                                     <div class="atropos-inner">
                                         <div data-atropos-offset="3">
-                                            <img src="../municipalidadfunes/images/history/historia_funes.jpg" class="border-radius-6px w-100" alt="">
+                                            <img src="<?php echo $path ?>/views/assets/images/history/historia_funes.jpg" class="border-radius-6px w-100" alt="">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="absolute-middle-right md-absolute-middle-center right-minus-45px md-right-auto d-inline-block text-center z-index-9">
-                            <a href="https://www.youtube.com/watch?v=XQUKkSJPTPw&source_ve_path=MjM4NTE" class="bg-white box-shadow-extra-large rounded-circle video-icon-box video-icon-extra-large popup-youtube d-inline-block" data-anime='{ "translate": [0, 0], "scale": [0,1], "duration": 1000, "delay": 300, "staggervalue": 300, "easing": "easeOutBack" }'>
+                            <a href="https://www.youtube.com/watch?v=XQUKkSJPTPw" class="bg-white box-shadow-extra-large rounded-circle video-icon-box video-icon-extra-large popup-youtube d-inline-block" data-anime='{ "translate": [0, 0], "scale": [0,1], "duration": 1000, "delay": 300, "staggervalue": 300, "easing": "easeOutBack" }'>
                                 <span>
                                     <span class="video-icon bg-white">
                                         <i class="fa-solid fa-play text-base-color"></i>
@@ -49,7 +49,7 @@
                     <div class="col-xl-5 col-lg-6 offset-lg-1 col-md-9 ps-6 text-center text-lg-start lg-ps-15px" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                         <span class="bg-solitude-blue text-uppercase fs-13 ps-25px pe-25px alt-font fw-600 text-base-color lh-40 sm-lh-55 border-radius-100px d-inline-block mb-25px">Historia</span>
                         <p>La ciudad de Funes, ubicada en la provincia de Santa Fe, Argentina, tiene una historia marcada por su rápido desarrollo y crecimiento. Fundada el 19 de octubre de 1871, Funes comenzó como un pequeño asentamiento rural. Durante el siglo XX, su cercanía a Rosario impulsó un notable auge en su urbanización y expansión. La ciudad, que en sus primeros años estuvo relacionada principalmente con la agricultura, ha evolucionado para convertirse en una importante localidad residencial y comercial, destacándose por su calidad de vida y su entorno natural. Su desarrollo ha sido impulsado por una creciente demanda de residencias suburbanas debido a su proximidad a una gran ciudad como Rosario.</p> 
-                        <a href="demo-business-services.html" class="btn btn-large btn-dark-gray btn-box-shadow btn-rounded mt-15px sm-mt-10px">Actualidad<i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/noticias" class="btn btn-large btn-dark-gray btn-box-shadow btn-rounded mt-15px sm-mt-10px">Actualidad<i class="fa-solid fa-arrow-right"></i></a>
                     </div> 
                 </div> 
                 <div class="row align-items-center justify-content-center mt-7 ps-5 sm-mt-35px lg-ps-0 pe-5 lg-pe-0">

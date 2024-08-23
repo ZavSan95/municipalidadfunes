@@ -6,7 +6,7 @@
                     <div class="col-lg-3 col-sm-6 last-paragraph-no-margin order-5 order-sm-4 order-lg-1 text-center text-sm-start">
                         <a href="demo-business.html" class="footer-logo mb-15px d-block d-lg-inline-block"><img src="<?php echo $path ?>/views/assets/images/LOGOencabezado.png" data-at2x="images/demo-business-logo-white@2x.png" alt=""></a>
                         <p class="w-90 sm-w-100 d-inline-block mb-15px">Gobierno de la Ciudad de Funes - Santa Fe - Argentina</p>
-                        <p>&COPY;  2024 <a href="index.html" target="_blank" class="text-white text-decoration-line-bottom">Municipalidad de Funes.</a></p>
+                        <p>&COPY;  2024 <a href="/home"  class="text-white text-decoration-line-bottom">Municipalidad de Funes.</a></p>
                     </div>
                     <!-- end footer column -->
 

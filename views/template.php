@@ -34,28 +34,52 @@ foreach($routesArray as $key => $value){
 <html class="no-js" lang="en">
 
 <head>
-    <title>Gobierno de la Ciudad de Funes - Home</title>
+    <title style="text-transform: capitalize;">Gobierno de la Ciudad de Funes - 
+    <?php 
+        if(!empty($routesArray[0])){
+
+            echo ucwords($routesArray[0]);
+
+        }else{
+
+            echo "Home";
+        }
+    ?></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="ThemeZaa">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="description"
-        content="Elevate your online presence with Crafto - a modern, versatile, multipurpose Bootstrap 5 responsive HTML5, SCSS template using highly creative 52+ ready demos.">
+    content="Elevate your online presence with Crafto - a modern, versatile, multipurpose Bootstrap 5 responsive HTML5, SCSS template using highly creative 52+ ready demos.">
+    
     <!-- favicon icon -->
     <link rel="shortcut icon" href="<?php echo $path ?>/views/assets/images/favicon.png">
     <link rel="apple-touch-icon" href="images/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    
     <!-- google fonts preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- style sheets and font icons -->
-    <script src="https://kit.fontawesome.com/7ec756f6f3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/vendors.min.css" />
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/icon.min.css" />
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/style.css" />
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/responsive.css" />
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/demos/business/business.css" />
+
+    <!-- Swiper CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" /> -->
+
+    <!-- SCRIPTS -->
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/7ec756f6f3.js" crossorigin="anonymous"></script>
+
+    <!-- Swiper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script> -->
+
 </head>
 
 <body data-mobile-nav-style="classic">
@@ -63,40 +87,38 @@ foreach($routesArray as $key => $value){
 <!-- Nav -->
 <?php include "views/pages/home/modules/nav.php"; ?>
 
-    <?php
+<?php
+
+    // echo "<pre>"; var_dump($routesArray); echo "</pre>";
     
-        if(!empty($routesArray[0])){
+    // Si $routesArray está vacío, redirige a la página de inicio
+    if (empty($routesArray[0])) {
+        include 'views/pages/home/home.php';
+    } else {
+        // Si $routesArray no está vacío, verifica las posibles rutas
+        if ($routesArray[0] == "turnos") {
 
-            if($routesArray[0] == "turnos"){
+            include 'pages/turnos/turnos.php';
 
-                
-                include 'pages/turnos/turnos.php';
+        } elseif ($routesArray[0] == "noticias") {
 
-            }
+            include 'views/pages/noticias/noticias.php';
 
-            if($routesArray[0] == "noticias"){
+        } elseif ($routesArray[0] == "home") {
 
-                include 'views/pages/noticias/noticias.php';
-            }
+            include 'views/pages/home/home.php';
 
-            if($routesArray[0] == "home"){
+        } elseif ($routesArray[0] == "ciudad") {
 
-                include 'views/pages/home/home.php';
-            }
+            include 'views/pages/ciudad/ciudad.php';
 
-            if($routesArray[0] == "ciudad"){
-
-                include 'views/pages/ciudad/ciudad.php';
-
-            }
-
-        }else{
-
-            include 'pages/home/home.php';
-
+        } else {
+            // Si no coincide con ninguna ruta, muestra la página 404
+            include 'pages/404/404.php';
         }
+    }
 
-    ?>
+?>
 
 <!-- Footer -->
 <?php include "views/pages/home/modules/footer.php"; ?>

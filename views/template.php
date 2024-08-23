@@ -84,6 +84,12 @@ foreach($routesArray as $key => $value){
                 include 'views/pages/home/home.php';
             }
 
+            if($routesArray[0] == "ciudad"){
+
+                include 'views/pages/ciudad/ciudad.php';
+
+            }
+
         }else{
 
             include 'pages/home/home.php';

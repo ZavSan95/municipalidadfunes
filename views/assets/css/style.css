@@ -13681,6 +13681,7 @@ canvas {
 .process-step-style-01:hover .border-color-transparent-on-hover {
   border-color: transparent !important;
 }
+
 /* Process step style 02 */
 .process-step-style-02 .process-step-icon {
   overflow: hidden;

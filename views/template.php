@@ -69,16 +69,15 @@ foreach($routesArray as $key => $value){
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/responsive.css" />
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/demos/business/business.css" />
 
-    <!-- Swiper CSS -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" /> -->
-
     <!-- SCRIPTS -->
 
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/7ec756f6f3.js" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-    <!-- Swiper -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script> -->
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/eb4a62b60b.js" crossorigin="anonymous"></script>
+
+
 
 </head>
 
@@ -112,7 +111,11 @@ foreach($routesArray as $key => $value){
 
             include 'views/pages/ciudad/ciudad.php';
 
-        } else {
+        } elseif ($routesArray[0] == "reclamos"){
+
+            include 'views/pages/reclamos/reclamos.php';
+        } 
+        else {
             // Si no coincide con ninguna ruta, muestra la página 404
             include 'pages/404/404.php';
         }
@@ -126,10 +129,11 @@ foreach($routesArray as $key => $value){
 <!-- Stickys -->
 <?php include "views/pages/home/modules/stickys.php"; ?>
 
-    <!-- javascript libraries -->
-    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/vendors.min.js"></script>
-    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/main.js"></script>
+<!-- javascript libraries -->
+<script type="text/javascript" src="<?php echo $path ?>/views/assets/js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $path ?>/views/assets/js/vendors.min.js"></script>
+<script type="text/javascript" src="<?php echo $path ?>/views/assets/js/main.js"></script>
+
 
 </body>
 

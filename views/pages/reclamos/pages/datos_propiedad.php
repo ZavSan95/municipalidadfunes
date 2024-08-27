@@ -88,12 +88,12 @@ async function initialize() {
             direccionValue = input.value;
             var lat = place.geometry.location.lat();
             var lng = place.geometry.location.lng();
-            // console.log('Latitud: ' + lat + ', Longitud: ' + lng);
-            // console.log('Direccion: ', direccionValue);
+            console.log('Latitud: ' + lat + ', Longitud: ' + lng);
+            console.log('Direccion: ', direccionValue);
 
             // Asignar valores a los inputs ocultos
-            document.getElementById('latitud').value = latValue;
-            document.getElementById('longitud').value = lngValue;
+            document.getElementById('latitud').value = lat;
+            document.getElementById('longitud').value = lng;
             document.getElementById('direccion_transformada').value = direccionValue;
 
             // Actualizar el iframe con las nuevas coordenadas

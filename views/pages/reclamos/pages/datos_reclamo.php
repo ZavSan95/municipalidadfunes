@@ -5,7 +5,7 @@
 </div>
 
 <!-- Contenedor Dropzone dentro del formulario principal -->
-<div class="dropzone" id="myDropzone">
+<div class="dropzone mb-16px" id="myDropzone">
     <!-- Fallback input aquí para cuando Dropzone no esté disponible -->
     <div class="fallback">
         <input name="file" type="file" multiple />

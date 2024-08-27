@@ -8,9 +8,6 @@
 <!-- Security -->
 <?php include "modules/security.php"; ?>
 
-<!-- Trámites -->
-<?php include "modules/tramites.php"; ?>
-
 <!-- Medios Pago -->
 <?php include "modules/medios_pago.php"; ?>
 

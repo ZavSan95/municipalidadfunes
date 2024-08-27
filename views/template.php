@@ -114,7 +114,12 @@ foreach($routesArray as $key => $value){
         } elseif ($routesArray[0] == "reclamos"){
 
             include 'views/pages/reclamos/reclamos.php';
-        } 
+
+        } elseif ($routesArray[0] == "tramites"){
+
+            include 'views/pages/tramites/tramites.php';
+        }  
+
         else {
             // Si no coincide con ninguna ruta, muestra la página 404
             include 'pages/404/404.php';

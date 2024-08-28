@@ -37,6 +37,18 @@ header .navbar-brand img {
 header.sticky.sticky-active [data-header-hover="light"] .widget-text i {
     color: var(--white);
 }
+
+/* Iconos y texto de las redes sociales cuando el header es sticky y tiene clase sticky-active */
+header.sticky.sticky-active .header-social-icon i,
+header.sticky.sticky-active .header-icon .widget-text i {
+    color: var(--dark-grey) !important;
+}
+
+/* Asegurarse de que el enlace de texto de las redes sociales también sea visible */
+header.sticky.sticky-active .header-icon a {
+    color: var(--dark-grey) !important;
+}
+
 /* accordion style 02 */
 .navbar .navbar-nav .dropdown.dropdown-with-icon-style02 .dropdown-menu {
     background-color: var(--dark-gray);

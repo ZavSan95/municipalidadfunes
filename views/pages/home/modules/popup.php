@@ -1,11 +1,11 @@
         <!-- PopUP Suscripcion Newsletter -->
-        <!-- <div id="subscribe-popup" class="container subscribe-popup contact-form-style-01 position-relative text-center xs-p-0 mfp-hide"> -->
-            <!-- start contact form -->
+        <!-- <div id="subscribe-popup" class="container subscribe-popup contact-form-style-01 position-relative text-center xs-p-0 mfp-hide">
+            
             <div class="row g-0 position-relative">
                 <div class="col-lg-5 cover-background md-h-600px xs-h-400px" style="background-image:url('<?php echo $path ?>/views/assets/images/mercado.jpeg');"></div>
                 <div class="col-lg-7">
                     <div class="p-14 xl-p-11 bg-white">
-                        <!-- <span class="mb-5px d-block"></span> -->
+                        
                         <h3 class="d-inline-block alt-font fw-600 text-dark-gray mb-8 ls-minus-1px">¿Cómo podemos ayudarte?</h3>
                         <form action="email-templates/contact-form.php" method="post">
                             <div class="position-relative form-group mb-15px">
@@ -33,6 +33,6 @@
                 </div>
                 <button title="Close (Esc)" type="button" class="mfp-close text-dark-gray"></button>
             </div>
-            <!-- end contact form -->
-        <!-- </div>  -->
+            
+        </div>  -->
         <!-- end subscription popup -->

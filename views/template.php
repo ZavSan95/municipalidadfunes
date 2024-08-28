@@ -118,6 +118,10 @@ foreach($routesArray as $key => $value){
         } elseif ($routesArray[0] == "tramites"){
 
             include 'views/pages/tramites/tramites.php';
+
+        }  elseif ($routesArray[0] == "contacto"){
+
+            include 'views/pages/contacto/contacto.php';
         }  
 
         else {

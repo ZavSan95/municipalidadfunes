@@ -34,15 +34,24 @@
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Gobierno</a></li>
                                 <li class="nav-item"><a href="/noticias" class="nav-link">Noticias</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link">Contacto</a></li>
+                                <li class="nav-item"><a href="/contacto" class="nav-link">Contacto</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-auto col-xxl-3 col-lg-2 text-end d-none d-sm-flex">
                         <div class="header-icon">
-                            <div class="d-none d-xxl-inline-block me-25px xxl-me-10px"><div class="alt-font fs-15 xl-fs-13 widget-text fw-500"><span class="w-35px h-35px bg-base-color d-inline-block lh-36 me-10px border-radius-100px">
-                                <i class="fa-brands fa-whatsapp me-10px"></i></span><a href="https://w.app/reclamosfunes" target="_blank" class="widget-text text-white-hover">341 - xxxxxxx</a></div></div>
-                            <div class="header-button"><a href="/reclamos"  class="btn btn-very-small btn-transparent-white-light btn-rounded">¿Reclamos?</a></div>
+                            <div class="d-none d-xxl-inline-block me-25px xxl-me-10px"><div class="alt-font fs-15 xl-fs-13 widget-text fw-500">
+                                <div class="col-auto col-lg-2 text-end">
+                                <div class="header-icon"> 
+                                    <div class="header-social-icon icon">
+                                        <a href="http://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                                        <a href="http://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                        <a href="http://www.twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                        <a href="https://w.app/reclamosfunes" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                                    </div>
+                                </div>  
+                            </div>
+
                         </div>  
                     </div>
                 </div>
@@ -50,3 +59,5 @@
             <!-- end navigation -->
         </header>
         <!-- end header --> 
+
+

@@ -122,6 +122,10 @@ foreach($routesArray as $key => $value){
         }  elseif ($routesArray[0] == "contacto"){
 
             include 'views/pages/contacto/contacto.php';
+
+        }  elseif ($routesArray[0] == "higiene_urbana"){
+
+            include 'views/pages/higiene/higiene_urbana.php';
         }  
 
         else {

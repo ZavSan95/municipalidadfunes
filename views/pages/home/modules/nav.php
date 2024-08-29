@@ -28,7 +28,7 @@
                                         <li><a href="/tramites"><i class="bi bi-briefcase"></i>Trámites</a></li>
                                         <li><a href="/turnos" target=""><i class="bi bi-clipboard-data"></i>Turnos</a></li>
                                         <li><a href="/reclamos"><i class="bi bi-peace"></i>Reclamos</a></li>
-                                        <li><a href="#"><i class="bi bi-bar-chart-line"></i>Higiene Urbana</a></li>
+                                        <li><a href="/higiene_urbana"><i class="bi bi-bar-chart-line"></i>Higiene Urbana</a></li>
                                         <li><a href="#"><i class="bi bi-send-check"></i>Salud Animal</a></li>
                                     </ul>
                                 </li>

@@ -81,6 +81,7 @@ Table of contents
   --mercadopago: #007EB5;
   --pagofacil: #D2B31D;
   --debin: #90C9A7;
+  --higiene: #074A1F;
 }
 /* ===================================
     03. Reset
@@ -13419,6 +13420,12 @@ canvas {
 .pricing-table-style-04 .accordion-item.active-accordion.debin {
   padding: 30px 40px;
   background-color: var(--debin) !important;
+  color: var(--white) !important;
+}
+
+.pricing-table-style-04 .accordion-item.active-accordion.higiene {
+  padding: 30px 40px;
+  background-color: var(--higiene) !important;
   color: var(--white) !important;
 }
 

@@ -287,4 +287,4 @@
 </section>
 <!-- end section -->
 
-<!-- <script src="<?php echo $path; ?>/views/assets/js/higiene_urbana.js"></script> -->
+<script src="<?php echo $path; ?>/views/assets/js/higiene_urbana.js"></script>

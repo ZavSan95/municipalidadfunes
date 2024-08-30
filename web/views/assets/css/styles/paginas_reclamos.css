@@ -1,0 +1,134 @@
+/* Estilos para el paso activo */
+.process-step-style-01.active .box-overlay {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.process-step-style-01.active .number,
+.process-step-style-01.active .icon {
+    color: var(--white);
+}
+
+.process-step-style-01.active .process-step-icon {
+    background: var(--base-color) !important;
+}
+
+.process-step-style-01.active .border-color-transparent-on-hover {
+    border-color: transparent !important;
+}
+
+.p-6 {
+    padding: 4.8rem !important;
+    /* Ajuste del padding original de 6rem a 4.8rem */
+}
+
+.md-p-5 {
+    padding: 4rem !important;
+    /* Ajuste del padding original de 5rem a 4rem */
+}
+
+.sm-p-8 {
+    padding: 6.4rem !important;
+    /* Ajuste del padding original de 8rem a 6.4rem */
+}
+
+.fs-4 {
+    font-size: 1.6rem;
+    /* Ajuste del tamaño de fuente de 2rem a 1.6rem */
+}
+
+.fs-5 {
+    font-size: 1.2rem;
+    /* Ajuste del tamaño de fuente de 1.5rem a 1.2rem */
+}
+
+.fs-13 {
+    font-size: 0.8rem;
+    /* Ajuste del tamaño de fuente de 1rem a 0.8rem */
+}
+
+.fs-14 {
+    font-size: 1.12rem;
+    /* Ajuste del tamaño de fuente de 1.4rem a 1.12rem */
+}
+
+.h-64px {
+    height: 64px;
+    /* Ajuste del tamaño de 80px a 64px */
+}
+
+.w-64px {
+    width: 64px;
+    /* Ajuste del tamaño de 80px a 64px */
+}
+
+.mb-16px {
+    margin-bottom: 16px !important;
+    /* Ajuste del margen original de 20px a 16px */
+}
+
+.mb-24px {
+    margin-bottom: 24px !important;
+    /* Ajuste del margen original de 30px a 24px */
+}
+
+.mb-4px {
+    margin-bottom: 4px !important;
+    /* Ajuste del margen original de 5px a 4px */
+}
+
+.mt-16px {
+    margin-top: 16px !important;
+    /* Ajuste del margen original de 20px a 16px */
+}
+
+.fs-160 {
+    font-size: 12.8rem;
+    /* Ajuste del tamaño de fuente de 16rem a 12.8rem */
+}
+
+.md-fs-136 {
+    font-size: 10.88rem;
+    /* Ajuste del tamaño de fuente de 13.6rem a 10.88rem */
+}
+
+.xs-fs-88 {
+    font-size: 7.04rem;
+    /* Ajuste del tamaño de fuente de 8.8rem a 7.04rem */
+}
+
+.border-radius-6px {
+    border-radius: 6px;
+    /* Se mantiene igual porque el radio de borde es pequeño */
+}
+
+.pt-4 {
+    padding-top: 3.2rem;
+    /* Ajuste del padding original de 4rem a 3.2rem */
+}
+
+.md-pt-36px {
+    padding-top: 28.8px;
+    /* Ajuste del padding original de 36px a 28.8px */
+}
+
+/* Elimina estilos que ya no son necesarios */
+.position-relative {
+    position: static;
+    /* Ajusta esto o remuévelo si ya no es necesario */
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+    /* Elimina cualquier margen inferior si no es necesario */
+}
+
+/* Si hay paddings extra debido a íconos, elimina o ajusta */
+.form-control {
+    padding-left: 1rem !important;
+    /* Ajusta el padding si el ícono estaba creando espacio extra */
+}
+
+.d-none {
+    display: none;
+}

@@ -43,17 +43,18 @@
 
 <!-- Formulario -->
 <div class="mb-16px">
-    <input type="text" name="tgi" class="form-control required" placeholder="Número Cuenta TGI*">
+    <input type="numeros" name="cuenta_reclamo" class="form-control required" placeholder="Número Cuenta TGI*">
 </div>
 <div class="mb-16px">
-    <select name="zona" class="form-control required">
+    <select name="zona_reclamo" class="form-control required">
         <option value="0" disabled selected>Seleccione Zona*</option>
+        <option value="1">Zona 1</option>
     </select>
     <span>Si no conoce su zona búsquela <b><a href="https://www.funes.gob.ar/ciudad/mapas"
                 target="_blank">aquí.</a></b></span>
 </div>
 <div class="mb-16px">
-    <input type="text" id="direccion" name="direccion" class="form-control required" placeholder="Dirección*">
+    <input type="all    " id="direccion" name="direccion_reclamo" class="form-control required" placeholder="Dirección*">
 </div>
 
 <!-- Mapa de Google reemplazado por iframe -->
@@ -64,8 +65,8 @@
 </div>
 
 <!-- Campos ocultos para latitud, longitud y dirección transformada -->
-<input type="hidden" name="latitud" id="latitud" name="latitud">
-<input type="hidden" name="longitud" id="longitud" name="longitud">
+<input type="hidden" name="latitud_reclamo" id="latitud" name="latitud">
+<input type="hidden" name="longitud_reclamo" id="longitud" name="longitud">
 <input type="hidden" name="direccion_transformada" id="direccion_transformada" name="direccion_transformada">
 
 <!-- Script de inicialización -->

@@ -10,7 +10,7 @@ class CurlController{
 	static public function request($url, $method, $fields) {
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://api.santiagoz5.sg-host.com/'.$url,
+			CURLOPT_URL => 'http://api.com/'.$url,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -19,6 +19,8 @@ class CurlController{
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => $method,
 			CURLOPT_POSTFIELDS => $fields,
+			//CURLOPT_SSL_VERIFYPEER => false,  // Ignora la verificación del certificado
+        	//CURLOPT_SSL_VERIFYHOST => 0,  // Ignora la verificación del nombre del host
 			CURLOPT_HTTPHEADER => array(
 				'Authorization: SSDFzdg235dsgsdfAsa44SDFGDFDadg'
 			),

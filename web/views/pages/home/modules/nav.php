@@ -19,7 +19,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav"> 
                             <ul class="navbar-nav alt-font"> 
-                                <li class="nav-item"><a href="/home" class="nav-link">Inicio</a></li>
+                                <li class="nav-item"><a href="/" class="nav-link">Inicio</a></li>
                                 <li class="nav-item"><a href="/ciudad" class="nav-link">Ciudad</a></li>
                                 <li class="nav-item dropdown dropdown-with-icon-style02">
                                     <a href="#" class="nav-link">Servicios</a>

@@ -2154,8 +2154,14 @@
         var emailFormat = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
                 telFormat = /[0-9 -()+]+$/,
                 urlformat = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                textFormat = /^[a-zA-Z\s]+$/,
+                numberFormat = /[0-9]+$/,
+                allFormat = /^[a-zA-Z0-9\s]+$/,
                 fieldVal = $(this).val();
         if (fieldVal == '' || fieldVal == undefined) {
+            $(this).addClass('is-invalid');
+        }
+        else if($(this).attr('type') == 'text' && !textFormat.test(fieldVal)){
             $(this).addClass('is-invalid');
         } else if ($(this).attr('type') == 'email' && !emailFormat.test(fieldVal)) {
             $(this).addClass('is-invalid');
@@ -2163,7 +2169,12 @@
             $(this).addClass('is-invalid');
         } else if ($(this).attr('type') == 'tel' && !telFormat.test(fieldVal)) {
             $(this).addClass('is-invalid');
-        } else {
+        } else if ($(this).attr('type') == 'numeros' && !numberFormat.test(fieldVal)) {
+            $(this).addClass('is-invalid');
+        } else if ($(this).attr('type') == 'all' && !allFormat.test(fieldVal)) {
+            $(this).addClass('is-invalid');
+        } 
+        else {
             $(this).removeClass('is-invalid').addClass('is-valid');
         }
     });

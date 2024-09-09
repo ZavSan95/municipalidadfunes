@@ -81,6 +81,15 @@ foreach($routesArray as $key => $value){
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/eb4a62b60b.js" crossorigin="anonymous"></script>
 
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Alerts -->
+    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/alerts.js"></script>
+
+
 
 
 </head>
@@ -95,48 +104,40 @@ foreach($routesArray as $key => $value){
     // echo "<pre>"; var_dump($routesArray); echo "</pre>";
     
     // Si $routesArray está vacío, redirige a la página de inicio
-    if (empty($routesArray[0])) {
-        include 'views/pages/home/home.php';
+if (empty($routesArray[0])) {
+    include 'views/pages/home/home.php';
+} else {
+    // Si $routesArray no está vacío, verifica las posibles rutas
+    if ($routesArray[0] == "admin") {
+
+        //MODULO ADMINISTRACIÓN
+        
+    } elseif ($routesArray[0] == "turnos") {
+        include 'pages/turnos/turnos.php';
+
+    } elseif ($routesArray[0] == "noticias") {
+        include 'views/pages/noticias/noticias.php';
+
+    }elseif ($routesArray[0] == "ciudad") {
+        include 'views/pages/ciudad/ciudad.php';
+
+    } elseif ($routesArray[0] == "reclamos") {
+        include 'views/pages/reclamos/reclamos.php';
+
+    } elseif ($routesArray[0] == "tramites") {
+        include 'views/pages/tramites/tramites.php';
+
+    } elseif ($routesArray[0] == "contacto") {
+        include 'views/pages/contacto/contacto.php';
+
+    } elseif ($routesArray[0] == "higiene_urbana") {
+        include 'views/pages/higiene/higiene_urbana.php';
+
     } else {
-        // Si $routesArray no está vacío, verifica las posibles rutas
-        if ($routesArray[0] == "turnos") {
-
-            include 'pages/turnos/turnos.php';
-
-        } elseif ($routesArray[0] == "noticias") {
-
-            include 'views/pages/noticias/noticias.php';
-
-        } elseif ($routesArray[0] == "home") {
-
-            include 'views/pages/home/home.php';
-
-        } elseif ($routesArray[0] == "ciudad") {
-
-            include 'views/pages/ciudad/ciudad.php';
-
-        } elseif ($routesArray[0] == "reclamos"){
-
-            include 'views/pages/reclamos/reclamos.php';
-
-        } elseif ($routesArray[0] == "tramites"){
-
-            include 'views/pages/tramites/tramites.php';
-
-        }  elseif ($routesArray[0] == "contacto"){
-
-            include 'views/pages/contacto/contacto.php';
-
-        }  elseif ($routesArray[0] == "higiene_urbana"){
-
-            include 'views/pages/higiene/higiene_urbana.php';
-        }  
-
-        else {
-            // Si no coincide con ninguna ruta, muestra la página 404
-            include 'pages/404/404.php';
-        }
+        // Si no coincide con ninguna ruta, muestra la página 404
+        include 'pages/404/404.php';
     }
+}
 
 ?>
 
@@ -150,6 +151,7 @@ foreach($routesArray as $key => $value){
 <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/vendors.min.js"></script>
 <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/main.js"></script>
+
 
 
 

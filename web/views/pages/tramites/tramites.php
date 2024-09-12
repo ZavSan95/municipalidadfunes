@@ -47,7 +47,7 @@
                                 class="feather icon-feather-calendar icon-extra-medium text-dark-gray"></i><span>PATENTES</span></a>
                     </li>
                     <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab_four6"><i
-                                class="fa-solid fa-car-burst icon-extra-medium text-dark-gray"></i><span>INFRACCIONES</span></a>
+                                class="fa-solid fa-car-burst icon-extra-medium text-dark-gray"></i><span>API</span></a>
                     </li>
                 </ul>
                 <!-- end tab navigation -->
@@ -63,6 +63,7 @@
                             </div>
                             <!-- Iframe para TGI -->
                             <div class="flex-shrink-1" style="flex-basis: 600px;">
+                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Ingrese su Tasa de TGI</h5>
                                 <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menuurbanos.exe?ingreso" width="100%" height="300px"></iframe>
                             </div>
                         </div>
@@ -72,36 +73,33 @@
                     <!-- start tab content for TGR -->
                     <div class="tab-pane fade" id="tab_four2">
                         <!-- Content for TGR -->
-                        <div class="row align-items-center">
-                            <div class="col-md-6 offset-xl-1 sm-mb-30px">
-                                <img src="https://via.placeholder.com/600x730" alt="" class="border-radius-6px w-100" />
+                        <div class="d-flex">
+                            <!-- Contenido de texto o elementos adicionales -->
+                            <div class="flex-fill">
+                                <!-- Aquí podrías añadir otros elementos o contenido que quieras mostrar al lado del iframe -->
                             </div>
-                            <div class="col-xl-4 col-md-6 offset-xl-1 text-center text-md-start">
-                                <span
-                                    class="fs-18 fw-600 text-base-color mb-25px d-flex align-items-center justify-content-center justify-content-md-start">
-                                    <span class="text-center w-60px h-60px d-flex justify-content-center align-items-center rounded-circle bg-white box-shadow-medium-bottom align-middle me-15px flex-shrink-0">
-                                        <i class="feather icon-feather-shopping-bag fs-22"></i></span>TGR</span>
-                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Realiza el pago de TGR en línea de manera fácil y segura.</h5>
-                                <a href="#" class="btn btn-large btn-box-shadow btn-rounded btn-base-color mt-10px">Acceder</a>
+                            <!-- Iframe para TGI -->
+                            <div class="flex-shrink-1" style="flex-basis: 600px;">
+                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Ingrese su Tasa de TGR</h5>
+                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menururales.exe?ingreso" width="100%" height="300px"></iframe>
                             </div>
                         </div>
                     </div>
                     <!-- end tab content for TGR -->
+
                     
                     <!-- start tab content for CEMENTERIO -->
                     <div class="tab-pane fade" id="tab_four3">
                         <!-- Content for CEMENTERIO -->
-                        <div class="row align-items-center">
-                            <div class="col-md-6 offset-xl-1 sm-mb-30px">
-                                <img src="https://via.placeholder.com/600x730" alt="" class="border-radius-6px w-100" />
+                        <div class="d-flex">
+                            <!-- Contenido de texto o elementos adicionales -->
+                            <div class="flex-fill">
+                                <!-- Aquí podrías añadir otros elementos o contenido que quieras mostrar al lado del iframe -->
                             </div>
-                            <div class="col-xl-4 col-md-6 offset-xl-1 text-center text-md-start">
-                                <span
-                                    class="fs-18 fw-600 text-base-color mb-25px d-flex align-items-center justify-content-center justify-content-md-start">
-                                    <span class="text-center w-60px h-60px d-flex justify-content-center align-items-center rounded-circle bg-white box-shadow-medium-bottom align-middle me-15px flex-shrink-0">
-                                        <i class="feather icon-feather-file-text fs-22"></i></span>CEMENTERIO</span>
-                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Consulta y realiza gestiones relacionadas con el cementerio.</h5>
-                                <a href="#" class="btn btn-large btn-box-shadow btn-rounded btn-base-color mt-10px">Acceder</a>
+                            <!-- Iframe para TGI -->
+                            <div class="flex-shrink-1" style="flex-basis: 600px;">
+                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Ingrese su Tasa de Cementerio</h5>
+                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menucementerio.exe?ingreso" width="100%" height="300px"></iframe>
                             </div>
                         </div>
                     </div>
@@ -110,57 +108,49 @@
                     <!-- start tab content for DREI -->
                     <div class="tab-pane fade" id="tab_four4">
                         <!-- Content for DREI -->
-                        <div class="row align-items-center">
-                            <div class="col-md-6 offset-xl-1 sm-mb-30px">
-                                <img src="https://via.placeholder.com/600x730" alt="" class="border-radius-6px w-100" />
+
+                        <div class="d-flex">
+                            <!-- Contenido de texto o elementos adicionales -->
+                            <div class="flex-fill">
+                                <!-- Aquí podrías añadir otros elementos o contenido que quieras mostrar al lado del iframe -->
                             </div>
-                            <div class="col-xl-4 col-md-6 offset-xl-1 text-center text-md-start">
-                                <span
-                                    class="fs-18 fw-600 text-base-color mb-25px d-flex align-items-center justify-content-center justify-content-md-start">
-                                    <span class="text-center w-60px h-60px d-flex justify-content-center align-items-center rounded-circle bg-white box-shadow-medium-bottom align-middle me-15px flex-shrink-0">
-                                        <i class="feather icon-feather-calendar fs-22"></i></span>DREI</span>
-                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Gestiona tus trámites de DREI de manera eficiente.</h5>
-                                <a href="#" class="btn btn-large btn-box-shadow btn-rounded btn-base-color mt-10px">Acceder</a>
+                            <!-- Iframe para TGI -->
+                            <div class="flex-shrink-1" style="flex-basis: 600px;">
+                                <span style="color:#FF0000"><strong>NO SE ACEPTAN MÁS TRANSFERENCIAS BANCARIAS</strong></span></span></strong><br />
+                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Ingrese su DREI</h5>
+                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menucomercio.exe?ingreso" width="100%" height="300px"></iframe>
                             </div>
                         </div>
+
                     </div>
                     <!-- end tab content for DREI -->
+                    
                     
                     <!-- start tab content for PATENTES -->
                     <div class="tab-pane fade" id="tab_four5">
                         <!-- Content for PATENTES -->
-                        <div class="row align-items-center">
-                            <div class="col-md-6 offset-xl-1 sm-mb-30px">
-                                <img src="https://via.placeholder.com/600x730" alt="" class="border-radius-6px w-100" />
+                       <div class="flex-fill">
+                                <!-- Aquí podrías añadir otros elementos o contenido que quieras mostrar al lado del iframe -->
                             </div>
-                            <div class="col-xl-4 col-md-6 offset-xl-1 text-center text-md-start">
-                                <span
-                                    class="fs-18 fw-600 text-base-color mb-25px d-flex align-items-center justify-content-center justify-content-md-start">
-                                    <span class="text-center w-60px h-60px d-flex justify-content-center align-items-center rounded-circle bg-white box-shadow-medium-bottom align-middle me-15px flex-shrink-0">
-                                        <i class="feather icon-feather-calendar fs-22"></i></span>PATENTES</span>
-                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Consulta y paga tus patentes en línea de manera rápida.</h5>
-                                <a href="#" class="btn btn-large btn-box-shadow btn-rounded btn-base-color mt-10px">Acceder</a>
+                            <!-- Iframe para TGI -->
+                            <div class="flex-shrink-1" style="flex-basis: 600px;">
+                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Patentes</h5>
+                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://www.funes.gob.ar/patente.php" width="100%" height="700px"></iframe>
                             </div>
-                        </div>
                     </div>
                     <!-- end tab content for PATENTES -->
 
                     <!-- start tab content for INFRACCIONES -->
                     <div class="tab-pane fade" id="tab_four6">
-                        <!-- Content for INFRACCIONES -->
-                        <div class="row align-items-center">
-                            <div class="col-md-6 offset-xl-1 sm-mb-30px">
-                                <img src="https://via.placeholder.com/600x730" alt="" class="border-radius-6px w-100" />
+                        <!-- Content for API -->
+                        <div class="flex-fill">
+                                <!-- Aquí podrías añadir otros elementos o contenido que quieras mostrar al lado del iframe -->
                             </div>
-                            <div class="col-xl-4 col-md-6 offset-xl-1 text-center text-md-start">
-                                <span
-                                    class="fs-18 fw-600 text-base-color mb-25px d-flex align-items-center justify-content-center justify-content-md-start">
-                                    <span class="text-center w-60px h-60px d-flex justify-content-center align-items-center rounded-circle bg-white box-shadow-medium-bottom align-middle me-15px flex-shrink-0">
-                                        <i class="fa-solid fa-car-burst fs-22"></i></span>INFRACCIONES</span>
-                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Consulta y paga tus infracciones de tránsito.</h5>
-                                <a href="#" class="btn btn-large btn-box-shadow btn-rounded btn-base-color mt-10px">Acceder</a>
+                            <!-- Iframe para TGI -->
+                            <div class="flex-shrink-1" style="flex-basis: 600px;">
+                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">API</h5>
+                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://www.funes.gob.ar/api.php" width="100%" height="700px"></iframe>
                             </div>
-                        </div>
                     </div>
                     <!-- end tab content for INFRACCIONES -->
                     

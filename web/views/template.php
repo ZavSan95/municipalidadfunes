@@ -112,6 +112,9 @@ if (empty($routesArray[0])) {
 
         //MODULO ADMINISTRACIÓN
         
+    } elseif ($routesArray[0] == "comercios") {
+        include 'pages/comercios/comercios.php';
+
     } elseif ($routesArray[0] == "turnos") {
         include 'pages/turnos/turnos.php';
 

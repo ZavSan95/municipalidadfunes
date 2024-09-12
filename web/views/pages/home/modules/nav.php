@@ -25,11 +25,12 @@
                                     <a href="#" class="nav-link">Servicios</a>
                                     <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> 
+                                        <li><a href="/comercios"><i class="fa-solid fa-bag-shopping"></i>Comercios</a></li>
                                         <li><a href="/tramites"><i class="bi bi-briefcase"></i>Trámites</a></li>
-                                        <li><a href="/turnos" target=""><i class="bi bi-clipboard-data"></i>Turnos</a></li>
-                                        <li><a href="/reclamos"><i class="bi bi-peace"></i>Reclamos</a></li>
-                                        <li><a href="/higiene_urbana"><i class="bi bi-bar-chart-line"></i>Higiene Urbana</a></li>
-                                        <li><a href="#"><i class="bi bi-send-check"></i>Salud Animal</a></li>
+                                        <li><a href="/turnos" target=""><i class="fa-solid fa-calendar-days"></i>Turnos</a></li>
+                                        <li><a href="/reclamos"><i class="fa-solid fa-circle-exclamation"></i>Reclamos</a></li>
+                                        <li><a href="/higiene_urbana"><i class="fa-solid fa-city"></i>Higiene Urbana</a></li>
+                                        <li><a href="#"><i class="fa-solid fa-dog"></i>Salud Animal</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Gobierno</a></li>

@@ -47,10 +47,10 @@ foreach($routesArray as $key => $value){
     ?></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="ThemeZaa">
+    <meta name="author" content="DesarrolloWebSZ">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="description"
-    content="Elevate your online presence with Crafto - a modern, versatile, multipurpose Bootstrap 5 responsive HTML5, SCSS template using highly creative 52+ ready demos.">
+    content="Municipalidad de Funes, Santa Fe, Argentina">
     
     <!-- favicon icon -->
     <link rel="shortcut icon" href="<?php echo $path ?>/views/assets/images/favicon.png">
@@ -94,7 +94,9 @@ foreach($routesArray as $key => $value){
 
 </head>
 
-<body data-mobile-nav-style="classic">
+
+
+<body data-mobile-nav-style="classic" id="body-main">
 
 <!-- Nav -->
 <?php include "views/pages/home/modules/nav.php"; ?>
@@ -108,9 +110,30 @@ if (empty($routesArray[0])) {
     include 'views/pages/home/home.php';
 } else {
     // Si $routesArray no está vacío, verifica las posibles rutas
-    if ($routesArray[0] == "admin") {
+    if ($routesArray[0] == "admin" ||
+        $routesArray[0] == "salir"
+    ) {
 
+        echo "<style>
+        header, #footer-main {
+            display: none;
+        }
+        
+        </style>";
         //MODULO ADMINISTRACIÓN 
+        echo "<script>
+                document.addEventListener('DOMContentLoaded', () => {
+
+                    const nav = document.querySelector('header');
+                    const footer = document.querySelector('#footer-main');
+
+                    nav.innerHTML = '';
+                    footer.innerHTML = '';
+
+                });
+            </script>";
+
+        include 'pages/'.$routesArray[0].'/'.$routesArray[0].'.php';
         
     } elseif ($routesArray[0] == "saludanimal") {
         include 'pages/saludanimal/saludanimal.php';

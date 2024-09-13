@@ -1,5 +1,5 @@
         <!-- start footer -->
-        <footer class="pt-5 pb-5 sm-pt-40px sm-pb-45px footer-dark bg-extra-medium-slate-blue"> 
+        <footer class="pt-5 pb-5 sm-pt-40px sm-pb-45px footer-dark bg-extra-medium-slate-blue" id="footer-main"> 
             <div class="container">
                 <div class="row justify-content-center">
                     <!-- start footer column -->

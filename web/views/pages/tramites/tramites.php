@@ -52,6 +52,15 @@
                 </ul>
                 <!-- end tab navigation -->
             </div>
+            <script>
+                $(document).ready(function() {
+                    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+                        var target = $(e.target).attr("href"); 
+                        var iframe = $(target).find('iframe');
+                        iframe.attr('src', iframe.attr('src')); // recarga el iframe
+                    });
+                });
+            </script>
             <div class="col-xl-9 col-lg-8 col-md-12">
                 <div class="tab-content">
                     <!-- start tab content for TGI -->
@@ -64,7 +73,7 @@
                             <!-- Iframe para TGI -->
                             <div class="flex-shrink-1" style="flex-basis: 600px;">
                                 <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Ingrese su Tasa de TGI</h5>
-                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menuurbanos.exe?ingreso" width="100%" height="300px"></iframe>
+                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menururales.exe?ingreso" width="100%" height="300px"></iframe>
                             </div>
                         </div>
                     </div>

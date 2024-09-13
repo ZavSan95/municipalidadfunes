@@ -110,10 +110,16 @@ if (empty($routesArray[0])) {
     // Si $routesArray no está vacío, verifica las posibles rutas
     if ($routesArray[0] == "admin") {
 
-        //MODULO ADMINISTRACIÓN
+        //MODULO ADMINISTRACIÓN 
         
+    } elseif ($routesArray[0] == "saludanimal") {
+        include 'pages/saludanimal/saludanimal.php';
+
     } elseif ($routesArray[0] == "comercios") {
         include 'pages/comercios/comercios.php';
+
+    } elseif ($routesArray[0] == "gobierno") {
+        include 'pages/gobierno/gobierno.php';
 
     } elseif ($routesArray[0] == "turnos") {
         include 'pages/turnos/turnos.php';

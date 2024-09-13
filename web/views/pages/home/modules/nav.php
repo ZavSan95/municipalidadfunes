@@ -4,7 +4,7 @@
             <nav class="navbar navbar-expand-lg header-transparent bg-transparent header-reverse" data-header-hover="light">
                 <div class="container-fluid">
                     <div class="col-auto col-xxl-3 col-lg-2 me-lg-0 me-auto">
-                        <a class="navbar-brand" href="/home">
+                        <a class="navbar-brand" href="/">
                             <img src="<?php echo $path ?>/views/assets/images/LOGOencabezado.png" data-at2x="" alt="" class="default-logo">
                             <img src="<?php echo $path ?>/views/assets/images/LOGOcolor.png" data-at2x="" alt="" class="alt-logo">
                             <img src="<?php echo $path ?>/views/assets/images/LOGOcolor.png" data-at2x="" alt="" class="mobile-logo"> 
@@ -30,10 +30,10 @@
                                         <li><a href="/turnos" target=""><i class="fa-solid fa-calendar-days"></i>Turnos</a></li>
                                         <li><a href="/reclamos"><i class="fa-solid fa-circle-exclamation"></i>Reclamos</a></li>
                                         <li><a href="/higiene_urbana"><i class="fa-solid fa-city"></i>Higiene Urbana</a></li>
-                                        <li><a href="#"><i class="fa-solid fa-dog"></i>Salud Animal</a></li>
+                                        <li><a href="/saludanimal"><i class="fa-solid fa-dog"></i>Salud Animal</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item"><a href="#" class="nav-link">Gobierno</a></li>
+                                <li class="nav-item"><a href="/gobierno" class="nav-link">Gobierno</a></li>
                                 <li class="nav-item"><a href="/noticias" class="nav-link">Noticias</a></li>
                                 <li class="nav-item"><a href="/contacto" class="nav-link">Contacto</a></li>
                             </ul>

@@ -115,3 +115,14 @@ function fncSweetAlert(type, text, url){
 	}
 
 }
+
+/*=============================================
+Limpiar alertas
+=============================================*/
+function fncFormatInputs(){
+	
+	if(window.history.replaceState){
+		window.history.replaceState(null, null, window.location.href);
+	}
+	
+}

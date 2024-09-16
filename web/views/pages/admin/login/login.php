@@ -10,7 +10,7 @@
 
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" name="loginAdminEmail" class="form-control" placeholder="Correo Electrónico">
+          <input type="email" name="loginAdminEmail" class="form-control required" placeholder="Correo Electrónico">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="passwordAdmin" class="form-control" placeholder="Password">
+          <input type="password" name="passwordAdmin" class="form-control required" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -28,7 +28,7 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="remember">
+              <input type="checkbox" id="remember" onchange="rememberEmail(event)">
               <label for="remember">
                 Recordarme
               </label>
@@ -52,7 +52,7 @@
 
 
       <p class="mb-1">
-        <a href="#">¿Olvidaste tu clave?</a>
+        <a href="#resetPassword" data-bs-toggle="modal">¿Olvidaste tu clave?</a>
       </p>
     </div>
     <!-- /.login-card-body -->
@@ -60,10 +60,59 @@
 </div>
 <!-- /.login-box -->
 
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+
+
+<!-- Modal Reset Password -->
+
+<div class="modal fade" id="resetPassword">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Recuperar Contraseña</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p class="login-box-msg">¿Olvidaste tu clave? Solicita una nueva aquí.</p>
+
+        <form action="" method="post">
+
+          <div class="input-group mb-3">
+            <input type="email" name="resetPassword" class="form-control required" placeholder="Correo Electrónico">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-default btn block py-2">Nueva Contraseña</button>
+            </div>
+          </div>
+
+          <?php 
+
+          require_once 'controllers/controller.admin.php';
+          $reset = new AdminsController();
+          $reset->resetPassword();
+          ?>
+
+        </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+  
 </body>

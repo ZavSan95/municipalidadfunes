@@ -30,8 +30,8 @@ foreach($routesArray as $key => $value){
 
 ?>
 
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <title style="text-transform: capitalize;">Gobierno de la Ciudad de Funes - 
@@ -89,6 +89,10 @@ foreach($routesArray as $key => $value){
     <!-- Alerts -->
     <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/alerts.js"></script>
 
+    <!-- Forms -->
+     <!-- Alerts -->
+    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/forms.js"></script>
+
 
 
 
@@ -127,8 +131,7 @@ if (empty($routesArray[0])) {
                     const nav = document.querySelector('header');
                     const footer = document.querySelector('#footer-main');
 
-                    nav.innerHTML = '';
-                    footer.innerHTML = '';
+                    nav.style.display = 'none';
 
                 });
             </script>";

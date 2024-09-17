@@ -127,14 +127,14 @@ class AdminsController{
                     $fields = "password_admin=".$crypt;
 
                     $updatePassword = CurlController::request($url,$method,$fields);
-                    echo '<pre>';print_r($updatePassword);echo '</pre>';
+                    //echo '<pre>';print_r($updatePassword);echo '</pre>';
 
                     if($updatePassword->status == 200){
-
+                        
                         // REGISTRO RESET PASSWORD
                         $log = new ControllerLog();
-                        $log->register($_POST['loginAdminEmail'], "RESET PASSWORD");
-
+                        $log->register($_POST['resetPassword'], "RESET PASSWORD");
+                        
                         // echo '<pre>';print_r($newPassword);echo '</pre>';
                         // echo '<pre>';print_r($crypt);echo '</pre>';
                         $subject = 'Solicitud de nueva contraseña';

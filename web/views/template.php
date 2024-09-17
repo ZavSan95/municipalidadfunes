@@ -90,8 +90,14 @@ foreach($routesArray as $key => $value){
     <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/alerts.js"></script>
 
     <!-- Forms -->
-     <!-- Alerts -->
+
+    <!-- Alerts -->
     <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/forms.js"></script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
 
 
@@ -101,6 +107,8 @@ foreach($routesArray as $key => $value){
 
 
 <body data-mobile-nav-style="classic" id="body-main">
+
+<input type="hidden" id="urlPath" value="<?php echo $path ?>">
 
 <!-- Nav -->
 <?php include "views/pages/home/modules/nav.php"; ?>
@@ -186,6 +194,20 @@ if (empty($routesArray[0])) {
 <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/vendors.min.js"></script>
 <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/main.js"></script>
+
+<!-- DataTables  & Plugins -->
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/jszip/jszip.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 
 

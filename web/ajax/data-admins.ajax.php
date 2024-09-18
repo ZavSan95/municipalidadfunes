@@ -103,20 +103,22 @@ class DataTableController {
                 "data" => []
             ];
 
-            $actions = "
-                <div class='btn-group'>
-									<a href='' class='btn btn-info border-0 rounded-pill mr-2 btn-sm px-3'>
-										<i class='fas fa-pencil-alt text-white mr-1'></i>
-									</a>
-									<a href='' class='btn btn-info border-0 rounded-pill mr-2 btn-sm px-3'>
-										<i class='fas fa-trash-alt text-white mr-1'></i>
-									</a>
-								</div>
-            ";
-
-            $actions = TemplateController::htmlClean($actions);
-
+            
             foreach($data as $key => $value) {
+
+                $actions = "
+                    <div class='btn-group'>
+                                        <a href='/admin/administradores/gestion?admin=".base64_encode($value->id_admin)."' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
+                                            <i class='fas fa-pencil-alt text-white mr-1'></i>
+                                        </a>
+                                        <a href='' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
+                                            <i class='fas fa-trash-alt text-white mr-1'></i>
+                                        </a>
+                                    </div>
+                ";
+
+                $actions = TemplateController::htmlClean($actions);
+
                 $dataJSON['data'][] = [
                     "id_admin" => ($start + $key + 1),
                     "name_admin" => $value->name_admin,

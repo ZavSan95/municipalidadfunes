@@ -2070,6 +2070,9 @@
                 emailFormat = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
                 urlformat = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                 telFormat = /[0-9 -()+]+$/,
+                textFormat = /^[a-zA-Z\s]+$/,
+                numberFormat = /[0-9]+$/,
+                allFormat = /^[a-zA-Z0-9\s]+$/,
                 actionURL = formObj.attr('action'),
                 resultsObj = formObj.find('.form-results'),
                 grecaptchav3= _this.attr( 'data-sitekey' ) || '',
@@ -2088,6 +2091,15 @@
                 error = true;
                 __this.addClass('is-invalid');
             } else if (__this.attr('type') == 'tel' && !telFormat.test(fieldVal)) {
+                error = true;
+                __this.addClass('is-invalid');
+            } else if (__this.attr('type') == 'all' && !allFormat.test(fieldVal)) {
+                error = true;
+                __this.addClass('is-invalid');
+            } else if (__this.attr('type') == 'numero' && !numberFormat.test(fieldVal)) {
+                error = true;
+                __this.addClass('is-invalid');
+            } else if (__this.attr('type') == 'text' && !textFormat.test(fieldVal)) {
                 error = true;
                 __this.addClass('is-invalid');
             }

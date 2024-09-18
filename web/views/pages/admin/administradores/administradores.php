@@ -19,5 +19,29 @@
     </div>
     <!-- /.content-header -->
 
-    <?php include 'modules/listado.php'; ?>
+    <?php 
+    
+        if(!empty($routesArray[2])){
+
+            if($routesArray[2] == "gestion"){
+
+                include 'modules/gestion.php';
+
+            }else{
+
+                echo '
+                    <script>
+                        window.location = "'.$path.'404";
+                    </script>
+                ';
+            }
+
+        }else{
+
+            include 'modules/listado.php'; 
+        }
+    
+    ?>
+
+    
 </div>

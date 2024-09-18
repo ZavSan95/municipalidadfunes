@@ -171,4 +171,238 @@ class AdminsController{
 
     }
 
+    /*=============================================
+    Gestionar Administradores
+    =============================================*/
+    public function adminManage(){
+
+        if(isset($_POST['name_admin'])){
+
+            if(preg_match( '/^[.a-zA-Z0-9_]+([.][.a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["email_admin"] ) 
+				&& preg_match( '/^[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["name_admin"] )){
+
+
+                if(isset($_POST['idAdmin'])){
+
+                    if($_POST['password_admin'] != ""){
+
+                        if(preg_match('/^[*\\$\\!\\¡\\?\\¿\\.\\_\\#\\-\\0-9A-Za-z]{1,}$/', $_POST["password_admin"] )){
+
+							$crypt = crypt($_POST["password_admin"], '$2a$07$azybxcags23425sdg23sdfhsd$');
+
+						}else{
+
+							echo '    <script>
+                                    // Función para mostrar una alerta de SweetAlert2
+                                    function showAlert() {
+                                        Swal.fire({
+                                            title: "Error",
+                                            icon: "error",
+                                            text: "Formato de contraseña incorrecto",
+                                            confirmButtonColor: "#EF1400"
+                                        }).then((result) => {
+                                            // Redirige al usuario después de cerrar la alerta
+                                            if (result.isConfirmed) {
+                                                window.location.href = "/admin/administradores";
+                                            }
+                                        });
+                                    }
+                                    showAlert();
+                                </script>
+                            ';
+						}
+
+                    }else{
+
+                        $crypt = crypt($_POST['oldPassword'], '$2a$07$azybxcags23425sdg23sdfhsd$');
+                    }
+
+                    $url = "admins?id=".base64_decode($_POST['idAdmin'])."&nameId=id_admin&token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
+                    $method = "PUT";
+                    $fields = "name_admin=".trim(TemplateController::capitalize($_POST["name_admin"])).
+                    "&rol_admin=".$_POST["rol_admin"]."&email_admin=".$_POST["email_admin"]."&password_admin=".$crypt;
+
+                    $updateData = CurlController::request($url,$method,$fields);
+
+                    if($updateData->status == 200){
+
+                        echo '    <script>
+                            // Función para mostrar una alerta de SweetAlert2
+                            function showAlert() {
+                                Swal.fire({
+                                    title: "Correcto",
+                                    icon: "success",
+                                    text: "Usuario editado con éxito",
+                                    confirmButtonColor: "#074A1F"
+                                }).then((result) => {
+                                    // Redirige al usuario después de cerrar la alerta
+                                    if (result.isConfirmed) {
+                                        window.location.href = "/admin/administradores";
+                                    }
+                                });
+                            }
+                            showAlert();
+                        </script>
+                    ';
+            
+
+                    }else{
+
+                        if($updateData->status == 303){
+
+
+                            echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Token expirado, vuelva a iniciar sesión",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+                        }else{
+
+
+                            echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Error al guardar los datos, intente nuevamente",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+                        }
+                    }
+
+
+                }else{
+
+                    if(preg_match('/^[*\\$\\!\\¡\\?\\¿\\.\\_\\#\\-\\0-9A-Za-z]{1,}$/', $_POST["password_admin"] )){
+
+                        $crypt = crypt($_POST["password_admin"], '$2a$07$azybxcags23425sdg23sdfhsd$');
+
+                    }else{
+
+                        echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Formato de contraseña incorrecto",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+                    }
+            
+                    $url = "admins?token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
+                    $method = "POST";
+
+                    $fields = array(
+
+                        "name_admin" => trim(TemplateController::capitalize($_POST['name_admin'])),
+                        "rol_admin" => $_POST['rol_admin'],
+                        "email_admin" => $_POST['email_admin'],
+                        "password_admin" => $crypt,
+                        "date_created_admin" => date("Y-m-d")
+
+                    );
+
+                    $createData = CurlController::request($url,$method,$fields);
+
+                    if($createData->status == 200){
+
+                        echo '    <script>
+                            // Función para mostrar una alerta de SweetAlert2
+                            function showAlert() {
+                                Swal.fire({
+                                    title: "Correcto",
+                                    icon: "success",
+                                    text: "Usuario generado con éxito",
+                                    confirmButtonColor: "#074A1F"
+                                }).then((result) => {
+                                    // Redirige al usuario después de cerrar la alerta
+                                    if (result.isConfirmed) {
+                                        window.location.href = "/admin/administradores";
+                                    }
+                                });
+                            }
+                            showAlert();
+                        </script>
+                    ';
+            
+
+                    }else{
+
+                        if($createData->status == 303){
+
+
+                            echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Token expirado, vuelva a iniciar sesión",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+                        }else{
+
+
+                            echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Error al guardar los datos, intente nuevamente",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+                        }
+                    }
+                }
+
+                           
+            }else{
+
+
+
+                echo '    <script>
+                            // Función para mostrar una alerta de SweetAlert2
+                            function showAlert() {
+                                Swal.fire({
+                                    title: "Error",
+                                    icon: "error",
+                                    text: "Error al guardar los datos, intente nuevamente",
+                                    confirmButtonColor: "#EF1400"
+                                });
+                            }
+                            showAlert();
+                        </script>
+                    ';
+            }
+        }
+
+    }
+
 }

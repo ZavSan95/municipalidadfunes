@@ -103,4 +103,14 @@ class TemplateController{
 		return $code;
 	}
 
+	/*=============================================
+	Capitalizar inputs
+	=============================================*/
+	static public function capitalize($value){
+
+		$value = mb_convert_case($value, MB_CASE_TITLE, "utf-8");
+
+		return $value;
+	}
+
 }

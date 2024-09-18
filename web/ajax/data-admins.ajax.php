@@ -2,6 +2,7 @@
 
 use Google\Service\Analytics\Column;
 require_once '../controllers/controller.curl.php';
+require_once '../controllers/controller.template.php';
 
 class DataTableController {
 
@@ -33,25 +34,63 @@ class DataTableController {
                 return;
             }
 
-            /*=============================================
-            Selección de Datos
-            =============================================*/
             $select = "id_admin,rol_admin,name_admin,email_admin,date_updated_admin";
 
-            $url = "admins?select=".$select."&orderBy=".$orderBy."&orderMode=".$orderType."&startAt=".$start."&endAt=".$length;
-            $method = "GET";
-            $fields = array();
+            /*=============================================
+            Búsqueda de Datos
+            =============================================*/
+            if(!empty($_POST['search']['value'])){
 
-            $data = CurlController::request($url, $method, $fields)->results;
+                if(preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/',$_POST['search']['value'])){
 
-            $recordsFiltered = $totalData;
+                    $linkTo = ["name_admin", "email_admin", "rol_admin"];
 
+                    $search = str_replace(" ","_",$_POST['search']['value']);
+
+                    foreach ($linkTo as $key => $value) {
+                        
+                        $url = "admins?select=".$select."&linkTo=".$value."&search=".$search."&orderBy=".$orderBy."&orderMode=".$orderType."&startAt=".$start."&endAt=".$length;
+                        $data = CurlController::request($url, $method, $fields)->results;
+
+                        if($data == "Not Found"){
+
+                            $data = array();
+                            $recordsFiltered = 0;
+                        }else{
+
+                            $recordsFiltered = count($data);
+                            break;
+                        }
+                    }
+
+                }else{
+
+                    echo json_encode(["data" => []]);
+                    return;
+                }
+
+            }else{
+
+                /*=============================================
+                Selección de Datos
+                =============================================*/
+                
+                $url = "admins?select=".$select."&orderBy=".$orderBy."&orderMode=".$orderType."&startAt=".$start."&endAt=".$length;
+                $method = "GET";
+                $fields = array();
+
+                $data = CurlController::request($url, $method, $fields)->results;
+
+                $recordsFiltered = $totalData;
+
+            }
+
+            
             /*=============================================
             Cuando no hay datos
             =============================================*/
             if(empty($data)) {
-                echo json_encode(["data" => []]);
-                return;
+                
             }
 
             /*=============================================
@@ -64,6 +103,19 @@ class DataTableController {
                 "data" => []
             ];
 
+            $actions = "
+                <div class='btn-group'>
+									<a href='' class='btn btn-info border-0 rounded-pill mr-2 btn-sm px-3'>
+										<i class='fas fa-pencil-alt text-white mr-1'></i>
+									</a>
+									<a href='' class='btn btn-info border-0 rounded-pill mr-2 btn-sm px-3'>
+										<i class='fas fa-trash-alt text-white mr-1'></i>
+									</a>
+								</div>
+            ";
+
+            $actions = TemplateController::htmlClean($actions);
+
             foreach($data as $key => $value) {
                 $dataJSON['data'][] = [
                     "id_admin" => ($start + $key + 1),
@@ -71,7 +123,7 @@ class DataTableController {
                     "email_admin" => $value->email_admin,
                     "rol_admin" => $value->rol_admin,
                     "date_updated_admin" => $value->date_updated_admin,
-                    "actions" => "" // Puedes agregar botones de acción aquí
+                    "actions" => $actions
                 ];
             }
 

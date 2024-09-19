@@ -36,6 +36,7 @@ class AdminsController{
                     // Redireccionar a la misma página sin datos POST para evitar reenvíos
                     echo '
                         <script>
+                            localStorage.setItem("token-admin", "'.$login->results[0]->token_admin.'");
                             window.location.href = window.location.href; // Redirige y limpia el POST
                         </script>
                     ';

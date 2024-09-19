@@ -50,3 +50,119 @@ $(document).ready(function() {
         
 
 });
+
+/*=============================================
+Eliminar Item
+=============================================*/
+
+$(document).ready(function () {
+
+  $(document).on('click', '.deleteItem', function(){
+
+    var idItem = $(this).attr("idItem");
+    var table = $(this).attr("table");
+    var column = $(this).attr("column");
+    var rol = $(this).attr("rol");
+
+    new Promise(resolve => {
+
+      Swal.fire({
+        title: "¿Estás seguro?",
+        text: "No podrás revertir este cambio",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "No, cancelar",
+        confirmButtonText: "Si, confirmar"
+      }).then((result) => {
+          
+        resolve(result.value); 
+            
+      });
+
+    }).then(response => {
+
+      console.log(response); 
+      
+      if (response) {
+        
+        if(rol=="admin"){
+
+          var token = localStorage.getItem('token-admin');
+          var url = "/ajax/delete-admins.ajax.php";
+
+        }
+
+        var data = new FormData();
+        data.append("token", token);
+        data.append("table", table);
+        data.append("id", idItem);
+        data.append("nameId", "id_"+column);
+
+        $.ajax({
+
+          url: url,
+          method: "POST",
+          data: data,
+          contentType: false,
+          cache: false, 
+          processData: false,
+          success: function(response){
+
+            if(response == 200){
+
+              function showAlert() {
+                Swal.fire({
+                    title: "Correcto",
+                    icon: "success",
+                    text: "Item eliminado con éxito",
+                    confirmButtonColor: "#074A1F"
+                }).then((result) => {
+                    // Redirige al usuario después de cerrar la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = "/admin/administradores";
+                    }
+                });
+            }
+            showAlert();
+            }
+            else if(response == "no-borrar"){
+
+              function showAlert() {
+                Swal.fire({
+                    title: "Error",
+                    icon: "error",
+                    text: "Este item no se puede borrar",
+                    confirmButtonColor: "#EF1400"
+                });
+            }
+            showAlert();
+            }
+            else{
+
+              function showAlert() {
+                Swal.fire({
+                    title: "Error",
+                    icon: "error",
+                    text: "Este item no se puede borrar",
+                    confirmButtonColor: "#EF1400"
+                });
+            }
+            showAlert();
+            }
+
+
+          }
+
+        })
+
+      } else {
+        console.log("Eliminación cancelada");
+      }
+    });
+
+  });
+
+});
+

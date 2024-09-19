@@ -111,9 +111,10 @@ class DataTableController {
                                         <a href='/admin/administradores/gestion?admin=".base64_encode($value->id_admin)."' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
                                             <i class='fas fa-pencil-alt text-white mr-1'></i>
                                         </a>
-                                        <a href='' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
+                                        <button class='btn btn-info border-0 rounded-pill mr-2 btn-sm deleteItem' 
+                                        rol='admin' table='admins' column='admin' idItem='".base64_encode($value->id_admin)."'>
                                             <i class='fas fa-trash-alt text-white mr-1'></i>
-                                        </a>
+                                        </button>
                                     </div>
                 ";
 

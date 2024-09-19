@@ -36,6 +36,7 @@ class AdminsController{
                     // Redireccionar a la misma página sin datos POST para evitar reenvíos
                     echo '
                         <script>
+                            localStorage.setItem("email-admin","'.$login->results[0]->email_admin.'");
                             localStorage.setItem("token-admin", "'.$login->results[0]->token_admin.'");
                             window.location.href = window.location.href; // Redirige y limpia el POST
                         </script>
@@ -227,6 +228,9 @@ class AdminsController{
 
                     if($updateData->status == 200){
 
+                        $log = new ControllerLog();
+                        $log->register($_SESSION['administrador']->email_admin, "EDICION USUARIO", base64_decode($_POST['idAdmin']));
+
                         echo '    <script>
                             // Función para mostrar una alerta de SweetAlert2
                             function showAlert() {
@@ -324,6 +328,9 @@ class AdminsController{
                     $createData = CurlController::request($url,$method,$fields);
 
                     if($createData->status == 200){
+
+                        $log = new ControllerLog();
+                        $log->register($_SESSION['administrador']->email_admin, "CREAR USUARIO", $_POST['email_admin']);
 
                         echo '    <script>
                             // Función para mostrar una alerta de SweetAlert2

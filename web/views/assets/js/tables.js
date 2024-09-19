@@ -1,3 +1,51 @@
+/*=============================================
+Tabla para administradores
+=============================================*/
+
+if($(".adminsTable").length > 0){
+
+  var url = "/ajax/data-admins.ajax.php";
+
+  var columns = [
+     {"data":"id_admin"},
+     {"data":"name_admin"},
+     {"data":"email_admin"},
+     {"data":"rol_admin"},
+     {"data":"date_updated_admin"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+/*=============================================
+Tabla para noticias
+=============================================*/
+
+if($(".newsTable").length > 0){
+
+  var url = "/ajax/data-news.ajax.php";
+
+  var columns = [
+     {"data":"id_new"},
+     {"data":"title_new"},
+     {"data":"category_new"},
+     {"data":"intro_new"},
+     {"data":"body_new"},
+     {"data":"image_new"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+/*=============================================
+Data Table Admins
+=============================================*/
 $(document).ready(function() {
 
     $("#tables").DataTable({
@@ -9,17 +57,10 @@ $(document).ready(function() {
         "processing":true,
         "serverSide": true,
         "ajax":{
-            "url":$("#urlPath").val()+"ajax/data-admins.ajax.php",
+            "url": url,
             "type": "POST"
         },
-        "columns":[
-           {"data":"id_admin"},
-           {"data":"name_admin"},
-           {"data":"email_admin"},
-           {"data":"rol_admin"},
-           {"data":"date_updated_admin"},
-           {"data":"actions", "orderable":false, "searchable":false}
-        ],
+        "columns":columns,
         "language":{
         
               "sProcessing":     "Procesando...",
@@ -83,13 +124,14 @@ $(document).ready(function () {
 
     }).then(response => {
 
-      console.log(response); 
+      //console.log(response); 
       
       if (response) {
         
         if(rol=="admin"){
 
           var token = localStorage.getItem('token-admin');
+          var emailAdmin = localStorage.getItem('email-admin');
           var url = "/ajax/delete-admins.ajax.php";
 
         }
@@ -99,6 +141,7 @@ $(document).ready(function () {
         data.append("table", table);
         data.append("id", idItem);
         data.append("nameId", "id_"+column);
+        data.append("email-admin", emailAdmin);
 
         $.ajax({
 
@@ -111,7 +154,7 @@ $(document).ready(function () {
           success: function(response){
 
             if(response == 200){
-
+              console.log(response);
               function showAlert() {
                 Swal.fire({
                     title: "Correcto",
@@ -128,7 +171,7 @@ $(document).ready(function () {
             showAlert();
             }
             else if(response == "no-borrar"){
-
+              console.log(response);
               function showAlert() {
                 Swal.fire({
                     title: "Error",
@@ -140,7 +183,7 @@ $(document).ready(function () {
             showAlert();
             }
             else{
-
+              console.log(response);
               function showAlert() {
                 Swal.fire({
                     title: "Error",

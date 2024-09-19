@@ -47,6 +47,11 @@ class NewController {
         
         return $fecha_formateada;
     }
+
+    public function newsManage(){
+
+        
+    }
 }
 
 ?>

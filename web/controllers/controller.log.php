@@ -2,7 +2,7 @@
 
 class ControllerLog {
 
-    public function register($user, $action) {
+    public function register($user, $action, $otherUser = null) {
         
         // Obtener la IP del cliente (o servidor dependiendo del contexto)
         $ipAddress = $this->getUserIP();
@@ -15,6 +15,7 @@ class ControllerLog {
         $fields = array (
             "user_log" => $user,
             "action_log" => $action,
+            "user_action_log" => $otherUser,
             "date_created_log" => date('Y-m-d H:i:s'), // Fecha actual
             "ip_address_log" => $ipAddress 
         );

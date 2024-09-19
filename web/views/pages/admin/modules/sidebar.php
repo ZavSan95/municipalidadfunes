@@ -22,8 +22,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <!-- Administradores -->
                 <li class="nav-item">
@@ -35,28 +34,14 @@
                     </a>
                 </li>
 
+                <!-- Prensa -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa-solid fa-newspaper"></i>
+                    <a href="/admin/prensa" class="nav-link">
+                        <i class="nav-icon fa-solid fa-newspaper"></i>
                         <p>
-                            Noticias
-                            <i class="right fas fa-angle-left"></i>
+                            Prensa
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Subir Noticia</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ver Noticias</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="nav-item">
@@ -72,7 +57,7 @@
         </nav>
         <!-- /.sidebar-menu -->
 
-        
+
     </div>
     <!-- /.sidebar -->
 </aside>

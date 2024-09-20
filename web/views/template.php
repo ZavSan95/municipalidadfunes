@@ -34,8 +34,8 @@ foreach($routesArray as $key => $value){
 <html lang="en">
 
 <head>
-    <title style="text-transform: capitalize;">Gobierno de la Ciudad de Funes - 
-    <?php 
+    <title style="text-transform: capitalize;">Gobierno de la Ciudad de Funes -
+        <?php 
         if(!empty($routesArray[0])){
 
             echo ucwords($routesArray[0]);
@@ -49,19 +49,18 @@ foreach($routesArray as $key => $value){
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="DesarrolloWebSZ">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description"
-    content="Municipalidad de Funes, Santa Fe, Argentina">
-    
+    <meta name="description" content="Municipalidad de Funes, Santa Fe, Argentina">
+
     <!-- favicon icon -->
     <link rel="shortcut icon" href="<?php echo $path ?>/views/assets/images/favicon.png">
     <link rel="apple-touch-icon" href="images/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-    
+
     <!-- google fonts preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+
     <!-- style sheets and font icons -->
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/vendors.min.css" />
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/icon.min.css" />
@@ -69,20 +68,79 @@ foreach($routesArray as $key => $value){
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/responsive.css" />
     <link rel="stylesheet" href="<?php echo $path ?>/views/assets/demos/business/business.css" />
 
+
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- DataTables -->
+    <link rel="stylesheet"
+        href="<?php echo $path ?>views/assets/css/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="<?php echo $path ?>views/assets/css/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="<?php echo $path ?>views/assets/css/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- Toast Alerts -->
+    <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/toastr/toastr.min.css">
+
+    <!-- Summernote -->
+
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?php echo $path ?>/views/pages/admin/dist/css/adminlte.min.css">
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- summernote -->
+    <!-- https://summernote.org/getting-started/#run-summernote -->
+    <link rel="stylesheet" href="<?php echo $path ?>/views/assets/summernote/summernote.min.css">
+
+
+
+</head>
+
+
+
+<body data-mobile-nav-style="classic" id="body-main">
+
+    <input type="hidden" id="urlPath" value="<?php echo $path ?>">
+
+    <!-- Nav -->
+    <?php include "views/pages/home/modules/nav.php"; ?>
+
+    <!-- jQuery -->
+    <script src="<?php echo $path ?>views/assets/js/plugins/jquery/jquery.min.js"></script>
+
+    <?php if (!empty($routesArray[0]) && $routesArray[0] == "admin"): ?>
+
+    <!-- Bootstrap 4 -->
+    <script src="<?php echo $path ?>views/assets/js/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <?php else: ?>
+
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <?php endif ?>
+
+    <!-- JDSlider -->
+    <script src="<?php echo $path ?>views/assets/js/plugins/jdSlider/jdSlider.js"></script>
+
+    <!-- Knob -->
+    <script src="<?php echo $path ?>views/assets/js/plugins/knob/knob.js"></script>
+
     <!-- SCRIPTS -->
 
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
     <!-- Paginación-->
-    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/plugins/pagination/pagination.min.js"></script>
-    
+    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/plugins/pagination/pagination.min.js">
+    </script>
+
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/eb4a62b60b.js" crossorigin="anonymous"></script>
 
-    <!-- SweetAlert2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -94,28 +152,13 @@ foreach($routesArray as $key => $value){
     <!-- Alerts -->
     <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/forms.js"></script>
 
-    <!-- DataTables -->
-    <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-   
-    <!-- Toast Alerts -->
-    <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/toastr/toastr.min.css">
+    <!-- AdminLTE App -->
+    <script src="<?php echo $path ?>/views/pages/admin/dist/js/adminlte.js"></script>
 
+    <!-- SummerNote -->
+    <script src="<?php echo $path ?>/views/assets/summernote/summernote.min.js"></script>
 
-
-</head>
-
-
-
-<body data-mobile-nav-style="classic" id="body-main">
-
-<input type="hidden" id="urlPath" value="<?php echo $path ?>">
-
-<!-- Nav -->
-<?php include "views/pages/home/modules/nav.php"; ?>
-
-<?php
+    <?php
 
     // echo "<pre>"; var_dump($routesArray); echo "</pre>";
     
@@ -129,17 +172,17 @@ if (empty($routesArray[0])) {
     ) {
 
         echo "<style>
-        header, #footer-main {
+        header, #piePagina {
             display: none;
         }
         
         </style>";
         //MODULO ADMINISTRACIÓN 
-        echo "<script>
+        echo "<script>  
                 document.addEventListener('DOMContentLoaded', () => {
 
                     const nav = document.querySelector('header');
-                    const footer = document.querySelector('#footer-main');
+                    const footer = document.querySelector('#piePagina');
 
                     nav.style.display = 'none';
 
@@ -186,33 +229,34 @@ if (empty($routesArray[0])) {
 
 ?>
 
-<!-- Footer -->
-<?php include "views/pages/home/modules/footer.php"; ?>
+    <!-- Footer -->
+    <?php include "views/pages/home/modules/footer.php"; ?>
 
-<!-- Stickys -->
-<?php include "views/pages/home/modules/stickys.php"; ?>
+    <!-- Stickys -->
+    <?php include "views/pages/home/modules/stickys.php"; ?>
 
-<!-- javascript libraries -->
-<script type="text/javascript" src="<?php echo $path ?>/views/assets/js/jquery.js"></script>
-<script type="text/javascript" src="<?php echo $path ?>/views/assets/js/vendors.min.js"></script>
-<script type="text/javascript" src="<?php echo $path ?>/views/assets/js/main.js"></script>
+    <!-- javascript libraries -->
+    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/vendors.min.js"></script>
+    <script type="text/javascript" src="<?php echo $path ?>/views/assets/js/main.js"></script>
 
-<!-- DataTables  & Plugins -->
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/jszip/jszip.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js">
+    </script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables-responsive/js/responsive.bootstrap4.min.js">
+    </script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/jszip/jszip.min.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-<!-- Toast Alerts -->
-<script src="<?php echo $path ?>views/assets/js/plugins/toastr/toastr.min.js"></script>
+    <!-- Toast Alerts -->
+    <script src="<?php echo $path ?>views/assets/js/plugins/toastr/toastr.min.js"></script>
 
 
 

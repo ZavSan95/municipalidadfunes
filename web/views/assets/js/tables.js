@@ -32,9 +32,6 @@ if($(".newsTable").length > 0){
      {"data":"id_new"},
      {"data":"title_new"},
      {"data":"category_new"},
-     {"data":"intro_new"},
-     {"data":"body_new"},
-     {"data":"image_new"},
      {"data":"actions", "orderable":false, "searchable":false}
   ]
 

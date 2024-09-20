@@ -1,6 +1,6 @@
 <div class="content">
 	
-	<div class="container">
+	<div class="container-fluid">
 		
 		<div class="card">
 			
@@ -21,32 +21,12 @@
 							<th>#</th>
 							<th>Titulo</th>
 							<th>Categoria</th>
-							<th>Intro</th>
-							<th>Cuerpo</th>
-                            <th>Imagen</th>
 							<th>Acciones</th>
 						</tr>
 						
 					</thead>
 					<tbody>
-						<!-- <tr>
-							<td>1</td>
-							<td>Santiago Zavatti</td>
-							<td>admin@ecommerce.com</td>
-							<td>Administrador</td>
-							<td>2023-01-23 12:58:58</td>
-							<td>
-								<div class="btn-group">
-									<a href="" class="btn btn-info border-0 rounded-pill mr-2 btn-sm px-3">
-										<i class="fas fa-pencil-alt text-white mr-1"></i>
-									</a>
-									<a href="" class="btn btn-info border-0 rounded-pill mr-2 btn-sm px-3">
-										<i class="fas fa-trash-alt text-white mr-1"></i>
-									</a>
-								</div>
-							</td>
-						</tr> -->
-						
+
 					</tbody>
 
 

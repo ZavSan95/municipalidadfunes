@@ -1,6 +1,9 @@
+
+<!-- modules/links.php -->
+<div>
 <?php
 
-include 'modules/links.php';
+
 
 // Verificar si el usuario está logueado como administrador
 if (!isset($_SESSION["administrador"])) {
@@ -52,6 +55,8 @@ if (!isset($_SESSION["administrador"])) {
 }
 ?>
 
-<?php include 'modules/scripts.php'; ?>
+<!-- modules/scripts -->
 
 <script src="<?php echo $path ?>/views/assets/js/tables.js"></script>
+
+</div>

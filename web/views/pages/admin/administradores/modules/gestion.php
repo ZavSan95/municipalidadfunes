@@ -118,7 +118,7 @@ if(isset($_GET['admin'])){
                                         <select name="rol_admin" id="rol_admin" class="form-control required" required>
 
                                             <option value="" <?php if (!empty($admin) && $admin->rol_admin == ""): ?>
-                                                selected <?php endif ?>>Elije Rol</option>
+                                                selected <?php endif ?>>Seleccione Rol</option>
                                             <option value="admin"
                                                 <?php if (!empty($admin) && $admin->rol_admin == "admin"): ?> selected
                                                 <?php endif ?>>Administrador</option>

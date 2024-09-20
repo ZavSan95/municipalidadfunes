@@ -2072,7 +2072,7 @@
                 telFormat = /[0-9 -()+]+$/,
                 textFormat = /^[a-zA-Z\s]+$/,
                 numberFormat = /[0-9]+$/,
-                allFormat = /^[a-zA-Z0-9\s]+$/,
+                allFormat = /^[a-zA-Z0-9\s.,@#()_\-:+%&°]+$/,
                 actionURL = formObj.attr('action'),
                 resultsObj = formObj.find('.form-results'),
                 grecaptchav3= _this.attr( 'data-sitekey' ) || '',
@@ -2168,7 +2168,7 @@
                 urlformat = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                 textFormat = /^[a-zA-Z\s]+$/,
                 numberFormat = /[0-9]+$/,
-                allFormat = /^[a-zA-Z0-9\s]+$/,
+                allFormat = /^[a-zA-Z0-9\s.,@#()_\-:+%&°]+$/,
                 fieldVal = $(this).val();
         if (fieldVal == '' || fieldVal == undefined) {
             $(this).addClass('is-invalid');

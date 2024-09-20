@@ -32,7 +32,7 @@ class DataTableController {
                 return;
             }
 
-            $select = "id_new,title_new,category_new,intro_new,body_new,image_new";
+            $select = "id_new,title_new,category_new";
 
             // Search data
             if(!empty($_POST['search']['value'])) {
@@ -106,9 +106,6 @@ class DataTableController {
                         "id_new" => ($start + $key + 1),
                         "title_new" => $value->title_new,
                         "category_new" => $value->category_new,
-                        "intro_new" => $value->intro_new,
-                        "body_new" => $value->body_new,
-                        "image_new" => $value->image_new,
                         "actions" => $actions
                     ];
                 }

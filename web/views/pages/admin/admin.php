@@ -58,5 +58,6 @@ if (!isset($_SESSION["administrador"])) {
 <!-- modules/scripts -->
 
 <script src="<?php echo $path ?>/views/assets/js/tables.js"></script>
+<script src="<?php echo $path ?>/views/assets/js/forms.js"></script>
 
 </div>

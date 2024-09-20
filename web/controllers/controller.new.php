@@ -50,7 +50,23 @@ class NewController {
 
     public function newsManage(){
 
-        
+        if(isset($_POST['title_new'])){
+
+            /*=============================================
+            Validar y Guardar Datos
+            =============================================*/
+            $fields = array (
+
+                "title_new" => trim(TemplateController::capitalize($_POST['title_new'])),
+                "category_new" => $_POST['category_new'],
+                "intro_new" => $_POST['intro_new'],
+                "body_new" => $_POST['body_new'],
+                "image_new" => '',
+                "date_created_new" => date("Y-m-d")
+            );
+
+            echo '<pre>'; print_r($fields);echo '</pre>';
+        }
     }
 }
 

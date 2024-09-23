@@ -17,13 +17,13 @@ class DataTableController {
             $length = $_POST['length'];
 
             // Total records count
-            $url = "news?select=id_new";
+            $url = "relations?rel=news,categories&type=new,category&select=id_new";
             $method = "GET";
             $fields = array();
 
             $response = CurlController::request($url, $method, $fields);
 
-            // echo '<pre>';print_r($response);echo '</pre>';
+            //echo '<pre>';print_r($response);echo '</pre>';
 
             if ($response->status == 200) {
                 $totalData = $response->total;
@@ -32,21 +32,21 @@ class DataTableController {
                 return;
             }
 
-            $select = "id_new,title_new,category_new";
+            $select = "id_new,title_new,name_category";
 
             // Search data
             if(!empty($_POST['search']['value'])) {
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["title_new", "category_new", "intro_new"];
+                    $linkTo = ["name_category", "title_new"];
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
                     $data = [];
                     $recordsFiltered = 0;
 
                     foreach ($linkTo as $value) {
-                        $url = "news?select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                        $url = "relations?rel=news,categories&type=new,category&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
                         $response = CurlController::request($url, $method, $fields);
 
                         if ($response->status == 200) {
@@ -66,7 +66,8 @@ class DataTableController {
             } else {
 
                 // Select data
-                $url = "news?select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                $url = "relations?rel=news,categories&type=new,category&select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                //$url = "relations?rel=news,categories&type=new,category&select=".$select."&linkTo="."&orderBy=".$orderBy."&orderMode=".$orderType."&startAt=".$start."&endAt=".$length;
                 $response = CurlController::request($url, $method, $fields);
 
                 if ($response->status == 200) {
@@ -105,7 +106,7 @@ class DataTableController {
                     $dataJSON['data'][] = [
                         "id_new" => ($start + $key + 1),
                         "title_new" => $value->title_new,
-                        "category_new" => $value->category_new,
+                        "name_category" => $value->name_category,
                         "actions" => $actions
                     ];
                 }

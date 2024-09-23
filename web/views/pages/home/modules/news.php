@@ -13,61 +13,60 @@
                         <ul class="blog-classic blog-wrapper grid-loading grid grid-4col xl-grid-4col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                             <li class="grid-sizer"></li>
 
-                            <!-- start blog item -->
-                            <li class="grid-item">
-                                <div class="card bg-transparent border-0 h-100">
-                                    <div class="blog-image position-relative overflow-hidden border-radius-6px">
-                                        <a href="demo-business-blog-single-modern.html"><img src="<?php echo $path ?>/views/assets/images/noticia1.jpeg" alt="" /></a>
-                                    </div>
-                                    <div class="card-body px-0 pb-30px pt-30px xs-pb-15px">
-                                        <span class="fs-14 text-uppercase mb-5px d-block"><a href="demo-business-blog.html" class="text-dark-gray fw-600 categories-text">Ciudad</a><a href="#" class="blog-date">21 Agosto 2024</a></span>
-                                        <a href="demo-business-blog-single-modern.html" class="card-title mb-0 fw-500 fs-18 lh-30 text-dark-gray d-inline-block">°149 aniversario de Funes: celebrando a nuestra gente</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end blog item -->
+                            <?php 
 
-                            <!-- start blog item -->
-                            <li class="grid-item">
-                                <div class="card bg-transparent border-0 h-100">
-                                    <div class="blog-image position-relative overflow-hidden border-radius-6px">
-                                        <a href="demo-business-blog-single-modern.html"><img src="<?php echo $path ?>/views/assets/images/noticia2.jpg" alt="" /></a>
-                                    </div>
-                                    <div class="card-body px-0 pb-30px pt-30px xs-pb-15px">
-                                        <span class="fs-14 text-uppercase mb-5px d-block"><a href="demo-business-blog.html" class="text-dark-gray fw-600 categories-text">Educación</a><a href="#" class="blog-date">22 August 2023</a></span>
-                                        <a href="demo-business-blog-single-modern.html" class="card-title mb-0 fw-500 fs-18 lh-30 text-dark-gray d-inline-block">La Expo Carreras 2024 llega a Funes</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end blog item -->
+                            $select = "id_new,title_new,name_category,image_new,date_created_new";
+                            $url = "relations?rel=news,categories&type=new,category&select=".$select."&startAt=0&endAt=4&orderBy=date_created_new&orderMode=DESC";
+                            $method = "GET";
+                            $fields = array();
 
-                            <!-- start blog item -->
-                            <li class="grid-item">
-                                <div class="card bg-transparent border-0 h-100">
-                                    <div class="blog-image position-relative overflow-hidden border-radius-6px">
-                                        <a href="demo-business-blog-single-modern.html"><img src="<?php echo $path ?>/views/assets/images/noticia3.jpeg" alt="" /></a>
-                                    </div>
-                                    <div class="card-body px-0 pb-30px pt-30px xs-pb-15px">
-                                        <span class="fs-14 text-uppercase mb-5px d-block"><a href="demo-business-blog.html" class="text-dark-gray fw-600 categories-text">Gobierno</a><a href="#" class="blog-date">8 Agosto 2024</a></span>
-                                        <a href="demo-business-blog-single-modern.html" class="card-title mb-0 fw-500 fs-18 lh-30 text-dark-gray d-inline-block">El cónsul de República Checa llenó de elogios al municipio</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end blog item --> 
+                            // Initialize $noticias to null or an empty array
+                            $noticias = null;
 
-                            <!-- start blog item -->
-                            <li class="grid-item">
-                                <div class="card bg-transparent border-0 h-100">
-                                    <div class="blog-image position-relative overflow-hidden border-radius-6px">
-                                        <a href="demo-business-blog-single-modern.html"><img src="<?php echo $path ?>/views/assets/images/noticia4.jpg" alt="" /></a>
+                            // Make the request using the initialized $noticias variable
+                            $noticias = CurlController::request($url, $method, $fields);
+
+                            // Check if $noticias is an object and has a status property before accessing it
+                            if($noticias && property_exists($noticias, 'status') && $noticias->status == 200){
+                                
+                                $noticias = $noticias->results;
+                                
+                            }else{
+
+                                $noticias = array();
+
+                            }
+
+                            require_once('controllers/controller.new.php');
+                            // Crear una instancia del controlador
+                            $new = new NewController();
+        
+                            // Usar el método dateFormat para formatear la fecha
+                            foreach ($noticias as $noticia) {
+                                $fecha_formateada = $new->dateFormat($noticia->date_created_new);
+                                ?>
+        
+                                <li class="news-item grid-item">
+                                    <div class="news-card bg-transparent no-border h-100">
+                                        <div class="image-container position-relative overflow-hidden border-radius-4">
+                                            <a href="demo-business-blog-single-modern.html">
+                                                <img src="<?php echo $path . '/views/assets/images/noticias/' . $noticia->image_new; ?>" alt="<?php echo htmlspecialchars($noticia->title_new); ?>" class="img-fluid">
+                                            </a>
+                                        </div>
+                                        <div class="card-content px-3 pt-3 pb-3 xs-pb-2 no-margin">
+                                            <span class="category-date fs-14 text-uppercase">
+                                                <a href="#" class="category-link text-dark-gray fw-600"><?php echo htmlspecialchars($noticia->name_category); ?></a>
+                                            </span>
+                                            <span class="blog-date fs-14"><?php echo $fecha_formateada; ?></span>
+                                            <a href="demo-business-blog-single-modern.html" class="news-title mb-2 fw-500 fs-18 lh-30 text-dark-gray d-inline-block"><?php echo htmlspecialchars($noticia->title_new); ?></a>
+                                        </div>
                                     </div>
-                                    <div class="card-body px-0 pb-30px pt-30px xs-pb-15px">
-                                        <span class="fs-14 text-uppercase mb-5px d-block"><a href="demo-business-blog.html" class="text-dark-gray fw-600 categories-text">Seguridad</a><a href="#" class="blog-date">10 Agosto 2024</a></span>
-                                        <a href="demo-business-blog-single-modern.html" class="card-title mb-0 fw-500 fs-18 lh-30 text-dark-gray d-inline-block">Nuevo Comando Radioeléctrico</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end blog item -->
+                                </li>
+        
+                                <?php
+                            }
+
+                            ?>
 
                         </ul>
                     </div>

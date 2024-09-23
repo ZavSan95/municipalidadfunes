@@ -113,4 +113,96 @@ class TemplateController{
 		return $value;
 	}
 
+	/*=============================================
+	Función para almacenar imágenes
+	=============================================*/
+
+	static public function saveImage($image, $folder, $name, $width, $height){
+
+		if(isset($image["tmp_name"]) && !empty($image["tmp_name"])) { 
+	
+			/*=============================================
+			Configuramos la ruta del directorio donde se guardará la imagen
+			=============================================*/
+			$directory = strtolower("views/".$folder);
+	
+			/*=============================================
+			Preguntamos primero si no existe el directorio, para crearlo
+			=============================================*/
+			if(!file_exists($directory)){
+				mkdir($directory, 0755);
+			}
+	
+			/*=============================================
+			De acuerdo al tipo de imagen aplicamos las funciones por defecto
+			=============================================*/
+			if($image["type"] == "image/jpeg" || $image["type"] == "image/png" || $image["type"] == "image/gif"){
+	
+				// Obtener las dimensiones originales de la imagen
+				list($originalWidth, $originalHeight) = getimagesize($image["tmp_name"]);
+	
+				// Crear una nueva imagen en blanco del tamaño especificado
+				$newImage = imagecreatetruecolor($width, $height);
+	
+				// Manejar transparencia para PNG y GIF
+				if($image["type"] == "image/png" || $image["type"] == "image/gif") {
+					imagealphablending($newImage, false);
+					imagesavealpha($newImage, true);
+					$transparent = imagecolorallocatealpha($newImage, 0, 0, 0, 127);
+					imagefilledrectangle($newImage, 0, 0, $width, $height, $transparent);
+				}
+	
+				if($image["type"] == "image/jpeg"){
+					$start = imagecreatefromjpeg($image["tmp_name"]);
+				} elseif($image["type"] == "image/png"){
+					$start = imagecreatefrompng($image["tmp_name"]);
+				} elseif($image["type"] == "image/gif"){
+					$start = imagecreatefromgif($image["tmp_name"]);
+				}
+	
+				// Redimensionar la imagen original a las dimensiones especificadas
+				imagecopyresampled($newImage, $start, 0, 0, 0, 0, $width, $height, $originalWidth, $originalHeight);
+	
+				// Definir la ruta donde se guardará la nueva imagen
+				$newImagePath = $directory.'/'.$name.'.'.pathinfo($image['name'], PATHINFO_EXTENSION);
+	
+				// Guardar la imagen redimensionada en el directorio especificado
+				if($image["type"] == "image/jpeg"){
+					imagejpeg($newImage, $newImagePath);
+				} elseif($image["type"] == "image/png"){
+					imagepng($newImage, $newImagePath);
+				} elseif($image["type"] == "image/gif"){
+					imagegif($newImage, $newImagePath);
+				}
+	
+				// Liberar memoria
+				imagedestroy($newImage);
+				imagedestroy($start);
+	
+				// Devolver el nombre de la nueva imagen
+				return $name.'.'.pathinfo($image['name'], PATHINFO_EXTENSION);
+			}
+		}
+	
+		return "error";
+	}
+
+	/*=============================================
+	Generar URLS
+	=============================================*/
+	static public function generateUrl($string) {
+		// Eliminar caracteres especiales
+		$string = preg_replace('/[^a-zA-Z0-9\s]/', '', $string);
+		
+		// Reemplazar espacios en blanco por guiones bajos
+		$string = str_replace(' ', '_', $string);
+		
+		// Convertir a minúsculas
+		$string = strtolower($string);
+		
+		return $string;
+	}
+
+	
+
 }

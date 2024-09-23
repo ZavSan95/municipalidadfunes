@@ -96,10 +96,10 @@ $(document).ready(function() {
                                             value="<?php echo !empty($new) ? $new->title_new : ''; ?>" required>
                                     </div>
                                     <div class="form-group pb-3">
-                                        <label for="category_new">Categoría <sup
+                                        <label for="id_category_new">Categoría <sup
                                                 class="text-danger font-weight-bold">*</sup></label>
-                                        <select name="category_new" class="form-control required">
-                                            <option value="" <?php if (!empty($new) && $new->category_new == ""): ?>
+                                        <select name="id_category_new" class="form-control required">
+                                            <option value="" <?php if (!empty($new) && $new->id_category_new == ""): ?>
                                                 selected <?php endif ?>>Seleccione Categoría</option>
 
                                             <?php 
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
                                                 foreach ($category as $value) {
                                                 echo '<option value="'.$value->id_category.'" ' . 
-                                                (($new && $new->category_new == $value->id_category) ? 'selected' : '') . 
+                                                (($new && $new->id_category_new == $value->id_category) ? 'selected' : '') . 
                                                 '>'.$value->name_category.'</option>';
                                                 }
                                                 }

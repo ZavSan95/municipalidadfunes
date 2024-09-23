@@ -19,7 +19,7 @@ $url = "news";
 $method = "GET";
 $fields = array ();
 $totalNews = CurlController::request($url, $method, $fields)->total;
-// echo "<pre>"; print_r(ceil($totalNews/8)); echo "</pre>";
+//echo "<pre>"; print_r(ceil($totalNews/8)); echo "</pre>";
 if($startAt > $totalNews){
 
     echo '<script>
@@ -30,8 +30,8 @@ if($startAt > $totalNews){
 
 
 
-$select = "id_new,title_new,category_new,intro_new,image_new,date_created_new";
-$url = "news?select=".$select."&startAt=".$startAt."&endAt=".$endAt
+$select = "id_new,title_new,name_category,image_new,date_created_new";
+$url = "relations?rel=news,categories&type=new,category&select=".$select."&startAt=".$startAt."&endAt=".$endAt
 ."&orderBy=date_created_new&orderMode=DESC";
 $method = "GET";
 $fields = array();
@@ -101,23 +101,102 @@ if($noticias && property_exists($noticias, 'status') && $noticias->status == 200
                     // Usar el método dateFormat para formatear la fecha
                     foreach ($noticias as $noticia) {
                         $fecha_formateada = $new->dateFormat($noticia->date_created_new);
+                        ?>
 
-                        echo '<li class="grid-item">';
-                        echo '    <div class="card bg-transparent border-0 h-100">';
-                        echo '        <div class="blog-image position-relative overflow-hidden border-radius-4px">';
-                        echo '            <a href="demo-business-blog-single-modern.html"><img src="' . $path . '/views/assets/images/noticias/' . $noticia->image_new . '" alt=""></a>';
-                        echo '        </div>';
-                        echo '        <div class="card-body px-0 pt-30px pb-30px xs-pb-15px last-paragraph-no-margin">';
-                        echo '            <span class="fs-14 text-uppercase"><a href="#" class="text-dark-gray fw-600 categories-text">' . $noticia->category_new . '</a><a href="#" class="blog-date">' . $fecha_formateada . '</a></span>';
-                        echo '            <a href="demo-business-blog-single-modern.html" class="card-title mb-15px fw-500 fs-18 lh-30 text-dark-gray d-inline-block">' . $noticia->title_new . '</a>';
-                        echo '            <p class="w-95 sm-w-100"></p>';
-                        echo '        </div>';
-                        echo '    </div>';
-                        echo '</li>';
+                        <li class="news-item grid-item">
+                            <div class="news-card bg-transparent no-border h-100">
+                                <div class="image-container position-relative overflow-hidden border-radius-4">
+                                    <a href="demo-business-blog-single-modern.html">
+                                        <img src="<?php echo $path . '/views/assets/images/noticias/' . $noticia->image_new; ?>" alt="<?php echo htmlspecialchars($noticia->title_new); ?>" class="img-fluid">
+                                    </a>
+                                </div>
+                                <div class="card-content px-3 pt-3 pb-3 xs-pb-2 no-margin">
+                                    <span class="category-date fs-14 text-uppercase">
+                                        <a href="#" class="category-link text-dark-gray fw-600"><?php echo htmlspecialchars($noticia->name_category); ?></a>
+                                    </span>
+                                    <span class="blog-date fs-14"><?php echo $fecha_formateada; ?></span>
+                                    <a href="demo-business-blog-single-modern.html" class="news-title mb-2 fw-500 fs-18 lh-30 text-dark-gray d-inline-block"><?php echo htmlspecialchars($noticia->title_new); ?></a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <?php
                     }
                     ?>
 
+                    <style>
+                        .news-card {
+                            background-color: transparent; /* Fondo transparente */
+                            border: none !important; /* Sin bordes */
+                            box-shadow: none; /* Sin sombra, si es necesario */
+                        }
 
+                        .image-container {
+                            position: relative; /* Mantiene la posición relativa */
+                            overflow: hidden; /* Asegura que la imagen no sobresalga */
+                            border-radius: 4px; /* Redondea las esquinas */
+                        }
+
+                        .img-fluid {
+                            width: 100%; /* Asegura que la imagen ocupe todo el ancho */
+                            height: auto; /* Mantiene la proporción de la imagen */
+                        }
+
+                        .card-content {
+                            padding: 1rem; /* Espaciado interno */
+                        }
+
+                        .category-date {
+                            display: block; /* Asegura que la categoría ocupe toda la línea */
+                            margin-bottom: 0.25rem; /* Espacio inferior para separar de la fecha */
+                        }
+
+                        .category-link {
+                            color: #6c757d; /* Color del texto (gris oscuro) */
+                            font-weight: 600; /* Negrita */
+                            text-decoration: none; /* Sin subrayado */
+                        }
+
+                        .category-link:hover {
+                            color: #074A1F; /* Cambia el color al pasar el mouse */
+                        }
+
+                        .blog-date {
+                            display: block; /* Asegura que la fecha ocupe toda la línea */
+                            font-weight: bold; /* Negrita para la fecha */
+                            color: black; /* Color del texto */
+                            letter-spacing: normal; /* Espaciado normal */
+                            margin-bottom: 0.5rem; /* Espacio inferior antes del título */
+                        }
+
+                        .news-title {
+                            margin-top: 0.5rem; /* Espacio superior */
+                            font-weight: 500; /* Peso de la fuente */
+                            font-size: 18px; /* Tamaño de fuente */
+                            line-height: 1.5; /* Altura de línea */
+                            color: #343a40; /* Color del texto (gris más oscuro) */
+                            text-decoration: none; /* Sin subrayado */
+                        }
+
+                        .news-title:hover {
+                            color: #074A1F; /* Cambia el color al pasar el mouse */
+                        }
+
+                        .image-container {
+                            overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+                            position: relative; /* Para posicionar el efecto de zoom */
+                        }
+
+                        .image-container img {
+                            transition: transform 0.5s ease; /* Suaviza el efecto de zoom */
+                        }
+
+                        .image-container:hover img {
+                            transform: scale(1.1); /* Aumenta el tamaño de la imagen al hacer hover */
+                        }
+
+                        
+                    </style>
                     
 
                 </ul>

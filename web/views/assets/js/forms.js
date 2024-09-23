@@ -128,9 +128,7 @@ function validateImageJS(event, tagImg){
       $(data).on("load", function(event){
         
         var path = event.target.result; 
-  
-        fncSweetAlert("close", "", "");
-  
+    
         $("."+tagImg).attr("src", path);
         $(".metaImg").attr("src", path);    
   

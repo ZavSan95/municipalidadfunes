@@ -89,6 +89,7 @@ foreach($routesArray as $key => $value){
 
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo $path ?>/views/pages/admin/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo $path ?>/views/assets/css/customs/customs.css">
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">

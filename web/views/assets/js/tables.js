@@ -31,7 +31,7 @@ if($(".newsTable").length > 0){
   var columns = [
      {"data":"id_new"},
      {"data":"title_new"},
-     {"data":"category_new"},
+     {"data":"name_category"},
      {"data":"actions", "orderable":false, "searchable":false}
   ]
 

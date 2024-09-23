@@ -1,0 +1,72 @@
+
+.news-card {
+    background-color: transparent; /* Fondo transparente */
+    border: none !important; /* Sin bordes */
+    box-shadow: none; /* Sin sombra, si es necesario */
+}
+
+.image-container {
+    position: relative; /* Mantiene la posición relativa */
+    overflow: hidden; /* Asegura que la imagen no sobresalga */
+    border-radius: 4px; /* Redondea las esquinas */
+}
+
+.img-fluid {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.card-content {
+    padding: 1rem; /* Espaciado interno */
+}
+
+.category-date {
+    display: block; /* Asegura que la categoría ocupe toda la línea */
+    margin-bottom: 0.25rem; /* Espacio inferior para separar de la fecha */
+}
+
+.category-link {
+    color: #6c757d; /* Color del texto (gris oscuro) */
+    font-weight: 600; /* Negrita */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.category-link:hover {
+    color: #074A1F; /* Cambia el color al pasar el mouse */
+}
+
+.blog-date {
+    display: block; /* Asegura que la fecha ocupe toda la línea */
+    font-weight: bold; /* Negrita para la fecha */
+    color: black; /* Color del texto */
+    letter-spacing: normal; /* Espaciado normal */
+    margin-bottom: 0.5rem; /* Espacio inferior antes del título */
+}
+
+.news-title {
+    margin-top: 0.5rem; /* Espacio superior */
+    font-weight: 500; /* Peso de la fuente */
+    font-size: 18px; /* Tamaño de fuente */
+    line-height: 1.5; /* Altura de línea */
+    color: #343a40; /* Color del texto (gris más oscuro) */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.news-title:hover {
+    color: #074A1F; /* Cambia el color al pasar el mouse */
+}
+
+.image-container {
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+    position: relative; /* Para posicionar el efecto de zoom */
+}
+
+.image-container img {
+    transition: transform 0.5s ease; /* Suaviza el efecto de zoom */
+}
+
+.image-container:hover img {
+    transform: scale(1.1); /* Aumenta el tamaño de la imagen al hacer hover */
+}
+
+

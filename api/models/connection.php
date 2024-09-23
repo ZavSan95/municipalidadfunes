@@ -12,7 +12,7 @@ class Connection{
 
 		$infoDB = array(
 
-			"database" => "funes",
+			"database" => "prueba",
 			"user" => "root",
 			"pass" => ""
 

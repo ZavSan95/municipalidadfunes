@@ -130,7 +130,12 @@ $(document).ready(function () {
           var token = localStorage.getItem('token-admin');
           var emailAdmin = localStorage.getItem('email-admin');
           var url = "/ajax/delete-admins.ajax.php";
+        }
 
+        if(table == "admins"){
+          var reDirec = "administradores";
+        }else if(table == "news"){
+          var reDirec = "prensa";
         }
 
         var data = new FormData();
@@ -148,52 +153,78 @@ $(document).ready(function () {
           contentType: false,
           cache: false, 
           processData: false,
-          success: function(response){
+          success: function(response) {
+            if (response == 200) {
+                console.log(response);
+                function showAlert() {
+                    Swal.fire({
+                        title: "Correcto",
+                        icon: "success",
+                        text: "Item eliminado con éxito",
+                        confirmButtonColor: "#074A1F"
+                    }).then((result) => {
+                        // Redirige al usuario después de cerrar la alerta
+                        if (result.isConfirmed) {
+                            window.location.href = "/admin/" + reDirec;
+                        }
+                    });
+                }
+                showAlert();
+                
+                // Registrar la eliminación
+                var emailUser = localStorage.getItem('email-admin');
+                var logData = new FormData();
+                logData.append("token", localStorage.getItem('token-admin'));
+                logData.append("table", table);
+                logData.append("id", idItem);
+                logData.append("emailUser", emailUser);
 
-            if(response == 200){
-              console.log(response);
-              function showAlert() {
-                Swal.fire({
-                    title: "Correcto",
-                    icon: "success",
-                    text: "Item eliminado con éxito",
-                    confirmButtonColor: "#074A1F"
-                }).then((result) => {
-                    // Redirige al usuario después de cerrar la alerta
-                    if (result.isConfirmed) {
-                        window.location.href = "/admin/administradores";
+                // Llama al endpoint de registro
+                $.ajax({
+                    url: "/ajax/logs/logDelete.ajax.php", // Asegúrate de que esta ruta sea correcta
+                    method: "POST",
+                    data: logData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(logResponse) {
+                        console.log(logResponse); // Verifica la respuesta del servidor
+                        const response = JSON.parse(logResponse); // Asegúrate de parsear la respuesta JSON
+                        if (response.status === "success") {
+                            console.log("Log registrado correctamente.");
+                        } else {
+                            console.error("Error al registrar el log:", response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error en la solicitud AJAX:", error);
                     }
                 });
+            } else if (response == "no-borrar") {
+                console.log(response);
+                function showAlert() {
+                    Swal.fire({
+                        title: "Error",
+                        icon: "error",
+                        text: "Este item no se puede borrar",
+                        confirmButtonColor: "#EF1400"
+                    });
+                }
+                showAlert();
+            } else {
+                console.log(response);
+                function showAlert() {
+                    Swal.fire({
+                        title: "Error",
+                        icon: "error",
+                        text: "Este item no se puede borrar",
+                        confirmButtonColor: "#EF1400"
+                    });
+                }
+                showAlert();
             }
-            showAlert();
-            }
-            else if(response == "no-borrar"){
-              console.log(response);
-              function showAlert() {
-                Swal.fire({
-                    title: "Error",
-                    icon: "error",
-                    text: "Este item no se puede borrar",
-                    confirmButtonColor: "#EF1400"
-                });
-            }
-            showAlert();
-            }
-            else{
-              console.log(response);
-              function showAlert() {
-                Swal.fire({
-                    title: "Error",
-                    icon: "error",
-                    text: "Este item no se puede borrar",
-                    confirmButtonColor: "#EF1400"
-                });
-            }
-            showAlert();
-            }
-
-
-          }
+        }
+        
 
         })
 

@@ -49,7 +49,7 @@
                                 <li class="news-item grid-item">
                                     <div class="news-card bg-transparent no-border h-100">
                                         <div class="image-container position-relative overflow-hidden border-radius-4">
-                                            <a href="demo-business-blog-single-modern.html">
+                                            <a href="#">
                                                 <img src="<?php echo $path . '/views/assets/images/noticias/' . $noticia->image_new; ?>" alt="<?php echo htmlspecialchars($noticia->title_new); ?>" class="img-fluid">
                                             </a>
                                         </div>
@@ -58,7 +58,7 @@
                                                 <a href="#" class="category-link text-dark-gray fw-600"><?php echo htmlspecialchars($noticia->name_category); ?></a>
                                             </span>
                                             <span class="blog-date fs-14"><?php echo $fecha_formateada; ?></span>
-                                            <a href="demo-business-blog-single-modern.html" class="news-title mb-2 fw-500 fs-18 lh-30 text-dark-gray d-inline-block"><?php echo htmlspecialchars($noticia->title_new); ?></a>
+                                            <a href="#" class="news-title mb-2 fw-500 fs-18 lh-30 text-dark-gray d-inline-block"><?php echo htmlspecialchars($noticia->title_new); ?></a>
                                         </div>
                                     </div>
                                 </li>

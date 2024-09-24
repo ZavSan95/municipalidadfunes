@@ -49,6 +49,9 @@
                     <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab_four6"><i
                                 class="fa-solid fa-car-burst icon-extra-medium text-dark-gray"></i><span>API</span></a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab_four7"><i
+                            class="fa-solid fa-car-burst icon-extra-medium text-dark-gray"></i><span>INFRACCIONES</span></a>
+                    </li>
                 </ul>
                 <!-- end tab navigation -->
             </div>
@@ -149,7 +152,7 @@
                     </div>
                     <!-- end tab content for PATENTES -->
 
-                    <!-- start tab content for INFRACCIONES -->
+                    <!-- start tab content for API -->
                     <div class="tab-pane fade" id="tab_four6">
                         <!-- Content for API -->
                         <div class="flex-fill">
@@ -159,6 +162,20 @@
                             <div class="flex-shrink-1" style="flex-basis: 600px;">
                                 <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">API</h5>
                                 <iframe class="tramites" frameborder="0" scrolling="no" src="https://www.funes.gob.ar/api.php" width="100%" height="700px"></iframe>
+                            </div>
+                    </div>
+                    <!-- end tab content for API -->
+
+                    <!-- start tab content for INFRACCIONES -->
+                    <div class="tab-pane fade" id="tab_four7">
+                        <!-- Content for INFRACCIONES -->
+                        <div class="flex-fill">
+                                <!-- Aquí podrías añadir otros elementos o contenido que quieras mostrar al lado del iframe -->
+                            </div>
+                            <!-- Iframe para TGI -->
+                            <div class="flex-shrink-1" style="flex-basis: 600px;">
+                                <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">INFRACCIONES</h5>
+                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menuvehiculo.exe?ingreso" width="100%" height="300px"></iframe>
                             </div>
                     </div>
                     <!-- end tab content for INFRACCIONES -->

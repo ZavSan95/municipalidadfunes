@@ -2070,9 +2070,9 @@
                 emailFormat = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
                 urlformat = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                 telFormat = /[0-9 -()+]+$/,
-                textFormat = /^[a-zA-Z\s]+$/,
+                textFormat = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
                 numberFormat = /[0-9]+$/,
-                allFormat = /^[a-zA-Z0-9\s.,@#()_\-:+%&°]+$/,
+                allFormat = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,@#()_\-:+%&°]+$/,
                 actionURL = formObj.attr('action'),
                 resultsObj = formObj.find('.form-results'),
                 grecaptchav3= _this.attr( 'data-sitekey' ) || '',
@@ -2166,9 +2166,9 @@
         var emailFormat = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
                 telFormat = /[0-9 -()+]+$/,
                 urlformat = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
-                textFormat = /^[a-zA-Z\s]+$/,
+                textFormat = textFormat = /^[a-zA-Z\s]+$/,
                 numberFormat = /[0-9]+$/,
-                allFormat = /^[a-zA-Z0-9\s.,@#()_\-:+%&°]+$/,
+                allFormat = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,@#()_\-:+%&°]+$/,
                 fieldVal = $(this).val();
         if (fieldVal == '' || fieldVal == undefined) {
             $(this).addClass('is-invalid');

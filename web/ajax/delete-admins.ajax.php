@@ -9,25 +9,81 @@ class DeleteController {
     public $id;
     public $nameId;
 
-    public function ajaxDelete() {
+   
+    public function ajaxDelete(){
 
         if ($this->table == "admins" && base64_decode($this->id) == "1") {
             echo "no-borrar";
             return;
         }
 
-        $url = "admins?id=" . base64_decode($this->id) . "&nameId=" . $this->nameId . "&token=" . $this->token . "&table=admins&suffix=admin";
+        if ($this->table == "news") {
+            
+            $select = "image_new";
+            $url = "news?linkTo=id_new&equalTo=".base64_decode($this->id)."&select=".$select;
+            $method = "GET";
+            $fields = array();
+
+            $dataItem = CurlController::request($url,$method,$fields)->results[0];
+
+            // Ruta del archivo
+            $imagePath = "../views/assets/images/noticias/" . $dataItem->image_new;
+            
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $url = $this->table."?id=" . base64_decode($this->id) . "&nameId=" . $this->nameId . "&token=" . $this->token . "&table=admins&suffix=admin";
         $method = "DELETE";
         $fields = array();
 
         $delete = CurlController::request($url, $method, $fields);
 
         return $delete->status; 
+    }    
+
+    public function registerLogDelete(){
+
+        if($this->table == "admins"){
+
+            
+
+            $select = "email_admin";
+            $url = "admins?linkTo=id_admin&equalTo=".base64_decode($this->id)."&select=".$select;
+            $method = "GET";
+            $fields = array();
+
+            $adminLog = CurlController::request($url,$method,$fields);
+            
+            
+            if($adminLog->status == 200){
+
+                $adminLog->results[0];
+
+            }else{
+
+                $userAction = null;
+            }
+
+            $log = new ControllerLog();
+            $log->register($_SESSION['administrador']->email_admin, "ELIMINAR USUARIO", $adminLog->email_admin);
+
+        }
+
+        if($this->table == "news"){
+
+            $log = new ControllerLog();
+            $log->register($_SESSION['administrador']->email_admin, "ELIMINAR NOTICIA", null);
+        }
     }
 
-}
+    }
+
+
 
 if (isset($_POST["token"])) {
+
 
     $Delete = new DeleteController();
     $Delete->token = $_POST["token"];
@@ -37,18 +93,7 @@ if (isset($_POST["token"])) {
 
     $status = $Delete->ajaxDelete(); // Captura el estado de la eliminación
 
-    // Registrar el log si la eliminación fue exitosa
-    if (isset($_POST['email-admin'])) { // Verificar si se ha enviado el email-admin
-        $log = new ControllerLog();
 
-        if ($status == 200) {
-            $log->register($_POST['email-admin'], "ELIMINACION USUARIO", base64_decode($_POST['id']));
-        } else {
-            $log->register($_POST['email-admin'], "ELIMINACION USUARIO FALLIDA", base64_decode($_POST['id']));
-        }
-    } else {
-        echo "No hay email de administrador";
-    }
 
     echo $status; // Responder con el estado de la operación
 }

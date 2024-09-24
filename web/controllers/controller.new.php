@@ -1,5 +1,5 @@
 <?php
-
+require_once 'controllers/controller.log.php';
 class NewController {
 
     /**
@@ -50,73 +50,192 @@ class NewController {
 
     public function newsManage(){
 
+        
         if(isset($_POST['title_new'])){
 
-
-            /*=============================================
-            Validar y Guardar Imagen
-            =============================================*/
-            if(isset($_FILES['image_new']['tmp_name']) && !empty($_FILES['image_new']['tmp_name'])){
-
-                $url_image = TemplateController::generateUrl($_POST['title_new']);
-
-                $image = $_FILES['image_new'];
-                $folder = "assets/images/noticias/";
-
-                // Generar un número aleatorio de 6 dígitos
-                $randomNumber = rand(100000, 999999);
-                $name = $randomNumber."_".$url_image;
-
-                $width = 1000;
-                $height = 600;
-
-                $saveImageNew = TemplateController::saveImage($image, $folder, $name, $width, $height);
-
+            // Comprobar si el título está vacío
+            if (empty(trim($_POST['title_new'])) || empty($_POST['id_category_new'])) {
+                // Establecer el mensaje de error en la sesión
+                $_SESSION['error-form'] = "Complete los campos requeridos";
+                return; 
             }
 
-            /*=============================================
-            Validar y Guardar Datos
-            =============================================*/
-            $fields = array (
+            if(isset($_POST['idNew'])){
 
-                "title_new" => trim(TemplateController::capitalize($_POST['title_new'])),
-                "id_category_new" => $_POST['id_category_new'],
-                "intro_new" => $_POST['intro_new'],
-                "body_new" => $_POST['body_new'],
-                "image_new" => $saveImageNew,
-                "date_created_new" => date("Y-m-d")
-            );
+                // echo '<pre>';print_r($_POST);echo '</pre>';
+                // echo 'fin segundo print_r';
+                // echo $_POST['idNew'];
+                // return;
 
-            //echo '<pre>'; print_r($fields);echo '</pre>';
+                
+                if(isset($_FILES['image_new']['tmp_name']) && !empty($_FILES['image_new']['tmp_name'])){
 
-            $url = "news?token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
-            $method = "POST";
+                    $url_image = TemplateController::generateUrl($_POST['title_new']);
 
-            $createData = CurlController::request($url,$method,$fields);
+                    $image = $_FILES['image_new'];
+                    $folder = "assets/images/noticias/";
+                
+                    // Generar un número aleatorio de 6 dígitos
+                    $randomNumber = rand(100000, 999999);
+                    $name = $randomNumber . "_" . $url_image;
+                
+                    $width = 1000;
+                    $height = 600;
+                
+                    unlink("views/assets/images/noticias/".$_POST['old_image_new']); // Eliminar la imagen vieja
+                
+                    // Guardar la nueva imagen
+                    $saveImageNew = TemplateController::saveImage($image, $folder, $name, $width, $height);
 
-            if($createData->status == 200){
+                }else{
 
-                echo '<script>
+                    $saveImageNew = $_POST['old_image_new'];
+                }
+                
+                
+                $fields = "title_new=".trim(TemplateController::capitalize($_POST['title_new']))."&id_category_new=".$_POST['id_category_new'].
+                "&intro_new=".$_POST['intro_new']."&body_new=".$_POST['body_new']."&image_new=".$saveImageNew;
 
-                    fncFormatInputs();
+                //echo '<pre>';print_r($fields);echo '</pre>';
+                
+            
+                $url = "news?id=".base64_decode($_POST['idNew'])."&nameId=id_new&token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
+                $method = "PUT";
 
-                    function showAlertSuccess(title,type,text) {
-                        Swal.fire({
-                            title: title,
-                            icon: type,
-                            text: text,
-                            confirmButtonColor: "#074A1F"
-                        }).then((result) => {
-                            // Redirige al usuario después de cerrar la alerta
-                            if (result.isConfirmed) {
-                                window.location.href = "/admin/prensa";
+                $updateData = CurlController::request($url,$method,$fields);
+
+                // echo '<pre>';print_r($updateData);echo '</pre>';
+                // return;
+                if($updateData->status == 200){
+
+                    $log = new ControllerLog();
+                    $log->register($_SESSION['administrador']->email_admin, "EDICION NOTICIA", null);
+
+                    echo '
+                        <script>
+                            // Función para mostrar una alerta de SweetAlert2
+                            function showAlert() {
+                                Swal.fire({
+                                    title: "Correcto",
+                                    icon: "success",
+                                    text: "Noticia editada con éxito",
+                                    confirmButtonColor: "#074A1F"
+                                }).then((result) => {
+                                    // Redirige al usuario después de cerrar la alerta
+                                    if (result.isConfirmed) {
+                                        window.location.href = "/admin/prensa";
+                                    }
+                                });
                             }
-                        });
-                    }
-                    showAlertSuccess("Éxito","success","Nueva noticia creada");
-
+                            showAlert();
                     </script>';
-            }
+                }else{
+
+                    if($updateData->status == 303){
+
+                        echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Token expirado, vuelva a iniciar sesión",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+                    }else{
+
+                        echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Error al guardar los datos, intente nuevamente",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+                    }
+                }
+
+            }else{
+
+
+                /*=============================================
+                Validar y Guardar Imagen
+                =============================================*/
+                if(isset($_FILES['image_new']['tmp_name']) && !empty($_FILES['image_new']['tmp_name'])){
+
+                    $url_image = TemplateController::generateUrl($_POST['title_new']);
+
+                    $image = $_FILES['image_new'];
+                    $folder = "assets/images/noticias/";
+
+                    // Generar un número aleatorio de 6 dígitos
+                    $randomNumber = rand(100000, 999999);
+                    $name = $randomNumber."_".$url_image;
+
+                    $width = 1000;
+                    $height = 600;
+
+                    $saveImageNew = TemplateController::saveImage($image, $folder, $name, $width, $height);
+
+                }
+
+                /*=============================================
+                Validar y Guardar Datos
+                =============================================*/
+                $fields = array (
+
+                    "title_new" => trim(TemplateController::capitalize($_POST['title_new'])),
+                    "id_category_new" => $_POST['id_category_new'],
+                    "intro_new" => $_POST['intro_new'],
+                    "body_new" => $_POST['body_new'],
+                    "image_new" => $saveImageNew,
+                    "date_created_new" => date("Y-m-d")
+                );
+
+                //echo '<pre>'; print_r($fields);echo '</pre>';
+
+                $url = "news?token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
+                $method = "POST";
+
+                $createData = CurlController::request($url,$method,$fields);
+
+                if($createData->status == 200){
+
+                    $log = new ControllerLog();
+                    $log->register($_SESSION['administrador']->email_admin, "CREACION NOTICIA", null);
+
+                    echo '<script>
+
+                        fncFormatInputs();
+
+                        function showAlertSuccess(title,type,text) {
+                            Swal.fire({
+                                title: title,
+                                icon: type,
+                                text: text,
+                                confirmButtonColor: "#074A1F"
+                            }).then((result) => {
+                                // Redirige al usuario después de cerrar la alerta
+                                if (result.isConfirmed) {
+                                    window.location.href = "/admin/prensa";
+                                }
+                            });
+                        }
+                        showAlertSuccess("Éxito","success","Nueva noticia creada");
+
+                        </script>';
+                }
+                
+            }            
         }
     }
 }

@@ -2,9 +2,9 @@
 
 class ControllerLog {
 
-    public function register($user, $action, $otherUser = null) {
+    public function register($user, $action, $otherUser = null): bool {
         
-        // Obtener la IP del cliente (o servidor dependiendo del contexto)
+        // Obtener la IP del cliente
         $ipAddress = $this->getUserIP();
 
         // URL y método para hacer el request
@@ -12,7 +12,7 @@ class ControllerLog {
         $method = "POST";
 
         // Datos del log
-        $fields = array (
+        $fields = array(
             "user_log" => $user,
             "action_log" => $action,
             "user_action_log" => $otherUser,
@@ -20,8 +20,16 @@ class ControllerLog {
             "ip_address_log" => $ipAddress 
         );
 
-        
+        // Realiza la solicitud CURL
         $registerLog = CurlController::request($url, $method, $fields);
+
+        // Verifica si la solicitud fue exitosa
+        if ($registerLog->status == 200) {
+            return true; // Registro exitoso
+        } else {
+            error_log("Error al registrar el log: " . json_encode($registerLog)); // Log de error
+            return false; // Error al registrar
+        }
     }
 
     // Método para obtener la IP del cliente
@@ -38,3 +46,4 @@ class ControllerLog {
         }
     }
 }
+

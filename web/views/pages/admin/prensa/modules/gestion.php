@@ -16,6 +16,7 @@ $new = null;
 } else {
 $new = null;
 }
+
 ?>
 
 <script>
@@ -30,7 +31,7 @@ $(document).ready(function() {
             <form method="post" class="needs-validation" novalidate enctype="multipart/form-data">
 
                 <?php if (!empty($new)): ?>
-                <input type="hidden" name="idNew" value="<?php echo base64_decode($new->id_new) ?>">
+                <input type="hidden" name="idNew" value="<?php echo  base64_encode($new->id_new) ?>">
                 <?php endif ?>
 
                 <div class="card-header">
@@ -91,7 +92,7 @@ $(document).ready(function() {
                                     <div class="form-group pb-3">
                                         <label for="title_new">Título <sup
                                                 class="text-danger font-weight-bold">*</sup></label>
-                                        <input type="text" class="form-control required"
+                                        <input type="all" class="form-control required"
                                             placeholder="Ingresar el título" id="title_new" name="title_new"
                                             value="<?php echo !empty($new) ? $new->title_new : ''; ?>" required>
                                     </div>

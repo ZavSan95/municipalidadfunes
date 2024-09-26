@@ -28,8 +28,8 @@ if (!isset($_SESSION["administrador"])) {
 
     // Definir los módulos permitidos para cada rol
     $modulosPorRol = [
-      'admin' => ['administradores', 'prensa', 'otroModulo'],
-      'prensa' => ['prensa'],
+      'admin' => ['administradores', 'prensa', 'slides','gestor_reclamos', 'informes_reclamos'],
+      'prensa' => ['prensa', 'slides'],
       // Agregar más roles y sus permisos si es necesario
     ];
 

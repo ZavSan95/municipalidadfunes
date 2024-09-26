@@ -13,7 +13,7 @@ if (isset($_POST["token"], $_POST["table"], $_POST["id"], $_POST["emailUser"])) 
         $otherUse = base64_decode($_POST["id"]);
         
     }
-    else if ($_POST['table'] == "news"){
+    else if ($_POST['table'] == "news" || $_POST['table'] == "slides"){
 
         $otherUse = null;
     }

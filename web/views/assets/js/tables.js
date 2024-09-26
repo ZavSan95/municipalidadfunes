@@ -41,6 +41,50 @@ if($(".newsTable").length > 0){
 }
 
 /*=============================================
+Tabla para Slides
+=============================================*/
+
+if($(".slidesTable").length > 0){
+
+  var url = "/ajax/data-slides.ajax.php";
+
+  var columns = [
+     {"data":"id_slide"},
+     {"data":"title_slide"},
+     {"data":"intro_slide"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+/*=============================================
+Tabla para Slides
+=============================================*/
+
+if($(".reclamosTable").length > 0){
+
+  var url = "/ajax/data-reclamos.ajax.php";
+
+  var columns = [
+     {"data":"id_reclamo"},
+     {"data":"categoria_reclamo"},
+     {"data":"dni_reclamo"},
+     {"data":"cuenta_reclamo"},
+     {"data":"deuda_reclamo"},
+     {"data":"zona_reclamo"},
+     {"data":"estado_reclamo"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+/*=============================================
 Data Table Admins
 =============================================*/
 $(document).ready(function() {
@@ -136,6 +180,8 @@ $(document).ready(function () {
           var reDirec = "administradores";
         }else if(table == "news"){
           var reDirec = "prensa";
+        }else if(table == "slides"){
+          var reDirec = "slides"
         }
 
         var data = new FormData();

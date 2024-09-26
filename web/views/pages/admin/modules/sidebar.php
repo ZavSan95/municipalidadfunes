@@ -44,6 +44,42 @@
                     </a>
                 </li>
 
+                <!-- Slides -->
+                <li class="nav-item">
+                    <a href="/admin/slides" class="nav-link">
+                        <i class="nav-icon fa-regular fa-image"></i>
+                        <p>
+                            Slides
+                        </p>
+                    </a>
+                </li>
+
+                <!-- Reclamos -->
+                <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fa-solid fa-triangle-exclamation"></i>
+                <p>
+                    Reclamos
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                <li class="nav-item">
+                    <a href="/admin/gestor_reclamos" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Gestor Reclamos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="informes_reclamos" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Estadísticas</p>
+                    </a>
+                </li>
+                </ul>
+            </li>
+
+                <!-- Salir -->
                 <li class="nav-item">
                     <a href="/salir" class="nav-link">
                         <i class="nav-icon fas fa-sign-out"></i>

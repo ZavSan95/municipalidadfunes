@@ -1,64 +1,67 @@
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <b>Administración</b> Funes
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg"></p>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="login-box">
+    <div class="login-logo">
+      <b>Administración</b> Funes
+    </div>
 
-      <form action="" method="post">
-        <div class="input-group mb-3">
-          <input type="email" name="loginAdminEmail" class="form-control required" placeholder="Correo Electrónico">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+    <!-- Card Container -->
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="max-width: 400px;">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg"></p>
+
+        <!-- Login Form -->
+        <form action="" method="post">
+          <!-- Email Field -->
+          <div class="input-group mb-3">
+            <input type="email" name="loginAdminEmail" class="form-control required" placeholder="Correo Electrónico" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" name="passwordAdmin" class="form-control required" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember" onchange="rememberEmail(event)">
-              <label for="remember">
-                Recordarme
-              </label>
-            </div>
-          </div>
-          
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Log In</button>
           </div>
 
+          <!-- Password Field -->
+          <div class="input-group mb-3">
+            <input type="password" name="passwordAdmin" class="form-control required" placeholder="Password" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Remember me and Log In Button -->
+          <div class="row mb-3 align-items-center">
+            <div class="col-6 d-flex align-items-center ">
+              <input type="checkbox" id="remember" name="remember" onchange="rememberEmail(event)" style="margin-right: 10px;">
+              <label for="remember" class="mb-0" style="width: 23rem;">Recordarme</label>
+            </div>
+            <div class="col-6 text-end">
+              <button type="submit" class="btn btn-primary">Log In</button>
+            </div>
+          </div>
+
+          <!-- PHP Login Controller -->
           <?php
-
             require_once 'controllers/controller.admin.php';
             $login = new AdminsController();
             $login->login();
-
           ?>
-          
-        </div>
-      </form>
+        </form>
 
-
-      <p class="mb-1">
-        <a href="#resetPassword" data-bs-toggle="modal">¿Olvidaste tu clave?</a>
-      </p>
+        <!-- Forgot Password -->
+        <p class="mb-1">
+          <a href="#resetPassword" data-bs-toggle="modal">¿Olvidaste tu clave?</a>
+        </p>
+      </div>
     </div>
-    <!-- /.login-card-body -->
   </div>
 </div>
-<!-- /.login-box -->
+
+
+
 
 
 
@@ -79,7 +82,6 @@
         <p class="login-box-msg">¿Olvidaste tu clave? Solicita una nueva aquí.</p>
 
         <form action="" method="post">
-
           <div class="input-group mb-3">
             <input type="email" name="resetPassword" class="form-control required" placeholder="Correo Electrónico">
             <div class="input-group-append">
@@ -96,12 +98,10 @@
           </div>
 
           <?php 
-
           require_once 'controllers/controller.admin.php';
           $reset = new AdminsController();
           $reset->resetPassword();
           ?>
-
         </form>
 
       </div>
@@ -114,5 +114,4 @@
     </div>
   </div>
 </div>
-  
 </body>

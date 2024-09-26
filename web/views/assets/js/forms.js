@@ -93,6 +93,8 @@ Validamos imagen
 function validateImageJS(event, tagImg){
 
     var image = event.target.files[0];
+
+    console.log(image)
     if(image == undefined){
 
         return;
@@ -104,15 +106,76 @@ function validateImageJS(event, tagImg){
   
     if(image["type"] !== "image/jpeg" && image["type"] !== "image/png" && image["type"] !== "image/gif"){
 
+        console.log("Error tipo");
         return;
+       
     }
   
     /*=============================================
     Validamos el tamaño
     =============================================*/
   
-    else if(image["size"] > 2000000){
+    else if(image["size"] > 4000000){
 
+        console.log("Error Tamaño");
+        return;
+    }
+  
+    /*=============================================
+    Mostramos la imagen temporal
+    =============================================*/
+  
+    else{
+  
+      var data = new FileReader();
+      data.readAsDataURL(image);
+  
+      $(data).on("load", function(event){
+        
+        var path = event.target.result; 
+    
+        $("."+tagImg).attr("src", path);
+        $(".metaImg").attr("src", path);    
+  
+      })
+  
+    }
+  
+  }
+
+
+/*=============================================
+Validamos Slide
+=============================================*/
+
+function validateSlideJS(event, tagImg){
+
+    var image = event.target.files[0];
+
+    console.log(image)
+    if(image == undefined){
+
+        return;
+    }
+  
+    /*=============================================
+    Validamos el formato
+    =============================================*/
+  
+    if(image["type"] !== "image/jpeg" && image["type"] !== "image/png" && image["type"] !== "image/gif"){
+
+        console.log("Error tipo");
+        return;
+       
+    }
+  
+    /*=============================================
+    Validamos el tamaño
+    =============================================*/
+  
+    else if(image["size"] > 15000000){
+
+        console.log("Error Tamaño");
         return;
     }
   

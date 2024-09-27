@@ -70,12 +70,12 @@ if($(".reclamosTable").length > 0){
 
   var columns = [
      {"data":"id_reclamo"},
-     {"data":"categoria_reclamo"},
+     {"data":"descripcion_rcategory"},
      {"data":"dni_reclamo"},
      {"data":"cuenta_reclamo"},
      {"data":"deuda_reclamo"},
-     {"data":"zona_reclamo"},
-     {"data":"estado_reclamo"},
+     {"data":"nombre_zona"},
+     {"data":"descripcion_estado"},
      {"data":"actions", "orderable":false, "searchable":false}
   ]
 

@@ -27,7 +27,12 @@
 
                 include 'modules/gestion.php';
 
-            }else{
+            }else if($routesArray[2] == "visor"){
+
+                include 'modules/visor.php';
+            }
+            
+            else {
 
                 echo '
                     <script>
@@ -36,7 +41,7 @@
                 ';
             }
 
-        }else{
+        }else {
 
             include 'modules/listado.php'; 
         }

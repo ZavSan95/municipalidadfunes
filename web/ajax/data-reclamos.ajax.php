@@ -17,7 +17,7 @@ class DataTableController {
             $length = $_POST['length'];
 
             // Total records count
-            $url = "reclamos?select=id_reclamo";
+            $url = "relations?rel=reclamos,rcategories,zonas,estados&type=reclamo,rcategory,zona,estado&select=id_reclamo";
             $method = "GET";
             $fields = array();
 
@@ -32,21 +32,21 @@ class DataTableController {
                 return;
             }
 
-            $select = "id_reclamo,categoria_reclamo,dni_reclamo,cuenta_reclamo,deuda_reclamo,zona_reclamo,estado_reclamo";
+            $select = "id_reclamo,descripcion_rcategory,dni_reclamo,cuenta_reclamo,deuda_reclamo,nombre_zona,descripcion_estado,latitud_reclamo,longitud_reclamo";
 
             // Search data
             if(!empty($_POST['search']['value'])) {
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["categoria_reclamo,dni_reclamo,cuenta_reclamo,zona_reclamo,estado_reclamo"];
+                    $linkTo = ["descripcion_rcategory", "dni_reclamo", "cuenta_reclamo", "nombre_zona", "descripcion_estado"];
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
                     $data = [];
                     $recordsFiltered = 0;
 
                     foreach ($linkTo as $value) {
-                        $url = "reclamos?select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                        $url = "relations?rel=reclamos,rcategories,zonas,estados&type=reclamo,rcategory,zona,estado&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
                         $response = CurlController::request($url, $method, $fields);
 
                         if ($response->status == 200) {
@@ -66,7 +66,7 @@ class DataTableController {
             } else {
 
                 // Select data
-                $url = "reclamos?select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                $url = "relations?rel=reclamos,rcategories,zonas,estados&type=reclamo,rcategory,zona,estado&select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
                 //$url = "relations?rel=news,categories&type=new,category&select=".$select."&linkTo="."&orderBy=".$orderBy."&orderMode=".$orderType."&startAt=".$start."&endAt=".$length;
                 $response = CurlController::request($url, $method, $fields);
 
@@ -91,12 +91,23 @@ class DataTableController {
                 foreach ($data as $key => $value) {
                     $actions = "
                         <div class='btn-group'>
+                            <a href='/admin/gestor_reclamos/visor?reclamo=" . base64_encode($value->id_reclamo) . "' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
+                                <i class='fa-regular fa-eye text-white mr-1'></i>
+                            </a>
                             <a href='/admin/gestor_reclamos/gestion?reclamo=" . base64_encode($value->id_reclamo) . "' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
                                 <i class='fas fa-pencil-alt text-white mr-1'></i>
                             </a>
                             <button class='btn btn-info border-0 rounded-pill mr-2 btn-sm deleteItem' 
-                            rol='admin' table='reclamos' column='reclamo' idItem='" . base64_encode($value->id_reclamo) . "'>
+                                rol='admin' table='reclamos' column='reclamo' idItem='" . base64_encode($value->id_reclamo) . "'>
                                 <i class='fas fa-trash-alt text-white mr-1'></i>
+                            </button>
+                            <button class='btn btn-info border-0 rounded-pill mr-2 btn-sm' 
+                                data-toggle='modal' 
+                                data-target='#mapModal' 
+                                data-latitude='" . $value->latitud_reclamo . "' 
+                                data-longitude='" . $value->longitud_reclamo . "' 
+                                onclick='loadMap(\"" . $value->latitud_reclamo . "\", \"" . $value->longitud_reclamo . "\")'>
+                                <i class='fas fa-map-marked-alt text-white mr-1'></i> <!-- Map icon -->
                             </button>
                         </div>
                     ";
@@ -105,12 +116,12 @@ class DataTableController {
 
                     $dataJSON['data'][] = [
                         "id_reclamo" => ($start + $key + 1),
-                        "categoria_reclamo" => $value->categoria_reclamo,
+                        "descripcion_rcategory" => $value->descripcion_rcategory,
                         "dni_reclamo" => $value->dni_reclamo,
                         "cuenta_reclamo" => $value->cuenta_reclamo,
                         "deuda_reclamo" => $value->deuda_reclamo,
-                        "zona_reclamo" => $value->zona_reclamo,
-                        "estado_reclamo" => $value->estado_reclamo,
+                        "nombre_zona" => $value->nombre_zona,
+                        "descripcion_estado" => $value->descripcion_estado,
                         "actions" => $actions
                     ];
                 }

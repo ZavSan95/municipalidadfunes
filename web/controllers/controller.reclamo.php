@@ -4,76 +4,299 @@ class ReclamoController{
 
     public function reclamoManage(){
 
-        // Verificar que todos los campos requeridos están presentes y no están vacíos
-        if ($this->validateForm()) {
+        if(isset($_POST['cuenta_reclamo']) && !empty($_POST['cuenta_reclamo'])){
 
-            // Si la validación es exitosa, proceder con el procesamiento del formulario
-            $direccion = explode(",", $_POST['direccion_transformada']);
-            $direccion = $direccion[0];
+            /*=============================================
+            Generar random number para el nombre
+            =============================================*/
+            $randomNumber = rand(100000, 999999);
 
-            $fields = array(
-                "nombre_reclamo" => $_POST['nombre_reclamo'],
-                "apellido_reclamo" => $_POST['apellido_reclamo'],
-                "dni_reclamo" => $_POST['dni_reclamo'],
-                "celular_reclamo" => $_POST['celular_reclamo'],
-                "correo_reclamo" => $_POST['correo_reclamo'],
-                "cuenta_reclamo" => $_POST['cuenta_reclamo'],
-                "direccion_reclamo" => $_POST['direccion_reclamo'],
-                "latitud_reclamo" => $_POST['latitud_reclamo'],
-                "longitud_reclamo" => $_POST['longitud_reclamo'],
-                "categoria_reclamo" => $_POST['categoria_reclamo'],
-                "img_reclamo" => '',
-                "detalle_reclamo" => $_POST['detalle_reclamo']
-            );
+            $codigoReclamo = $randomNumber."_".trim($_POST['cuenta_reclamo']);
 
-            $url = 'reclamos?token=no&table=reclamos&suffix=reclamo&except=id_reclamo';
-            $method = 'POST';
-            $createReclamo = CurlController::request($url, $method, $fields);
+            /*=============================================
+            Ediciòn reclamo
+            =============================================*/
+            if(isset($_POST['idReclamo']) && !empty($_POST['idReclamo'])){
 
-            if($createReclamo->status == 200){
+                $idReclamo = $_POST['idReclamo'];
+                $codReclamo = $_POST['codigoReclamo'];
 
-                echo '    <script>
-                            // Función para mostrar una alerta de SweetAlert2
-                            function showAlert() {
-                                Swal.fire({
-                                    title: "Correcto",
-                                    icon: "success",
-                                    text: "Reclamo generado con éxito",
-                                    confirmButtonColor: "#074A1F"
-                                });
-                            }
-                            showAlert();
-                        </script>
-                ';
+                /*=============================================
+                Guardar imágenes base64
+                =============================================*/
+                $galleryReclamo = []; // Inicializa aquí
+                $galleryCount = 0;
 
+                if (!empty($_POST['img_reclamo'])) {
+                    foreach (json_decode($_POST['img_reclamo'], true) as $key => $value) {
+                        $galleryCount++;
+
+                        $image["tmp_name"] = $value["file"];
+                        $image["type"] = $value["type"];
+                        $image["mode"] = "base64";
+
+                        $folder = "assets/images/reclamos/";
+                        $name = $codReclamo . "_" . $key;
+                        $width = 1000;
+                        $height = 600;
+
+                        $saveImageGallery = TemplateController::saveImage64($image, $folder, $name, $width, $height);
+                        array_push($galleryReclamo, $saveImageGallery);
+                    }
+                }
+
+                // Manejar imágenes viejas
+                if (!empty($_POST['galleryOldReclamo'])) {
+                    foreach (json_decode($_POST['galleryOldReclamo'], true) as $index => $item) {
+                        array_push($galleryReclamo, $item);
+                    }
+                }
+
+                // Convertir a JSON una vez después del bucle
+                $images_reclamo = json_encode($galleryReclamo);
+
+
+
+                /*=============================================
+                Eliminación de imágenes borradas
+                =============================================*/
+                if (!empty($_POST['deleteGalleryReclamo'])) {
+                    foreach (json_decode($_POST['deleteGalleryReclamo'], true) as $i => $img) {
+                        unlink("views/assets/images/reclamos/" . $img);
+                    }
+                }
+
+                $fields = 
+                    "codigo_reclamo=".$codReclamo."&id_estado_reclamo=".$_POST['id_estado_reclamo'].
+                    "&id_rcategory_reclamo=".$_POST['id_rcategory_reclamo']."&img_reclamo=".$images_reclamo.
+                    "&latitud_reclamo=".$_POST['latitud_reclamo']."&longitud_reclamo=".$_POST['longitud_reclamo'].
+                    "&cuenta_reclamo=".trim($_POST['cuenta_reclamo'])."&deuda_reclamo=".$_POST['deuda_reclamo'].
+                    "&id_zona_reclamo=".$_POST['id_zona_reclamo']."&direccion_reclamo=".trim($_POST['direccion_reclamo']).
+                    "&nombre_reclamo=".trim($_POST['nombre_reclamo'])."&apellido_reclamo=".trim($_POST['apellido_reclamo']).
+                    "&dni_reclamo=".trim($_POST['dni_reclamo'])."&celular_reclamo=".trim($_POST['celular_reclamo']).
+                    "&correo_reclamo=".trim($_POST['correo_reclamo'])."&date_created_reclamo=".date("Y-m-d");
+
+                $url = "reclamos?id=".$_POST['idReclamo']."&nameId=id_reclamo&token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
+                $method = "PUT";
+
+                $updateReclamo = CurlController::request($url,$method,$fields);
+
+                if($updateReclamo->status == 200){
+
+                    require_once 'controllers/controller.log.php';
+                    $log = new ControllerLog();
+                    $log->register($_SESSION['administrador']->email_admin, "EDICION RECLAMO", null);
+
+                        echo '
+                            <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Correcto",
+                                        icon: "success",
+                                        text: "Reclamo editado con éxito",
+                                        confirmButtonColor: "#074A1F"
+                                    }).then((result) => {
+                                        // Redirige al usuario después de cerrar la alerta
+                                        if (result.isConfirmed) {
+                                            window.location.href = "/admin/gestor_reclamos";
+                                        }
+                                    });
+                                }
+                                showAlert();
+                        </script>';
+                }else{
+
+                    if($updateReclamo->status == 303){
+
+                        echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Token expirado, vuelva a iniciar sesión",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+
+                    }else{
+
+
+                        echo '    <script>
+                                    // Función para mostrar una alerta de SweetAlert2
+                                    function showAlert() {
+                                        Swal.fire({
+                                            title: "Error",
+                                            icon: "error",
+                                            text: "Error al guardar los datos, intente nuevamente",
+                                            confirmButtonColor: "#EF1400"
+                                        });
+                                    }
+                                    showAlert();
+                                </script>
+                            ';
+                    }
+
+                }
+               
             }
             
-        } else {
-            // Si la validación falla, mostrar un mensaje de error o redirigir
-            echo "Por favor, completa todos los campos obligatorios.";
-        }
-    }
+            /*=============================================
+            Creación reclamo
+            =============================================*/
+            else{
 
-    // Método para validar si todos los campos requeridos están presentes y no están vacíos
-    private function validateForm() {
-        $requiredFields = [
-            'nombre_reclamo', 'apellido_reclamo', 'dni_reclamo', 
-            'celular_reclamo', 'correo_reclamo', 'cuenta_reclamo', 
-            'direccion_reclamo', 'latitud_reclamo', 'longitud_reclamo', 
-            'categoria_reclamo', 'detalle_reclamo'
-        ];
+                /*=============================================
+                Generar random number para el codigo reclamo
+                =============================================*/
+                $randomNumber = rand(100000, 999999);
 
-        foreach ($requiredFields as $field) {
-            if (!isset($_POST[$field]) || empty(trim($_POST[$field]))) {
-                return false; // Fallo de validación si falta un campo o está vacío
+                $codigoReclamo = $randomNumber."_".trim($_POST['cuenta_reclamo']);
+
+
+                /*=============================================
+                Guardar imagenes base64
+                =============================================*/
+                if(!empty($_POST['img_reclamo'])){
+
+                    $galleryReclamo = array();
+                    $galleryCount = 0;
+
+                    foreach(json_decode($_POST['img_reclamo'],true) as $key => $value){
+
+                        $galleryCount++;
+
+                        // echo '<pre>';print_r($value);echo'</pre>';
+                        $image["tmp_name"] = $value["file"];
+                        $image["type"] = $value["type"];
+                        $image["mode"] = "base64";
+                        
+                        $folder = "assets/images/reclamos/";
+                        $name = $codigoReclamo."_".$key;
+                        $width = 1000;
+                        $height = 600;
+
+                        $saveImageGallery = TemplateController::saveImage64($image,$folder,$name,$width,$height);
+
+                        array_push($galleryReclamo,$saveImageGallery);
+
+                        if(count(json_decode($_POST['img_reclamo'],true)) == $galleryCount){
+
+                            $images_reclamo = json_encode($galleryReclamo);
+                        }
+
+                    }
+                }
+
+                /*=============================================
+                Campos reclamo
+                =============================================*/
+                $fields = array(
+
+                    //Datos reclamo
+                    "codigo_reclamo" => $codigoReclamo,
+                    "id_estado_reclamo" => $_POST['id_estado_reclamo'],
+                    "id_rcategory_reclamo" => $_POST['id_rcategory_reclamo'],
+                    "img_reclamo" => $images_reclamo,
+                    "latitud_reclamo" => $_POST['latitud_reclamo'],
+                    "longitud_reclamo" => $_POST['longitud_reclamo'],
+
+                    //Datos propiedad
+                    "cuenta_reclamo" => trim($_POST['cuenta_reclamo']),
+                    "deuda_reclamo" => $_POST['deuda_reclamo'],
+                    "id_zona_reclamo" => $_POST['id_zona_reclamo'],
+                    "direccion_reclamo" => trim($_POST['direccion_reclamo']),
+
+                    //Datos personales
+                    "nombre_reclamo" => trim($_POST['nombre_reclamo']),
+                    "apellido_reclamo" => trim($_POST['apellido_reclamo']),
+                    "dni_reclamo" => trim($_POST['dni_reclamo']),
+                    "celular_reclamo" => trim($_POST['celular_reclamo']),
+                    "correo_reclamo" => trim($_POST['correo_reclamo']),
+
+                    "date_created_reclamo" => date("Y-m-d")
+
+                );
+
+
+                /*=============================================
+                Guardamos reclamo
+                =============================================*/
+
+                $url = "reclamos?token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
+                $method = "POST";
+
+                $createReclamo = CurlController::request($url,$method,$fields);
+
+                if($createReclamo->status == 200){
+
+                    require_once 'controllers/controller.log.php';
+                    $log = new ControllerLog();
+                    $log->register($_SESSION['administrador']->email_admin, "CREACION RECLAMO", null);
+
+                        echo '
+                            <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Correcto",
+                                        icon: "success",
+                                        text: "Reclamo creado con éxito",
+                                        confirmButtonColor: "#074A1F"
+                                    }).then((result) => {
+                                        // Redirige al usuario después de cerrar la alerta
+                                        if (result.isConfirmed) {
+                                            window.location.href = "/admin/gestor_reclamos";
+                                        }
+                                    });
+                                }
+                                showAlert();
+                        </script>';
+                        
+                }else{
+
+                    if($createReclamo->status == 303){
+
+                        echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Token expirado, vuelva a iniciar sesión",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+
+                    }else{
+
+
+                        echo '    <script>
+                                    // Función para mostrar una alerta de SweetAlert2
+                                    function showAlert() {
+                                        Swal.fire({
+                                            title: "Error",
+                                            icon: "error",
+                                            text: "Error al guardar los datos, intente nuevamente",
+                                            confirmButtonColor: "#EF1400"
+                                        });
+                                    }
+                                    showAlert();
+                                </script>
+                            ';
+                    }
+                }
             }
+            
         }
-
-        // Puedes agregar más validaciones específicas, como formato de correo electrónico, etc.
-        if (!filter_var($_POST['correo_reclamo'], FILTER_VALIDATE_EMAIL)) {
-            return false; // Validación de formato de correo
-        }
-
-        return true;
     }
+
+
 }

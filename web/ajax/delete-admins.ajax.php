@@ -34,6 +34,30 @@ class DeleteController {
             }
         }
 
+        if ($this->table == "reclamos") {
+            $select = "img_reclamo";
+            $url = "reclamos?linkTo=id_reclamo&equalTo=" . base64_decode($this->id) . "&select=" . $select;
+            $method = "GET";
+            $fields = array();
+        
+            $dataItem = CurlController::request($url, $method, $fields)->results[0];
+        
+            // Decodificar el JSON para obtener el array de imágenes
+            $images = json_decode($dataItem->img_reclamo, true);
+        
+            if (is_array($images)) {
+                foreach ($images as $image) {
+                    // Ruta del archivo
+                    $imagePath = "../views/assets/images/reclamos/" . $image;
+        
+                    // Verificar si el archivo existe y eliminarlo
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+            }
+        }
+
         $url = $this->table."?id=" . base64_decode($this->id) . "&nameId=" . $this->nameId . "&token=" . $this->token . "&table=admins&suffix=admin";
         $method = "DELETE";
         $fields = array();
@@ -42,41 +66,6 @@ class DeleteController {
 
         return $delete->status; 
     }    
-
-    public function registerLogDelete(){
-
-        if($this->table == "admins"){
-
-            
-
-            $select = "email_admin";
-            $url = "admins?linkTo=id_admin&equalTo=".base64_decode($this->id)."&select=".$select;
-            $method = "GET";
-            $fields = array();
-
-            $adminLog = CurlController::request($url,$method,$fields);
-            
-            
-            if($adminLog->status == 200){
-
-                $adminLog->results[0];
-
-            }else{
-
-                $userAction = null;
-            }
-
-            $log = new ControllerLog();
-            $log->register($_SESSION['administrador']->email_admin, "ELIMINAR USUARIO", $adminLog->email_admin);
-
-        }
-
-        if($this->table == "news"){
-
-            $log = new ControllerLog();
-            $log->register($_SESSION['administrador']->email_admin, "ELIMINAR NOTICIA", null);
-        }
-    }
 
     }
 

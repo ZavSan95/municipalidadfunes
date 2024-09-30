@@ -182,6 +182,8 @@ $(document).ready(function () {
           var reDirec = "prensa";
         }else if(table == "slides"){
           var reDirec = "slides"
+        }else if(table == "reclamos"){
+          var reDirec = "gestor_reclamos"
         }
 
         var data = new FormData();

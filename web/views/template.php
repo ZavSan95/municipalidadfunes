@@ -159,6 +159,9 @@ foreach($routesArray as $key => $value){
     <!-- SummerNote -->
     <script src="<?php echo $path ?>/views/assets/summernote/summernote.min.js"></script>
 
+     <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <?php
 
     // echo "<pre>"; var_dump($routesArray); echo "</pre>";

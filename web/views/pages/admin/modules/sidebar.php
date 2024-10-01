@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="informes_reclamos" class="nav-link">
+                    <a href="/admin/estadisticas_reclamos" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Estadísticas</p>
                     </a>

@@ -24,9 +24,10 @@ $reclamo = null;
     <div class="container">
         <form method="POST">
 
-        <input type="hidden" name="idReclamo" value="<?php echo !empty($reclamo) ? $reclamo->id_reclamo : ''; ?>">
-        <input type="hidden" name="codigoReclamo" value="<?php echo !empty($reclamo) ? $reclamo->codigo_reclamo : ''; ?>">
-        <?php 
+            <input type="hidden" name="idReclamo" value="<?php echo !empty($reclamo) ? $reclamo->id_reclamo : ''; ?>">
+            <input type="hidden" name="codigoReclamo"
+                value="<?php echo !empty($reclamo) ? $reclamo->codigo_reclamo : ''; ?>">
+            <?php 
         
         require_once 'controllers/controller.reclamo.php';
         $manage = new ReclamoController();
@@ -104,24 +105,35 @@ echo '<option value="'.$value->id_rcategory.'" ' .
                                             <div class="form-group pb-3 text-center">
 
                                                 <div class="dropzone mb-16px" id="myDropzoneReclamo">
-                                                    <?php if(!empty($reclamo->img_reclamo)): ?>
-                                                        <?php foreach (json_decode($reclamo->img_reclamo,true)  as $index => $item): ?>
-                                                            <div class="dz-preview dz-file-preview">
-                                                                <div class="dz-image">
-                                                                    <img class="img-fluid" src="<?php echo "/views/assets/images/reclamos/".$item ?>">
-                                                                </div>
-                                                                <a class="dz-remove" data-dz-remove remove="<?php echo $item ?>" onclick="removeGallery(this)">Eliminar Archivo</a>
-                                                            </div>  
-                                                        <?php endforeach ?>
+                                                    <?php 
+                                                    // Check if $reclamo is not null and has the img_reclamo property
+                                                    if (isset($reclamo) && property_exists($reclamo, 'img_reclamo')) {
+                                                    $imagenes = json_decode($reclamo->img_reclamo, true); 
+                                                    if (!empty($imagenes) && is_array($imagenes)): ?>
+                                                    <?php foreach ($imagenes as $index => $item): ?>
+                                                    <div class="dz-preview dz-file-preview">
+                                                        <div class="dz-image">
+                                                            <img class="img-fluid"
+                                                                src="<?php echo "/views/assets/images/reclamos/".$item ?>">
+                                                        </div>
+                                                        <a class="dz-remove" data-dz-remove remove="<?php echo $item ?>"
+                                                            onclick="removeGallery(this)">Eliminar Archivo</a>
+                                                    </div>
+                                                    <?php endforeach ?>
                                                     <?php endif; ?>
+                                                    <?php } ?>
                                                 </div>
 
-                                                    <input type="hidden" name="img_reclamo" class="galleryReclamo">
 
-                                                    <input type="hidden" name="galleryOldReclamo" class="galleryOldReclamo" value='<?php echo $reclamo->img_reclamo ?>'>
 
-                                                    <input type="hidden" name="deleteGalleryReclamo" class="deleteGalleryProduct" value='[]'>
-                                                    
+                                                <input type="hidden" name="img_reclamo" class="galleryReclamo">
+
+                                                <input type="hidden" name="galleryOldReclamo" class="galleryOldReclamo"
+                                                    value='<?php echo $reclamo->img_reclamo ?>'>
+
+                                                <input type="hidden" name="deleteGalleryReclamo"
+                                                    class="deleteGalleryProduct" value='[]'>
+
                                             </div>
                                         </div>
                                     </div>
@@ -198,8 +210,10 @@ echo '<option value="'.$value->id_zona.'" ' .
                                     <iframe id="map-iframe" width="100%" height="400px" frameborder="0" style="border:0"
                                         allowfullscreen
                                         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAaRnCKVVSWGR159MyTF6rV7NMIPsW960c&q=Funes,Argentina"></iframe>
-                                        <input type="hidden" name="latitud_reclamo" id="latitud_reclamo" value="<?php echo !empty($reclamo) ? $reclamo->latitud_reclamo : ''; ?>">
-                                        <input type="hidden" name="longitud_reclamo" id="longitud_reclamo" value="<?php echo !empty($reclamo) ? $reclamo->longitud_reclamo : ''; ?>">
+                                    <input type="hidden" name="latitud_reclamo" id="latitud_reclamo"
+                                        value="<?php echo !empty($reclamo) ? $reclamo->latitud_reclamo : ''; ?>">
+                                    <input type="hidden" name="longitud_reclamo" id="longitud_reclamo"
+                                        value="<?php echo !empty($reclamo) ? $reclamo->longitud_reclamo : ''; ?>">
                                 </div>
                             </div>
                         </div>
@@ -292,7 +306,6 @@ echo '<option value="'.$value->id_zona.'" ' .
 </div>
 
 <script>
-
 /*=============================================
 Edición Galería DropZone
 =============================================*/
@@ -324,13 +337,11 @@ function removeGallery(elem) {
         deleteArray.push(fileToRemove);
         $(".deleteGalleryProduct").val(JSON.stringify(deleteArray));
 
- 
+
     } else {
         console.log("El archivo no se encontró en el array.");
     }
 }
-
-
 </script>
 <!-- DropZone -->
 <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>

@@ -47,8 +47,13 @@ class ReclamoController{
 
                 // Manejar imágenes viejas
                 if (!empty($_POST['galleryOldReclamo'])) {
-                    foreach (json_decode($_POST['galleryOldReclamo'], true) as $index => $item) {
-                        array_push($galleryReclamo, $item);
+                    $galleryOldReclamo = json_decode($_POST['galleryOldReclamo'], true);
+
+                    // Verificar que el valor decodificado es un array
+                    if (is_array($galleryOldReclamo)) {
+                        foreach ($galleryOldReclamo as $index => $item) {
+                            array_push($galleryReclamo, $item);
+                        }
                     }
                 }
 

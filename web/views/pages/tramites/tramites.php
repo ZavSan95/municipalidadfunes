@@ -76,7 +76,7 @@
                             <!-- Iframe para TGI -->
                             <div class="flex-shrink-1" style="flex-basis: 600px;">
                                 <h5 class="alt-font text-dark-gray mb-20px fw-500 ls-minus-1px">Ingrese su Tasa de TGI</h5>
-                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menururales.exe?ingreso" width="100%" height="300px"></iframe>
+                                <iframe class="tramites" frameborder="0" scrolling="no" src="https://funesonline.funes.gob.ar:4443/cgi-bin/menuurbanos.exe?ingreso" width="100%" height="300px"></iframe>
                             </div>
                         </div>
                     </div>

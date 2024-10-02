@@ -214,6 +214,8 @@ $(document).ready(function () {
           var reDirec = "slides"
         }else if(table == "reclamos"){
           var reDirec = "gestor_reclamos"
+        }else if(table == "tickets"){
+          var reDirec = "servicio_tecnico"
         }
 
         var data = new FormData();

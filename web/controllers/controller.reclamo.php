@@ -89,13 +89,6 @@ class ReclamoController{
         if(isset($_POST['cuenta_reclamo']) && !empty($_POST['cuenta_reclamo'])){
 
             /*=============================================
-            Generar random number para el nombre
-            =============================================*/
-            $randomNumber = rand(100000, 999999);
-
-            $codigoReclamo = $randomNumber."_".trim($_POST['cuenta_reclamo']);
-
-            /*=============================================
             Ediciòn reclamo
             =============================================*/
             if(isset($_POST['idReclamo']) && !empty($_POST['idReclamo'])){

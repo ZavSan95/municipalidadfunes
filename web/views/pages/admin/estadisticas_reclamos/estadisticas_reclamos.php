@@ -140,7 +140,7 @@
                                 <p>Reclamos en Curso</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion-stats-bars"></i>
                             </div>
                             <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
@@ -173,7 +173,7 @@
                                 <p>Reclamos Finalizados</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="ion ion-stats-bars"></i>
                             </div>
                             <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
@@ -443,29 +443,29 @@
     </script>
 
 <?php 
-// Preparar la respuesta final para reclamos por categoria
-$result = [
-    'labels' => array_keys($categoryCounts),
-    'data' => array_values($categoryCounts),
-];
+    // Preparar la respuesta final para reclamos por categoria
+    $result = [
+        'labels' => array_keys($categoryCounts),
+        'data' => array_values($categoryCounts),
+    ];
 
-// Colores para las categorías (12 colores diferentes)
-$colors = [
-    'rgba(255, 99, 132)',
-    'rgba(54, 162, 235)',
-    'rgba(255, 206, 86)',
-    'rgba(75, 192, 192)',
-    'rgba(153, 102, 255)',
-    'rgba(255, 159, 64)',
-    'rgba(255, 99, 132)',
-    'rgba(54, 162, 235)',
-    'rgba(255, 206, 86)',
-    'rgba(75, 192, 192)',
-    'rgba(153, 102, 255)',
-    'rgba(255, 159, 64)'
-];
+    // Colores para las categorías (12 colores diferentes)
+    $colors = [
+        'rgba(255, 99, 132)',
+        'rgba(54, 162, 235)',
+        'rgba(255, 206, 86)',
+        'rgba(75, 192, 192)',
+        'rgba(153, 102, 255)',
+        'rgba(255, 159, 64)',
+        'rgba(255, 99, 132)',
+        'rgba(54, 162, 235)',
+        'rgba(255, 206, 86)',
+        'rgba(75, 192, 192)',
+        'rgba(153, 102, 255)',
+        'rgba(255, 159, 64)'
+    ];
 
-?>
+    ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById('donutChart').getContext('2d');

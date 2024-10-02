@@ -233,6 +233,41 @@ class NewController {
                         showAlertSuccess("Éxito","success","Nueva noticia creada");
 
                         </script>';
+                }else{
+
+                    if($createData->status == 303){
+
+                        echo '    <script>
+                                // Función para mostrar una alerta de SweetAlert2
+                                function showAlert() {
+                                    Swal.fire({
+                                        title: "Error",
+                                        icon: "error",
+                                        text: "Token expirado, vuelva a iniciar sesión",
+                                        confirmButtonColor: "#EF1400"
+                                    });
+                                }
+                                showAlert();
+                            </script>
+                        ';
+
+                    }else{
+
+
+                        echo '    <script>
+                                    // Función para mostrar una alerta de SweetAlert2
+                                    function showAlert() {
+                                        Swal.fire({
+                                            title: "Error",
+                                            icon: "error",
+                                            text: "Error al guardar los datos, intente nuevamente",
+                                            confirmButtonColor: "#EF1400"
+                                        });
+                                    }
+                                    showAlert();
+                                </script>
+                            ';
+                    }
                 }
                 
             }            

@@ -61,7 +61,7 @@ if($(".slidesTable").length > 0){
 }
 
 /*=============================================
-Tabla para Slides
+Tabla para Reclamos
 =============================================*/
 
 if($(".reclamosTable").length > 0){
@@ -75,6 +75,28 @@ if($(".reclamosTable").length > 0){
      {"data":"cuenta_reclamo"},
      {"data":"deuda_reclamo"},
      {"data":"nombre_zona"},
+     {"data":"descripcion_estado"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+/*=============================================
+Tabla para Tickets
+=============================================*/
+
+if($(".ticketsTable").length > 0){
+
+  var url = "/ajax/data-tickets.ajax.php";
+
+  var columns = [
+     {"data":"id_ticket"},
+     {"data":"descripcion_ticketcategory"},
+     {"data":"descripcion_tarea"},
+     {"data":"name_admin"},
      {"data":"descripcion_estado"},
      {"data":"actions", "orderable":false, "searchable":false}
   ]

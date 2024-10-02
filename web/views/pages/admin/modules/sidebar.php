@@ -56,28 +56,98 @@
 
                 <!-- Reclamos -->
                 <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fa-solid fa-triangle-exclamation"></i>
-                <p>
-                    Reclamos
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-                </a>
-                <ul class="nav nav-treeview" style="display: none;">
+                    <a href="#" class="nav-link">
+                    <i class="nav-icon fa-solid fa-triangle-exclamation"></i>
+                    <p>
+                        Reclamos
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                        <a href="/admin/gestor_reclamos" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Gestor Reclamos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/estadisticas_reclamos" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Estadísticas</p>
+                        </a>
+                    </li>
+                    </ul>
+                </li>
+
+                <!-- Tickets -->
                 <li class="nav-item">
-                    <a href="/admin/gestor_reclamos" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Gestor Reclamos</p>
+                    <a href="#" class="nav-link">
+                    <i class="nav-icon fa-solid fa-ticket"></i>
+                    <p>
+                        Tickets
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                        <a href="/admin/tickets/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Nuevo Ticket</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/estadisticas_reclamos" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Mis Tickets</p>
+                        </a>
+                    </li>
+                    </ul>
+                </li>
+
+                <!-- Servicio Técnico -->
+                <li class="nav-item">
+                    <a href="/admin/servicio_tecnico" class="nav-link">
+                        <i class="nav-icon fa-solid fa-screwdriver-wrench"></i>
+                        <p>
+                            Servicio Técnico
+                        </p>
                     </a>
                 </li>
+
+                <!-- Salud Animal -->
                 <li class="nav-item">
-                    <a href="/admin/estadisticas_reclamos" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Estadísticas</p>
+                    <a href="#" class="nav-link">
+                    <i class="nav-icon fa-solid fa-paw"></i>
+                    <p>
+                        Salud Animal
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a href="/admin/tickets/" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Tutores</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/estadisticas_reclamos" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Mascotas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Inclusión Social -->
+                <li class="nav-item">
+                    <a href="/admin/servicio_tecnico" class="nav-link">
+                        <i class="nav-icon fa-solid fa-people-roof"></i>
+                        <p>
+                            Inclusión Social
+                        </p>
                     </a>
                 </li>
-                </ul>
-            </li>
 
                 <!-- Salir -->
                 <li class="nav-item">

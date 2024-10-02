@@ -7,6 +7,7 @@ class DataTableController {
 
     public function data() {
 
+        
         if(isset($_POST)) {
 
             $draw = $_POST['draw'];

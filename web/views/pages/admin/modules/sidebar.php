@@ -149,6 +149,56 @@
                     </a>
                 </li>
 
+                <!-- Comercios -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="nav-icon fa-solid fa-shop"></i>
+                    <p>
+                        Comercios
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a href="/admin/estadisticas_reclamos" class="nav-link">
+
+                            <p>Renovación Habilitación</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/tickets/" class="nav-link">
+
+                            <p>Preinscripción Comercios</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/estadisticas_reclamos" class="nav-link">
+
+                            <p>Preinscripción Transportistas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Proveedores -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="nav-icon fa-solid fa-truck-fast"></i>
+                    <p>
+                        Proveedores
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a href="/admin/tickets/" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Registro Proveedores</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- Salir -->
                 <li class="nav-item">
                     <a href="/salir" class="nav-link">

@@ -78,6 +78,16 @@
                     </li>
                     </ul>
                 </li>
+                
+                <!-- Servicio Técnico -->
+                <li class="nav-item">
+                    <a href="/admin/servicio_tecnico" class="nav-link">
+                        <i class="nav-icon fa-solid fa-screwdriver-wrench"></i>
+                        <p>
+                            Servicio Técnico
+                        </p>
+                    </a>
+                </li>
 
                 <!-- Tickets -->
                 <li class="nav-item">
@@ -102,16 +112,6 @@
                         </a>
                     </li>
                     </ul>
-                </li>
-
-                <!-- Servicio Técnico -->
-                <li class="nav-item">
-                    <a href="/admin/servicio_tecnico" class="nav-link">
-                        <i class="nav-icon fa-solid fa-screwdriver-wrench"></i>
-                        <p>
-                            Servicio Técnico
-                        </p>
-                    </a>
                 </li>
 
                 <!-- Salud Animal -->

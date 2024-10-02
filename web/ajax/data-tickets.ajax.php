@@ -89,6 +89,7 @@ class DataTableController {
 
             if (is_array($data) || is_object($data)) {
                 foreach ($data as $key => $value) {
+                    
                     $actions = "
                         <div class='btn-group'>
                             <a href='/admin/servicio_tecnico/visor?ticket=" . base64_encode($value->id_ticket) . "' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>

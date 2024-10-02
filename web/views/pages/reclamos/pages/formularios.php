@@ -9,8 +9,10 @@
                 <div class="container">
                     <!-- Formulario principal -->
                     <form id="main-form" action="" method="post">
+                        <input type="hidden" name="id_estado_reclamo" value="1">
+                        <input type="hidden" name="deuda_reclamo" value="0">
+                        <input type="hidden" name="redirec_reclamo" value="/reclamos">
                         <?php
-
                             require_once('controllers/controller.reclamo.php');
                             $manage = new ReclamoController();
                             $manage->reclamoManage();
@@ -44,8 +46,7 @@
                             <div class="d-flex justify-content-between">
                                 <button type="button" class="btn btn-dark-gray btn-box-shadow" data-action="prev"
                                     data-target="page-2">Atrás</button>
-                                <button type="submit" class="btn btn-dark-gray btn-box-shadow"
-                                    >Enviar</button>
+                                <button type="button" class="btn btn-dark-gray btn-box-shadow" id="submit-button">Enviar</button>
                             </div>
                         </div>
                     </form>
@@ -56,3 +57,24 @@
     </div>
 </section>
 
+<!-- ReCaptcha V3 -->
+<script src="https://www.google.com/recaptcha/api.js?render=6Lfwo1UqAAAAAEk7jHzIZyzrHY0TMowxO5x4Z8pM"></script>
+
+<script>
+    document.getElementById('submit-button').addEventListener('click', function() {
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6Lfwo1UqAAAAAEk7jHzIZyzrHY0TMowxO5x4Z8pM', {action: 'submit'}).then(function(token) {
+                // Añade el token al formulario antes de enviarlo
+                let form = document.getElementById('main-form');
+                let input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', 'g-recaptcha-response');
+                input.setAttribute('value', token);
+                form.appendChild(input);
+
+                // Envía el formulario
+                form.submit();
+            });
+        });
+    });
+</script>

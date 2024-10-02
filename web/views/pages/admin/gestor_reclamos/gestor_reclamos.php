@@ -50,3 +50,8 @@
 
     
 </div>
+
+<!-- DropZone -->
+<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+<script src="<?php echo $path ?>/views/assets/js/dropzone.js"></script>

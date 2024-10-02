@@ -132,6 +132,9 @@ foreach($routesArray as $key => $value){
     <!-- Knob -->
     <script src="<?php echo $path ?>views/assets/js/plugins/knob/knob.js"></script>
 
+    <!-- DropZone -->
+    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+
     <!-- SCRIPTS -->
 
     <!-- Paginación-->
@@ -161,6 +164,13 @@ foreach($routesArray as $key => $value){
 
      <!-- ChartJS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- DropZone -->
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <script src="<?php echo $path ?>/views/assets/js/dropzone.js"></script>
+
+
+    
 
     <?php
 

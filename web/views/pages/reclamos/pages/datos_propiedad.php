@@ -46,15 +46,30 @@
     <input type="numeros" name="cuenta_reclamo" class="form-control required" placeholder="Número Cuenta TGI*">
 </div>
 <div class="mb-16px">
-    <select name="zona_reclamo" class="form-control required">
-        <option value="0" disabled selected>Seleccione Zona*</option>
-        <option value="1">Zona 1</option>
+    <select name="id_zona_reclamo" class="form-control required">
+        <option value="" <?php if (!empty($reclamo) && $reclamo->id_zona_reclamo == ""): ?> selected <?php endif ?>>
+            Seleccione Zona</option>
+        <?php 
+            $url = "zonas?select=id_zona,nombre_zona";
+            $method = "GET";
+            $fields = array();
+            $category = CurlController::request($url,$method,$fields);
+            if($category->status == 200){
+                $category = $category->results;
+                foreach ($category as $value) {
+                    echo '<option value="'.$value->id_zona.'" ' . 
+                    (($reclamo && $reclamo->id_zona_reclamo == $value->id_zona) ? 'selected' : '') . 
+                    '>'.$value->nombre_zona.'</option>';
+                }
+            }
+        ?>
     </select>
     <span>Si no conoce su zona búsquela <b><a href="https://www.funes.gob.ar/ciudad/mapas"
                 target="_blank">aquí.</a></b></span>
 </div>
 <div class="mb-16px">
-    <input type="all    " id="direccion" name="direccion_reclamo" class="form-control required" placeholder="Dirección*">
+    <input type="all    " id="direccion" name="direccion_reclamo" class="form-control required"
+        placeholder="Dirección*">
 </div>
 
 <!-- Mapa de Google reemplazado por iframe -->
@@ -114,7 +129,6 @@ function updateMapIframe(lat, lng) {
 
 // Llamar a la función de inicialización
 initialize();
-
 </script>
 
 
@@ -141,4 +155,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
     
  -->
-

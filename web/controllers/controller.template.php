@@ -25,7 +25,7 @@ class TemplateController{
 	}
 
 	/*=============================================
-	Ruta Principal o Dominio del sitio
+	Enviar Mail
 	=============================================*/
 	static public function sendMail($subject, $email, $title, $message, $link){
 		

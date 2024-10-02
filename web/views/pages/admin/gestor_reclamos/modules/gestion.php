@@ -1,14 +1,13 @@
 <?php
 
 if (isset($_GET['reclamo'])) {
-$select = "id_reclamo,codigo_reclamo,nombre_reclamo,apellido_reclamo,dni_reclamo,celular_reclamo,correo_reclamo,cuenta_reclamo,deuda_reclamo,zona_reclamo,estado_reclamo,".
+$select = "id_reclamo,codigo_reclamo,nombre_reclamo,apellido_reclamo,dni_reclamo,celular_reclamo,correo_reclamo,cuenta_reclamo,deuda_reclamo,zona_reclamo,estado_reclamo,detalle_reclamo".
 "estado_reclamo,direccion_reclamo,categoria_reclamo,img_reclamo,detalle_reclamo,date_created_reclamo";
 $url = "reclamos?linkTo=id_reclamo&equalTo=" . base64_decode($_GET['reclamo']);
 $method = "GET";
 $fields = array();
 
 $reclamo = CurlController::request($url, $method, $fields);
-
 if ($reclamo->status == 200) {
 $reclamo = $reclamo->results[0];
 } else {
@@ -139,6 +138,12 @@ echo '<option value="'.$value->id_rcategory.'" ' .
                                     </div>
                                 </div>
 
+                                <div class="col-md-12 mt-3">
+                                    <label for="detalle_reclamo">Detalles del Reclamo <sup
+                                    class="text-danger font-weight-bold">*</sup></label>
+                                    <textarea name="detalle_reclamo" type="all" class="form-control required" placeholder="Ingrese el detalle de su reclamo aquí."><?php echo !empty($reclamo) ? $reclamo->detalle_reclamo : ''; ?></textarea>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -180,7 +185,7 @@ echo '<option value="'.$value->id_rcategory.'" ' .
                                     <select name="id_zona_reclamo" class="form-control required">
                                         <option value=""
                                             <?php if (!empty($reclamo) && $reclamo->id_zona_reclamo == ""): ?> selected
-                                            <?php endif ?>>Seleccione Categoría</option>
+                                            <?php endif ?>>Seleccione Zona</option>
                                         <?php 
 $url = "zonas?select=id_zona,nombre_zona";
 $method = "GET";
@@ -305,145 +310,7 @@ echo '<option value="'.$value->id_zona.'" ' .
 </div>
 </div>
 
-<script>
-/*=============================================
-Edición Galería DropZone
-=============================================*/
-function removeGallery(elem) {
-    // Remover el elemento visualmente
-    $(elem).parent().remove();
 
-    // Convertir el valor de la galería vieja en un array
-    var arrayFilesEdit = JSON.parse($(".galleryOldReclamo").val());
-
-    // Mostrar el array antes de eliminar el archivo
-    console.log("Array antes de eliminar: ", arrayFilesEdit);
-
-    // Obtener el archivo que se desea eliminar
-    var fileToRemove = $(elem).attr("remove");
-
-    // Buscar el índice correcto del archivo en el array
-    var index = arrayFilesEdit.indexOf(fileToRemove);
-
-    if (index !== -1) {
-        // Si el archivo existe en el array, lo eliminamos
-        arrayFilesEdit.splice(index, 1);
-
-        // Actualizar el valor del campo hidden con el nuevo array
-        $(".galleryOldReclamo").val(JSON.stringify(arrayFilesEdit));
-
-        // Si también tienes que agregar el archivo eliminado a la lista de eliminados
-        var deleteArray = JSON.parse($(".deleteGalleryProduct").val());
-        deleteArray.push(fileToRemove);
-        $(".deleteGalleryProduct").val(JSON.stringify(deleteArray));
-
-
-    } else {
-        console.log("El archivo no se encontró en el array.");
-    }
-}
-</script>
-<!-- DropZone -->
-<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
-<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Desactivar la autodetección de Dropzone si es necesario
-    Dropzone.autoDiscover = false;
-
-    // Inicializar Dropzone en el contenedor con el ID 'myDropzone'
-    // var myDropzone = new Dropzone("#myDropzoneReclamo", {
-    //     url: "/file/post", // Cambia esta URL al endpoint donde quieres subir los archivos
-    //     method: "post",
-    //     maxFilesize: 2, // Tamaño máximo del archivo en MB
-    //     acceptedFiles: "image/jpeg, image/png", // Tipos de archivos aceptados
-    //     dictDefaultMessage: "Arrastra las imágenes de tu reclamo aquí", //Mensaje Default
-    //     dictRemoveFile: "Eliminar archivo", //Mensaje eliminar archivo
-    //     addRemoveLinks: true // Agregar enlaces de eliminación
-    // });
-
-    $(".dropzone").dropzone({
-        url: "/",
-        addRemoveLinks: true,
-        acceptedFiles: "image/jpeg, image/png",
-        maxFilesize: 10,
-        maxFiles: 10,
-        dictDefaultMessage: "Arrastra las imágenes de tu reclamo aquí",
-        dictRemoveFile: "Eliminar archivo",
-        init: function() {
-
-            var elem = $(this.element);
-            var arrayFiles = [];
-            var countArrayFiles = 0;
-
-            this.on("addedfile", function(file) {
-
-                countArrayFiles++;
-
-                setTimeout(function() {
-
-                    arrayFiles.push({
-
-                        "file": file.dataURL,
-                        "type": file.type,
-                        "width": file.width,
-                        "height": file.height
-
-                    })
-
-                    elem.parent().children(".galleryReclamo").val(JSON.stringify(
-                        arrayFiles));
-
-
-                }, 500 * countArrayFiles)
-
-            })
-
-            this.on("removedfile", function(file) {
-
-                countArrayFiles++;
-                setTimeout(function() {
-
-                    var index = arrayFiles.indexOf({
-
-                        "file": file.dataURL,
-                        "type": file.type,
-                        "width": file.width,
-                        "height": file.height
-
-                    })
-
-                    arrayFiles.splice(index, 1);
-
-                    elem.parent().children(".galleryReclamo").val(JSON.stringify(
-                        arrayFiles));
-
-                }, 500 * countArrayFiles)
-
-            })
-
-            myDropzone = this;
-
-            $(".saveBtn").click(function() {
-
-                if (arrayFiles.length >= 1) {
-
-                    myDropzone.processQueue();
-
-                } else {
-
-                    //Alerta errror galeria vacia
-                    return;
-                }
-            })
-        }
-
-    });
-
-
-});
-</script>
 
 <script>
 let direccionValue = ''; // Variable para guardar el valor del input de dirección

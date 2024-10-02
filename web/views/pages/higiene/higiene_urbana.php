@@ -6,7 +6,7 @@
             <div class="col-12 position-relative text-center page-title-extra-large">
                 <h1 class="m-auto text-white text-shadow-double-large fw-500 ls-minus-3px xs-ls-minus-2px"
                     data-anime='{ "translateY": [15, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                    Higiene Hurbana</h1>
+                    Higiene Urbana</h1>
             </div>
             <div class="down-section text-center"
                 data-anime='{ "translateY": [-15, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
@@ -27,7 +27,7 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-xl-5 col-lg-6 md-mb-50px text-center text-lg-start"
                 data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                <h3 class="alt-font text-dark-gray fw-600 ls-minus-1px">Higiene hurbana</h3>
+                <h3 class="alt-font text-dark-gray fw-600 ls-minus-1px">Higiene Urbana</h3>
                 <p>En esta seccion encontrara toda la información necesaria para mantener la higiene de nuestra
                     ciudad,
                     ya sea días, horarios o zonas.

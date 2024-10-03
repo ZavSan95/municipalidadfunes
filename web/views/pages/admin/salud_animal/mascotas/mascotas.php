@@ -27,6 +27,10 @@
 
             include 'modules/gestion.php';
 
+        }else if($routesArray[3] == "historias"){
+
+            include 'modules/historias.php';
+            
         }else{
 
             echo '

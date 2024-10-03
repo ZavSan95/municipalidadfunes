@@ -128,7 +128,52 @@ if($(".tutoresTable").length > 0){
 }
 
 /*=============================================
-Data Table Admins
+Tabla para Mascotas
+=============================================*/
+
+if($(".mascotasTable").length > 0){
+
+  var url = "/ajax/data-mascotas.ajax.php";
+
+  var columns = [
+     {"data":"id_mascota"},
+     {"data":"nombre_mascota"},
+     {"data":"dni_tutor"},
+     {"data":"descripcion_especie"},
+     {"data":"sexo_mascota"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+
+
+/*=============================================
+Tabla para Historias
+=============================================*/
+
+if($(".historiasTable").length > 0){
+  var url = "/ajax/data-historias.ajax.php";
+
+  var columns = [
+     {"data":"id_historia"},
+     {"data":"fecha_hora_historia"},
+     {"data":"descripcion_tipoconsulta"},
+     {"data":"peso_historia"},
+     {"data":"nombre_veterinario"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+}
+
+
+
+/*=============================================
+Data Table 
 =============================================*/
 $(document).ready(function() {
   $("#tables").DataTable({
@@ -239,6 +284,8 @@ $(document).ready(function () {
           var reDirec = "servicio_tecnico"
         }else if(table == "tutores"){
           var reDirec = "salud_animal/tutores"
+        }else if(table == "mascotas"){
+          var reDirec = "salud_animal/mascotas"
         }
 
         var data = new FormData();

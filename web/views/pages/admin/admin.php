@@ -28,7 +28,7 @@ if (!isset($_SESSION["administrador"])) {
 
     // Definir los módulos permitidos para cada rol
     $modulosPorRol = [
-      'admin' => ['administradores', 'prensa', 'slides','gestor_reclamos', 'estadisticas_reclamos', 'servicio_tecnico'],
+      'admin' => ['administradores', 'prensa', 'slides','gestor_reclamos', 'estadisticas_reclamos', 'servicio_tecnico', 'salud_animal', 'mascotas'],
       'prensa' => ['prensa', 'slides'],
       // Agregar más roles y sus permisos si es necesario
     ];
@@ -38,6 +38,8 @@ if (!isset($_SESSION["administrador"])) {
 
       // Incluir el archivo correspondiente al módulo
       include $routesArray[1]."/".$routesArray[1].".php";
+
+
 
     } else {
       // Si no tiene permisos, redirigir a la página de error 404

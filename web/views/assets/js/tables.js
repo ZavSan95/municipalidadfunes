@@ -107,6 +107,27 @@ if($(".ticketsTable").length > 0){
 }
 
 /*=============================================
+Tabla para Tutores
+=============================================*/
+
+if($(".tutoresTable").length > 0){
+
+  var url = "/ajax/data-tutores.ajax.php";
+
+  var columns = [
+     {"data":"id_tutor"},
+     {"data":"dni_tutor"},
+     {"data":"nombre_tutor"},
+     {"data":"apellido_tutor"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+/*=============================================
 Data Table Admins
 =============================================*/
 $(document).ready(function() {
@@ -216,6 +237,8 @@ $(document).ready(function () {
           var reDirec = "gestor_reclamos"
         }else if(table == "tickets"){
           var reDirec = "servicio_tecnico"
+        }else if(table == "tutores"){
+          var reDirec = "salud_animal/tutores"
         }
 
         var data = new FormData();

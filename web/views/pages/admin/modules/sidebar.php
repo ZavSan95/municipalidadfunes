@@ -125,13 +125,19 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: none;">
                         <li class="nav-item">
-                            <a href="/admin/tickets/" class="nav-link">
+                            <a href="/admin/salud_animal" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Informes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/salud_animal/tutores" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Tutores</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/estadisticas_reclamos" class="nav-link">
+                            <a href="/admin/salud_animal/mascotas" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Mascotas</p>
                             </a>

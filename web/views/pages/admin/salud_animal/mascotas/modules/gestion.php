@@ -2,8 +2,9 @@
 
 if(isset($_GET['mascota'])){
 
-$select = "id_mascota,nombre_mascota,nombre_tutor,apellido_tutor,descripcion_especie,raza_mascota,sexo_mascota";
-$url = "relations?rel=mascotas,tutores,especies&linkTo=id_mascota&equalTo=".base64_decode($_GET['mascotas']);
+$select = "id_mascota,nombre_mascota,raza_mascota,sexo_mascota,edad_mascota,color_mascota,imagen_mascota,id_tutor_mascota,".
+"nombre_tutor,apellido_tutor,dni_tutor,id_especie_mascota,descripcion_especie";
+$url = "relations?rel=mascotas,tutores,especies&type=mascota,tutor,especie&linkTo=id_mascota&equalTo=".base64_decode($_GET['mascota'])."&select=".$select;
 $method = "GET";
 $fields = array();
 
@@ -28,9 +29,9 @@ $mascota = null;
 
     <div class="container">
 
-        <div class="card">
+        <div class="card" style="margin-bottom: 3rem;">
 
-            <form method="post" class="needs-validation" novalidate>
+            <form method="post" class="needs-validation" novalidate enctype="multipart/form-data">
 
                 <?php if(!empty($mascota)): ?>
 
@@ -81,7 +82,7 @@ $mascota = null;
 
                 </div>
 
-                <div class="card-body mb-5">
+                <div class="card-body">
 
                     <?php 
 require_once 'controllers/controller.mascota.php';
@@ -178,29 +179,27 @@ echo '<option value="'.$value->id_especie.'" ' .
                                         <label for="edad_mascota">Edad <sup
                                                 class="text-danger font-weight-bold">*</sup></label>
 
-                                        <input type="all" class="form-control required" placeholder="Ingresar el nombre"
+                                        <input type="all" class="form-control required" placeholder="Ingresar edad"
                                             id="edad_mascota" name="edad_mascota"
-                                            value="<?php if (!empty($tutor)): ?><?php echo $tutor->edad_mascota ?><?php endif ?>"
+                                            value="<?php if (!empty($mascota)): ?><?php echo $mascota->edad_mascota ?><?php endif ?>"
                                             required>
 
                                     </div>
 
                                     <div class="form-group pb-3">
-
-                                        <label for="raza_mascota">Raza <sup
-                                                class="text-danger font-weight-bold">*</sup></label>
-
+                                        <label for="raza_mascota">Sexo <sup class="text-danger font-weight-bold">*</sup></label>
                                         <select name="sexo_mascota" id="sexo_mascota" class="form-control required">
-
-                                            <option value=""
-                                                <?php if (!empty($mascota) && $mascota->id_especie_mascota == ""): ?>
-                                                selected <?php endif ?>>Seleccione Sexo</option>
-                                            <option value="Masculino">Masculino</option>
-                                            <option value="Femenino">Femenino</option>
-                                            <option value="Indefinido">Indefinido</option>
-
+                                            <option value="">Seleccione Sexo</option>
+                                            <option value="Masculino" 
+                                                <?php if (!empty($mascota) && $mascota->sexo_mascota == "Masculino"): ?>
+                                                selected <?php endif ?>>Masculino</option>
+                                            <option value="Femenino" 
+                                                <?php if (!empty($mascota) && $mascota->sexo_mascota == "Femenino"): ?>
+                                                selected <?php endif ?>>Femenino</option>
+                                            <option value="Indefinido" 
+                                                <?php if (!empty($mascota) && $mascota->sexo_mascota == "Indefinido"): ?>
+                                                selected <?php endif ?>>Indefinido</option>
                                         </select>
-
                                     </div>
 
 
@@ -282,8 +281,6 @@ echo '<option value="'.$value->id_especie.'" ' .
 
                         </div>
 
-
-
                     </div>
 
 
@@ -308,14 +305,14 @@ echo '<option value="'.$value->id_especie.'" ' .
                                     class="btn border-0 btn-info float-right py-2 px-3 btn-sm rounded-pill">Guardar
                                     Información</button>
 
-                                <a href="/admin/salud_animal/tutores"
+                                <a href="/admin/salud_animal/mascotas"
                                     class="btn btn-default float-right py-2 px-3 btn-sm rounded-pill mr-2">Regresar</a>
 
                             </div>
 
                             <div class="col-12 text-center d-flex justify-content-center mt-2 d-block d-lg-none">
 
-                                <div><a href="/admin/salud_animal/tutores"
+                                <div><a href="/admin/salud_animal/mascotas"
                                         class="btn btn-default py-2 px-3 btn-sm rounded-pill mr-2">Regresar</a></div>
 
                                 <div><button type="submit"

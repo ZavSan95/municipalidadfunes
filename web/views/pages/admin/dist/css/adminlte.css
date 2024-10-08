@@ -11792,12 +11792,13 @@ body.sidebar-collapse:not(.sidebar-mini-xs):not(.sidebar-mini-md):not(.sidebar-m
 }
 
 body:not(.layout-fixed) .main-sidebar {
-  height: 100vh !important; /* Ocupa el 100% de la altura de la ventana */
+  height: auto !important; /* Ocupa el 100% de la altura de la ventana */
   min-height: 100vh !important; /* Asegura que el sidebar siempre tenga la altura mínima del viewport */
   position: fixed !important; /* Fija el sidebar en la pantalla */
   top: 0 !important; /* Mantiene el sidebar anclado en la parte superior */
   left: 0 !important; /* Mantiene el sidebar alineado a la izquierda */
   z-index: 1030 !important; /* Asegura que esté por encima de otros elementos */
+  
 }
 
 body:not(.layout-fixed) .main-sidebar .sidebar {

@@ -41,7 +41,7 @@ $(document).ready(function() {
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    <a href="/admin/salud_animal/mascotas/gestion" class="btn btn-info py-2 px-3 btn-sm rounded-pill">Agregar Historia</a>
+                    <a href="/admin/salud_animal/mascotas/gestion_historia?mascota=<?php echo base64_encode($idMascota) ?>" class="btn btn-info py-2 px-3 btn-sm rounded-pill">Agregar Historia</a>
                 </h3>
             </div>
             <div class="card-body">

@@ -31,6 +31,9 @@
 
             include 'modules/historias.php';
             
+        }else if($routesArray[3] == "gestion_historia"){
+
+            include 'modules/gestion_historia.php';
         }else{
 
             echo '

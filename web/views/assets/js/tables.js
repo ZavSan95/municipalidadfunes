@@ -152,27 +152,6 @@ if($(".mascotasTable").length > 0){
 
 
 /*=============================================
-Tabla para Historias
-=============================================*/
-
-if($(".historiasTable").length > 0){
-  var url = "/ajax/data-historias.ajax.php";
-
-  var columns = [
-     {"data":"id_historia"},
-     {"data":"fecha_hora_historia"},
-     {"data":"descripcion_tipoconsulta"},
-     {"data":"peso_historia"},
-     {"data":"nombre_veterinario"},
-     {"data":"actions", "orderable":false, "searchable":false}
-  ]
-
-  var order = [0,"desc"];
-}
-
-
-
-/*=============================================
 Data Table 
 =============================================*/
 $(document).ready(function() {

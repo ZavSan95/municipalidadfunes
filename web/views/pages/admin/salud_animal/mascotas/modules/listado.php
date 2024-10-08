@@ -7,7 +7,7 @@
 			<div class="card-header">
 				
 				<h3 class="card-title">
-					<a href="/admin/salud_animal/tutores/historias" class="btn btn-info py-2 px-3 btn-sm rounded-pill">Agregar Historia</a>
+					<a href="/admin/salud_animal/mascotas/gestion" class="btn btn-info py-2 px-3 btn-sm rounded-pill">Agregar Mascota</a>
 				</h3>
 
 			</div>

@@ -31,7 +31,24 @@ $(document).ready(function() {
         "searching": true, // Habilita el campo de búsqueda
         "ordering": true, // Habilita la ordenación de columnas
         "info": true, // Muestra información sobre los resultados
-        "autoWidth": false // Ajusta automáticamente el ancho de las columnas
+        "autoWidth": false, // Ajusta automáticamente el ancho de las columnas
+        "language": {
+          "sProcessing": "Procesando...",
+          "sLengthMenu": "Mostrar _MENU_ registros",
+          "sZeroRecords": "No se encontraron resultados",
+          "sEmptyTable": "Ningún dato disponible en esta tabla",
+          "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+          "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+          "sSearch": "Buscar:",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+              "sFirst": "Primero",
+              "sLast": "Último",
+              "sNext": "Siguiente",
+              "sPrevious": "Anterior"
+          },
+      },
     });
 });
 </script>
@@ -45,7 +62,7 @@ $(document).ready(function() {
                 </h3>
             </div>
             <div class="card-body">
-                <table id="historiasTable" class="table table-bordered table-striped">
+                <table id="historiasTable" class="table table-bordered table-striped text-center">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -53,7 +70,6 @@ $(document).ready(function() {
                             <th>Motivo Consulta</th>
                             <th>Peso</th>
                             <th>Veterinario</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,16 +81,6 @@ $(document).ready(function() {
                                     <td><?php echo $historia->descripcion_tipoconsulta; ?></td>
                                     <td><?php echo $historia->peso_historia; ?></td>
                                     <td><?php echo $historia->nombre_veterinario; ?></td>
-                                    <td>
-                                        <div class='btn-group'>
-                                            <a href='/admin/salud_animal/historias/gestion?historia=<?php echo base64_encode($historia->id_historia); ?>' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
-                                                <i class='fas fa-pencil-alt text-white mr-1'></i>
-                                            </a>
-                                            <button class='btn btn-info border-0 rounded-pill mr-2 btn-sm deleteItem' rol='admin' table='historias' column='historia' idItem='<?php echo base64_encode($historia->id_historia); ?>'>
-                                                <i class='fas fa-trash-alt text-white mr-1'></i>
-                                            </button>
-                                        </div>
-                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>

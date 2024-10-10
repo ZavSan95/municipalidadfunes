@@ -37,9 +37,17 @@ class TicketController{
                     $saveImageNew = $_POST['old_image_ticket'];
                 }
                 
+                if(isset($_POST['tecnico_ticket']) && !empty($_POST['tecnico_ticket'])){
+
+                    $tecnico = $_POST['tecnico_ticket'];
+                }else{
+
+                    $tecnico = null;
+                }
                 
                 $fields = "title_ticket=".trim(TemplateController::capitalize($_POST['title_ticket']))."&id_ticketcategory_ticket=".$_POST['id_ticketcategory_ticket'].
-                "&id_tarea_ticket=".$_POST['id_tarea_ticket']."&image_ticket=".$saveImageNew."&id_estado_ticket=".$_POST['id_estado_ticket']."&descripcion_ticket=".$_POST['descripcion_ticket'];
+                "&id_area_ticket=".$_POST['id_area_ticket']."&image_ticket=".$saveImageNew."&id_estado_ticket=".$_POST['id_estado_ticket']."&descripcion_ticket=".
+                $_POST['descripcion_ticket']."&tecnico_ticket=".$tecnico;
 
                 //echo '<pre>';print_r($fields);echo '</pre>';
                 
@@ -142,6 +150,14 @@ class TicketController{
                     $saveImageTicket = TemplateController::saveImage($image, $folder, $name, $width, $height);
 
                 }
+
+                if(isset($_POST['tecnico_ticket']) && !empty($_POST['tecnico_ticket'])){
+
+                    $tecnico = $_POST['tecnico_ticket'];
+                }else{
+
+                    $tecnico = null;
+                }
                 
                 /*=============================================
                 Validar y Guardar Datos
@@ -150,21 +166,24 @@ class TicketController{
 
                     "title_ticket" => trim(TemplateController::capitalize($_POST['title_ticket'])),
                     "id_ticketcategory_ticket" => $_POST['id_ticketcategory_ticket'],
-                    "id_tarea_ticket" => $_POST['id_tarea_ticket'],
+                    "id_area_ticket" => $_POST['id_area_ticket'],
                     "id_admin_ticket" => $_POST['id_admin_ticket'],
                     "id_estado_ticket" => $_POST['id_estado_ticket'],
-                    "descripcion_ticket" => $_POST['descripcion_ticket'],
+                    "descripcion_ticket" => urlencode($_POST['descripcion_ticket']),
                     "image_ticket" => $saveImageTicket,
+                    "tecnico_ticket" => $tecnico,
                     "date_created_ticket" => date("Y-m-d")
                 );
 
-                //echo '<pre>'; print_r($fields);echo '</pre>';
+                echo '<pre>'; print_r($fields);echo '</pre>';
 
                 $url = "tickets?token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
                 $method = "POST";
 
                 $createData = CurlController::request($url,$method,$fields);
             
+                echo '<pre>'; print_r($createData);echo '</pre>';
+                return;
                 if($createData->status == 200){
 
                     $log = new ControllerLog();

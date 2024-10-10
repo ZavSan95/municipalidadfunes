@@ -186,7 +186,7 @@ class AdminsController{
 
                 if(isset($_POST['idAdmin'])){
 
-                    if($_POST['password_admin'] != ""){
+                    if(!empty($_POST['password_admin'])){
 
                         if(preg_match('/^[*\\$\\!\\¡\\?\\¿\\.\\_\\#\\-\\0-9A-Za-z]{1,}$/', $_POST["password_admin"] )){
 
@@ -216,13 +216,13 @@ class AdminsController{
 
                     }else{
 
-                        $crypt = crypt($_POST['oldPassword'], '$2a$07$azybxcags23425sdg23sdfhsd$');
+                        $crypt = $_POST['oldPassword'];
                     }
 
                     $url = "admins?id=".base64_decode($_POST['idAdmin'])."&nameId=id_admin&token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
                     $method = "PUT";
                     $fields = "name_admin=".trim(TemplateController::capitalize($_POST["name_admin"])).
-                    "&rol_admin=".$_POST["rol_admin"]."&email_admin=".$_POST["email_admin"]."&password_admin=".$crypt;
+                    "&rol_admin=".$_POST["rol_admin"]."&id_area_admin=".$_POST['id_area_admin']."&email_admin=".$_POST["email_admin"]."&password_admin=".$crypt;
 
                     $updateData = CurlController::request($url,$method,$fields);
 
@@ -320,6 +320,7 @@ class AdminsController{
                         "name_admin" => trim(TemplateController::capitalize($_POST['name_admin'])),
                         "rol_admin" => $_POST['rol_admin'],
                         "email_admin" => $_POST['email_admin'],
+                        "id_area_admin" => $_POST['id_area-admin'],
                         "password_admin" => $crypt,
                         "date_created_admin" => date("Y-m-d")
 

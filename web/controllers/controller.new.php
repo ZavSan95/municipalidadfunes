@@ -97,9 +97,7 @@ class NewController {
                 
                 
                 $fields = "title_new=".trim(TemplateController::capitalize($_POST['title_new']))."&id_category_new=".$_POST['id_category_new'].
-                "&intro_new=".$_POST['intro_new']."&body_new=".$_POST['body_new']."&image_new=".$saveImageNew;
-
-                //echo '<pre>';print_r($fields);echo '</pre>';
+                "&intro_new=".$_POST['intro_new']."&body_new=".urlencode($_POST['body_new'])."&image_new=".$saveImageNew;
                 
             
                 $url = "news?id=".base64_decode($_POST['idNew'])."&nameId=id_new&token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
@@ -107,8 +105,6 @@ class NewController {
 
                 $updateData = CurlController::request($url,$method,$fields);
 
-                // echo '<pre>';print_r($updateData);echo '</pre>';
-                // return;
                 if($updateData->status == 200){
 
                     $log = new ControllerLog();

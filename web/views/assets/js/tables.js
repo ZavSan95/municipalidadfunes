@@ -21,6 +21,25 @@ if($(".adminsTable").length > 0){
 }
 
 /*=============================================
+Tabla para Áreas
+=============================================*/
+
+if($(".areasTable").length > 0){
+
+  var url = "/ajax/data-areas.ajax.php";
+
+  var columns = [
+     {"data":"id_area"},
+     {"data":"nombre_area"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+/*=============================================
 Tabla para noticias
 =============================================*/
 
@@ -95,7 +114,7 @@ if($(".ticketsTable").length > 0){
   var columns = [
      {"data":"id_ticket"},
      {"data":"descripcion_ticketcategory"},
-     {"data":"descripcion_tarea"},
+     {"data":"nombre_area"},
      {"data":"name_admin"},
      {"data":"descripcion_estado"},
      {"data":"actions", "orderable":false, "searchable":false}
@@ -148,6 +167,30 @@ if($(".mascotasTable").length > 0){
   
 
 }
+
+/*=============================================
+Tabla para Mis Tickets
+=============================================*/
+
+if($(".misTicketsTable").length > 0){
+
+  var url = "/ajax/data-misTickets.ajax.php";
+
+  var columns = [
+     {"data":"id_ticket"},
+     {"data":"title_ticket"},
+     {"data":"descripcion_ticketcategory"},
+     {"data":"descripcion_estado"},
+     {"data":"tecnico_ticket"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
+
 
 
 

@@ -122,18 +122,43 @@ if(isset($_GET['admin'])){
                                             <option value="admin"
                                                 <?php if (!empty($admin) && $admin->rol_admin == "admin"): ?> selected
                                                 <?php endif ?>>Administrador</option>
-                                            <option value="st"
-                                                <?php if (!empty($admin) && $admin->rol_admin == "st"): ?> selected
-                                                <?php endif ?>>Servicio Tecnico</option>
                                             <option value="prensa"
                                                 <?php if (!empty($admin) && $admin->rol_admin == "prensa"): ?> selected
                                                 <?php endif ?>>Prensa</option>
-                                            <option value="saludanimal"
-                                                <?php if (!empty($admin) && $admin->rol_admin == "saludanimal"): ?>
-                                                selected <?php endif ?>>Salud Animal</option>
+                                            <option value="servicio_tecnico"
+                                                <?php if (!empty($admin) && $admin->rol_admin == "servicio_tecnico"): ?>
+                                                selected <?php endif ?>>Servicio Técnico</option>
 
                                         </select>
 
+                                    </div>
+
+                                        <!-- Área -->
+                                        <div class="form-group pb-3">
+                                        <label for="id_area_admin">Área <sup
+                                                class="text-danger font-weight-bold">*</sup></label>
+                                        <select name="id_area_admin" class="form-control required">
+                                            <option value="">Seleccione Área</option>
+
+                                            <?php 
+                                                $url = "areas?select=id_area,nombre_area";
+                                                $method = "GET";
+                                                $fields = array();
+                                                $areas = CurlController::request($url,$method,$fields);
+
+                                                if($areas->status == 200){
+
+                                                $areas = $areas->results;
+
+                                                foreach ($areas as $value) {
+                                                    echo '<option value="'.$value->id_area.'" ' . 
+                                                    (($admin && $admin->id_area_admin == $value->id_area) ? 'selected' : '') . 
+                                                    '>'.$value->nombre_area.'</option>';
+                                                    }
+                                                }
+                                            ?>
+
+                                        </select>
                                     </div>
 
                                 </div>

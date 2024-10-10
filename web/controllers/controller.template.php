@@ -114,6 +114,16 @@ class TemplateController{
 	}
 
 	/*=============================================
+	Upper inputs
+	=============================================*/
+	static public function upperCase($value){
+
+		$value = mb_strtoupper($value, "utf-8");
+
+		return $value;
+	}
+
+	/*=============================================
 	Función para almacenar imágenes
 	=============================================*/
 

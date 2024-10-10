@@ -28,7 +28,8 @@ if (!isset($_SESSION["administrador"])) {
 
     // Definir los módulos permitidos para cada rol
     $modulosPorRol = [
-      'admin' => ['administradores', 'prensa', 'slides','gestor_reclamos', 'estadisticas_reclamos', 'servicio_tecnico', 'salud_animal', 'mascotas', 'historias'],
+      'admin' => ['administradores', 'prensa', 'slides','gestor_reclamos', 'estadisticas_reclamos',
+      'servicio_tecnico', 'salud_animal', 'mascotas', 'historias', 'areas', 'tickets'],
       'prensa' => ['prensa', 'slides'],
       // Agregar más roles y sus permisos si es necesario
     ];
@@ -42,10 +43,8 @@ if (!isset($_SESSION["administrador"])) {
 
 
     } else {
-      // Si no tiene permisos, redirigir a la página de error 404
-      echo '<script>
-         window.location = "'.$path.'404";
-      </script>';
+      // Si no tiene permisos, incluir el archivo de error 403 en lugar de redirigir
+      include '403/403.php';
     }
 
   } else {

@@ -127,14 +127,14 @@ $(document).ready(function() {
                                     </div>
 
                                     <div class="form-group pb-3">
-                                        <label for="id_tarea_ticket">Área <sup
+                                        <label for="id_area_ticket">Área <sup
                                                 class="text-danger font-weight-bold">*</sup></label>
-                                        <select name="id_tarea_ticket" class="form-control required">
-                                            <option value="" <?php if (!empty($ticket) && $ticket->id_tarea_ticket == ""): ?>
+                                        <select name="id_area_ticket" class="form-control required">
+                                            <option value="" <?php if (!empty($ticket) && $ticket->id_area_ticket == ""): ?>
                                                 selected <?php endif ?>>Seleccione Área</option>
 
                                             <?php 
-                                                $url = "tareas?select=id_tarea,descripcion_tarea&orderBy=descripcion_tarea&orderMode=ASC";
+                                                $url = "areas?select=id_area,nombre_area&orderBy=nombre_area&orderMode=ASC";
                                                 $method = "GET";
                                                 $fields = array();
                                                 $category = CurlController::request($url,$method,$fields);
@@ -144,9 +144,9 @@ $(document).ready(function() {
                                                 $category = $category->results;
 
                                                 foreach ($category as $value) {
-                                                echo '<option value="'.$value->id_tarea.'" ' . 
-                                                (($ticket && $ticket->id_tarea_ticket == $value->id_tarea) ? 'selected' : '') . 
-                                                '>'.$value->descripcion_tarea.'</option>';
+                                                echo '<option value="'.$value->id_area.'" ' . 
+                                                (($ticket && $ticket->id_area_ticket == $value->id_area) ? 'selected' : '') . 
+                                                '>'.$value->nombre_area.'</option>';
                                                 }
                                                 }
                                             ?>
@@ -175,6 +175,34 @@ $(document).ready(function() {
                                                 echo '<option value="'.$value->id_estado.'" ' . 
                                                 (($ticket && $ticket->id_estado_ticket == $value->id_estado) ? 'selected' : '') . 
                                                 '>'.$value->descripcion_estado.'</option>';
+                                                }
+                                                }
+                                            ?>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group pb-3">
+                                        <label for="tecnico_ticket">Técnico <sup
+                                                class="text-danger font-weight-bold">*</sup></label>
+                                        <select name="tecnico_ticket" class="form-control required">
+                                            <option value="" <?php if (!empty($ticket) && $ticket->tecnico_ticket == ""): ?>
+                                                selected <?php endif ?>>Seleccione Técnico</option>
+
+                                            <?php 
+                                                $url = "admins?select=id_admin,name_admin&linkTo=rol_admin&equalTo=servicio_tecnico&orderBy=name_admin&orderMode=ASC";
+                                                $method = "GET";
+                                                $fields = array();
+                                                $tecnicos = CurlController::request($url,$method,$fields);
+
+                                                if($tecnicos->status == 200){
+
+                                                $tecnicos = $tecnicos->results;
+
+                                                foreach ($tecnicos as $value) {
+                                                echo '<option value="'.$value->name_admin.'" ' . 
+                                                (($ticket && $ticket->tecnico_ticket == $value->name_admin) ? 'selected' : '') . 
+                                                '>'.$value->name_admin.'</option>';
                                                 }
                                                 }
                                             ?>
@@ -252,7 +280,7 @@ $(document).ready(function() {
                                                 class="text-danger font-weight-bold">*</sup></label>
                                         <textarea class="form-control required summernote" name="descripcion_ticket"
                                             placeholder="Ingresar la descripción del problema"
-                                            required><?php echo !empty($ticket) ? htmlspecialchars($ticket->descripcion_ticket) : ''; ?></textarea>
+                                            required><?php echo !empty($ticket) ? urldecode($ticket->descripcion_ticket) : ''; ?></textarea>
                                     </div>
                                 </div>
                             </div>

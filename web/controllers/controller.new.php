@@ -82,8 +82,8 @@ class NewController {
                     $randomNumber = rand(100000, 999999);
                     $name = $randomNumber . "_" . $url_image;
                 
-                    $width = 1000;
-                    $height = 600;
+                    $width = 1200;
+                    $height = 800;
                 
                     unlink("views/assets/images/noticias/".$_POST['old_image_new']); // Eliminar la imagen vieja
                 
@@ -95,9 +95,10 @@ class NewController {
                     $saveImageNew = $_POST['old_image_new'];
                 }
                 
+                $url = TemplateController::generateUrl($_POST['title_new']);
                 
                 $fields = "title_new=".trim(TemplateController::capitalize($_POST['title_new']))."&id_category_new=".$_POST['id_category_new'].
-                "&intro_new=".$_POST['intro_new']."&body_new=".urlencode($_POST['body_new'])."&image_new=".$saveImageNew;
+                "&intro_new=".$_POST['intro_new']."&body_new=".urlencode($_POST['body_new'])."&image_new=".$saveImageNew."&url_new=".$url;
                 
             
                 $url = "news?id=".base64_decode($_POST['idNew'])."&nameId=id_new&token=".$_SESSION['administrador']->token_admin."&table=admins&suffix=admin";
@@ -184,12 +185,14 @@ class NewController {
                     $randomNumber = rand(100000, 999999);
                     $name = $randomNumber."_".$url_image;
 
-                    $width = 1000;
-                    $height = 600;
+                    $width = 1200;
+                    $height = 800;
 
                     $saveImageNew = TemplateController::saveImage($image, $folder, $name, $width, $height);
 
                 }
+
+                $url = TemplateController::generateUrl($_POST['title_new']);
 
                 /*=============================================
                 Validar y Guardar Datos
@@ -197,6 +200,7 @@ class NewController {
                 $fields = array (
 
                     "title_new" => trim(TemplateController::capitalize($_POST['title_new'])),
+                    "url_new" => $url,
                     "id_category_new" => $_POST['id_category_new'],
                     "intro_new" => $_POST['intro_new'],
                     "body_new" => $_POST['body_new'],

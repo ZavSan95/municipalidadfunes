@@ -13,28 +13,63 @@ if(isset($routesArray[1]) && !empty($routesArray[1])){
 
 }
 
+if(isset($_GET['categoria']) && !empty($_GET['categoria'])){
 
+    $categoria = $_GET['categoria'];
 
-$url = "news";
-$method = "GET";
-$fields = array ();
-$totalNews = CurlController::request($url, $method, $fields)->total;
-//echo "<pre>"; print_r(ceil($totalNews/8)); echo "</pre>";
-if($startAt > $totalNews){
+}else{
 
-    echo '<script>
-        window.location = "'. $path . '404";
-        </script>';
-
+    $categoria = null;
 }
 
 
+if($categoria == null){
 
-$select = "id_new,title_new,name_category,image_new,date_created_new";
-$url = "relations?rel=news,categories&type=new,category&select=".$select."&startAt=".$startAt."&endAt=".$endAt
-."&orderBy=date_created_new&orderMode=DESC";
-$method = "GET";
-$fields = array();
+    $url = "news";
+    $method = "GET";
+    $fields = array ();
+    $totalNews = CurlController::request($url, $method, $fields)->total;
+
+    if($startAt > $totalNews){
+
+        echo '<script>
+            window.location = "'. $path . '404";
+            </script>';
+
+    }
+
+
+
+    $select = "id_new,title_new,name_category,image_new,date_created_new";
+    $url = "relations?rel=news,categories&type=new,category&select=".$select."&startAt=".$startAt."&endAt=".$endAt
+    ."&orderBy=date_created_new&orderMode=DESC";
+    $method = "GET";
+    $fields = array();
+
+}else{
+
+    $url = "relations?rel=news,categories&type=new,category&linkTo=name_category&equalTo=".$categoria;
+    $method = "GET";
+    $fields = array ();
+    $totalNews = CurlController::request($url, $method, $fields)->total;
+
+    if($startAt > $totalNews){
+
+        echo '<script>
+            window.location = "'. $path . '404";
+            </script>';
+
+    }
+
+
+
+    $select = "id_new,title_new,name_category,image_new,date_created_new";
+    $url = "relations?rel=news,categories&type=new,category&linkTo=name_category&equalTo=".$categoria."&select=".$select."&startAt=".$startAt."&endAt=".$endAt
+    ."&orderBy=date_created_new&orderMode=DESC";
+    $method = "GET";
+    $fields = array();
+
+}
 
 // Initialize $noticias to null or an empty array
 $noticias = null;
@@ -53,7 +88,6 @@ if($noticias && property_exists($noticias, 'status') && $noticias->status == 200
 
 }
 
-// echo "<pre>"; print_r($noticias); echo "</pre>";
 ?>
 
 
@@ -85,6 +119,27 @@ if($noticias && property_exists($noticias, 'status') && $noticias->status == 200
 <!-- start section -->
 <section id="down-section">
     <div class="container">
+
+        <form id="filter-form" action="" method="GET">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <label for="category-filter">Categoría:</label>
+                    <select id="category-filter" name="categoria" class="form-control">
+                        <option value="">Todas</option>
+                        <option value="categoria1">Categoría 1</option>
+                        <option value="categoria2">Categoría 2</option>
+                        <!-- Añade más opciones según las categorías disponibles -->
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label for="date-filter">Fecha mayor a:</label>
+                    <input type="date" id="date-filter" name="fecha" class="form-control">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Aplicar Filtros</button>
+        </form>
+
         <div class="row">
             <div class="col-12 px-0">
                 <ul class="blog-classic blog-wrapper grid-loading grid grid-4col xl-grid-4col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-double-extra-large"

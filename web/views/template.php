@@ -235,6 +235,9 @@ if (empty($routesArray[0])) {
     } elseif ($routesArray[0] == "higiene_urbana") {
         include 'views/pages/higiene/higiene_urbana.php';
 
+    } elseif ($routesArray[0] == "noticia") {
+        include 'views/pages/noticia/noticia.php';
+
     } else {
         // Si no coincide con ninguna ruta, muestra la página 404
         include 'pages/404/404.php';

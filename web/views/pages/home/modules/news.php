@@ -15,7 +15,7 @@
 
                             <?php 
 
-                            $select = "id_new,title_new,name_category,image_new,date_created_new";
+                            $select = "id_new,title_new,url_new,id_category,name_category,image_new,date_created_new";
                             $url = "relations?rel=news,categories&type=new,category&select=".$select."&startAt=0&endAt=4&orderBy=date_created_new&orderMode=DESC";
                             $method = "GET";
                             $fields = array();
@@ -49,16 +49,16 @@
                                 <li class="news-item grid-item">
                                     <div class="news-card bg-transparent no-border h-100">
                                         <div class="image-container position-relative overflow-hidden border-radius-4">
-                                            <a href="#">
+                                            <a href="/noticia/<?php echo $noticia->url_new ?>">
                                                 <img src="<?php echo $path . '/views/assets/images/noticias/' . $noticia->image_new; ?>" alt="<?php echo htmlspecialchars($noticia->title_new); ?>" class="img-fluid">
                                             </a>
                                         </div>
                                         <div class="card-content px-3 pt-3 pb-3 xs-pb-2 no-margin">
                                             <span class="category-date fs-14 text-uppercase">
-                                                <a href="#" class="category-link text-dark-gray fw-600"><?php echo htmlspecialchars($noticia->name_category); ?></a>
+                                                <a href="noticias?categoria=<?php echo $noticia->name_category?>" class="category-link text-dark-gray fw-600"><?php echo htmlspecialchars($noticia->name_category); ?></a>
                                             </span>
                                             <span class="blog-date fs-14"><?php echo $fecha_formateada; ?></span>
-                                            <a href="#" class="news-title mb-2 fw-500 fs-18 lh-30 text-dark-gray d-inline-block"><?php echo htmlspecialchars($noticia->title_new); ?></a>
+                                            <a href="/noticia/<?php echo $noticia->url_new ?>" class="news-title mb-2 fw-500 fs-18 lh-30 text-dark-gray d-inline-block"><?php echo htmlspecialchars($noticia->title_new); ?></a>
                                         </div>
                                     </div>
                                 </li>

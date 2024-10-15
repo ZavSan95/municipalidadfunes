@@ -164,8 +164,6 @@ if($(".mascotasTable").length > 0){
   ]
 
   var order = [0,"desc"];
-  
-
 }
 
 /*=============================================
@@ -182,6 +180,28 @@ if($(".misTicketsTable").length > 0){
      {"data":"descripcion_ticketcategory"},
      {"data":"descripcion_estado"},
      {"data":"tecnico_ticket"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+}
+
+/*=============================================
+Tabla para Registros Inclusión Social
+=============================================*/
+
+if($(".inclusionTable").length > 0){
+
+  var url = "/ajax/data-regristros.ajax.php";
+
+  var columns = [
+     {"data":"id_registro"},
+     {"data":"fecha_registro"},
+     {"data":"descripcion_restado"},
+     {"data":"descripcion_prioridad"},
+     {"data":"dni_registro"}, 
+     {"data":"nombre_registro"},
+     {"data":"descripcion_equipo"},
      {"data":"actions", "orderable":false, "searchable":false}
   ]
 

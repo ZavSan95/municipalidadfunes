@@ -4,7 +4,7 @@
     name="nombre_reclamo" 
     class="form-control required" 
     placeholder="Nombre*"
-    
+    autocomplete="off"
     >
 </div>
 
@@ -14,6 +14,7 @@
     name="apellido_reclamo" 
     class="form-control required" 
     placeholder="Apellido*"
+    autocomplete="off"
     >
 </div>
 
@@ -23,6 +24,7 @@
     name="dni_reclamo" 
     class="form-control required" 
     placeholder="DNI (sin espacios ni puntos)*"
+    autocomplete="off"
     >
 </div>
 
@@ -32,6 +34,7 @@
     name="celular_reclamo" 
     class="form-control required" 
     placeholder="Celular*"
+    autocomplete="off"
     >
 </div>
 
@@ -41,6 +44,7 @@
     name="correo_reclamo" 
     class="form-control required" 
     placeholder="Correo Electrónico*"
+    autocomplete="off"
     >
 </div>
 

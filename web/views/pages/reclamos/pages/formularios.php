@@ -8,7 +8,7 @@
             <div class="col-12 px-0 position-relative">
                 <div class="container">
                     <!-- Formulario principal -->
-                    <form id="main-form" action="" method="post">
+                    <form id="main-form" action="" method="post" autocomplete="off">
                         <input type="hidden" name="id_estado_reclamo" value="1">
                         <input type="hidden" name="deuda_reclamo" value="0">
                         <input type="hidden" name="redirec_reclamo" value="/reclamos">

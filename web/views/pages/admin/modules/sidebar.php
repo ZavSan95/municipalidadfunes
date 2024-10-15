@@ -148,7 +148,7 @@
                 <!-- Verificación del rol antes de mostrar "Inclusión Social" -->
                 <?php if (in_array($_SESSION['administrador']->rol_admin, ['admin', 'inclusion'])) : ?>
                 <li class="nav-item">
-                    <a href="/admin/" class="nav-link">
+                    <a href="/admin/inclusion_social" class="nav-link">
                         <i class="nav-icon fa-solid fa-people-roof"></i>
                         <p>
                             Inclusión Social

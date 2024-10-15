@@ -69,7 +69,7 @@
 </div>
 <div class="mb-16px">
     <input type="all    " id="direccion" name="direccion_reclamo" class="form-control required"
-        placeholder="Dirección*">
+        placeholder="Dirección*" autocomplete="off">
 </div>
 
 <!-- Mapa de Google reemplazado por iframe -->

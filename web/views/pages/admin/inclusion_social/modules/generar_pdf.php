@@ -2,14 +2,15 @@
 require_once 'views/assets/fpdf/fpdf.php'; 
 require_once 'controllers/controller.curl.php';
 
-if (isset($_GET['registro']) && !empty($_GET['registro'])) {
-    $idRegistro = base64_decode($_GET['registro']);
+if (isset($_GET['registroPDF']) && !empty($_GET['registroPDF'])) {
+    $idRegistro = base64_decode($_GET['registroPDF']);
 } else {
     $idRegistro = null;
 }
 
 $select = "*";
-$url = "registros?select=" . $select;
+$url = "relations?rel=registros,restados,prioridades,rzonas,equipos,trabajos&type=registro,restado,prioridad,rzona,equipo,trabajo".
+"&linkTo=id_registro&equalTo=".base64_decode($_GET['registroPDF'])."&select=" . $select;
 $method = "GET";
 $fields = array();
 
@@ -58,32 +59,39 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial', 'B', 10);
 
 // Agregar encabezados
-$fechaPedido = '14/10/2024'; // Ejemplo de valor
-$dni = '30173025';           // Ejemplo de valor
-$nombreApellido = 'MARIA DE LOS ANGELES PERALTA'; // Ejemplo de valor
-$telefono = '2311563';       // Ejemplo de valor
-$direccion = 'MITRE 1089';   // Ejemplo de valor
-$estado = 'Entregado';       // Ejemplo de valor
-$zona = 'VILLA ELVIRA';      // Ejemplo de valor
-$equipo = 'EQUIPO SOCIAL ADRIANA'; // Ejemplo de valor
-$trabajoOficio = 'AMA DE CASA'; // Ejemplo de valor
-$bancarizacion = 'SI';       // Ejemplo de valor
-$accesoInformacion = 'REDES SOCIALES'; // Ejemplo de valor
-$tramiteDNI = 'NO';          // Ejemplo de valor
-$monotributo = 'NO, NECESITA'; // Ejemplo de valor
-$ultimoTrabajo = '';         // Ejemplo de valor
-$educacionPrimariaCompleta = ''; // Ejemplo de valor
-$educacionPrimariaIncompleta = ''; // Ejemplo de valor
-$educacionSecundariaCompleta = ''; // Ejemplo de valor
-$educacionSecundariaIncompleta = ''; // Ejemplo de valor
-$observaciones = '';         // Ejemplo de valor
-$informe = 'TIENE 36 AÑOS, SOLTERA, SECUNDARIA COMPLETA. VIVE CON XAVIER MILLAN DE 14 AÑOS, ASISTE
-A 398, VACUNAS AL DIA, COBRA AUH; KIARA PERALTA DE 12 AÑOS, ASISTE A 125, VACUNAS AL
-DIA, COBRA AUH; THIAGO PERALTA DE 8 AÑOS, ASISTE A 125, VACUNAS AL DIA, COBRA AUH. SU
-CASA ES PROPIA, TIENE LUZ, AGUA POTABLE Y GAS A GARRAFA. SU CAPS ES ABEL FAUST.
- Solicita carga de garrafa, debido a que no posee los medios economicos para recargarla,
-y la necesita para su micro emprendimiento de cocina. Se sugiere darle acceso al
-beneficio';               // Ejemplo de valor
+$fechaPedido = $data->date_created_registro; 
+$dni = $data->dni_registro;           
+$nombreApellido = $data->nombre_registro; 
+$telefono = $data->telefono_registro;       
+$direccion = $data->direccion_registro;   
+$estado = $data->descripcion_restado;       
+$zona = $data->descripcion_rzona;      
+$equipo = $data->descripcion_equipo; 
+$trabajoOficio = $data->descripcion_trabajo; 
+$bancarizacion = $data->bancarizacion_registro;       
+$accesoInformacion = $data->acceso_registro;         
+$ultimoTrabajo = $data->utrabajo_registro;         
+ 
+
+// Función para limpiar el HTML del informe
+function limpiarHtml($texto) {
+    // Reemplazar saltos de línea <br> o <br /> por un espacio, para que las oraciones queden en la misma línea
+    $texto = preg_replace('/<br\s*\/?>/i', ' ', $texto);
+    
+    // Convertir entidades HTML a caracteres
+    $texto = html_entity_decode($texto, ENT_QUOTES, 'UTF-8');
+    
+    // Eliminar cualquier otra etiqueta HTML que quede
+    $texto = strip_tags($texto);
+    
+    // Eliminar saltos de línea innecesarios
+    $texto = trim(preg_replace('/\s+/', ' ', $texto));
+    
+    return $texto;
+}
+
+$observaciones = limpiarHtml($data->observacion_registro);   
+$informe = limpiarHtml($data->informe_registro);
 
 // Agregar encabezados con valores en la misma fila y un espacio entre ellos
 $pdf->Cell(0, 6, mb_convert_encoding('Fecha Pedido: ', 'ISO-8859-1') . '  ' . $fechaPedido, 0, 1, 'L');
@@ -97,19 +105,26 @@ $pdf->Cell(0, 6, mb_convert_encoding('Equipo: ', 'ISO-8859-1') . '  ' . $equipo,
 $pdf->Cell(0, 6, mb_convert_encoding('Trabajo/Oficio: ', 'ISO-8859-1') . '  ' . $trabajoOficio, 0, 1, 'L');
 $pdf->Cell(0, 6, mb_convert_encoding('Bancarización: ', 'ISO-8859-1') . '  ' . $bancarizacion, 0, 1, 'L');
 $pdf->Cell(0, 6, mb_convert_encoding('Acceso a la información: ', 'ISO-8859-1') . '  ' . $accesoInformacion, 0, 1, 'L');
-$pdf->Cell(0, 6, mb_convert_encoding('Trámite DNI: ', 'ISO-8859-1') . '  ' . $tramiteDNI, 0, 1, 'L');
-$pdf->Cell(0, 6, mb_convert_encoding('Monotributo: ', 'ISO-8859-1') . '  ' . $monotributo, 0, 1, 'L');
 $pdf->Cell(0, 6, mb_convert_encoding('Observaciones: ', 'ISO-8859-1') . '  ' . $observaciones, 0, 1, 'L');
 
-// Imprimir el encabezado "Informe" y luego el contenido del informe
+// Imprimir el encabezado "Informe" y luego el contenido del informe con menor espaciado entre líneas
 $pdf->Ln(10); 
 $pdf->Cell(0, 6, mb_convert_encoding('Informe: ', 'ISO-8859-1'), 0, 1, 'L');
-$pdf->MultiCell(0, 6, mb_convert_encoding($informe, 'ISO-8859-1'), 0, 'L');
+$pdf->MultiCell(0, 5, mb_convert_encoding($informe, 'ISO-8859-1'), 0, 'L'); // Reduce el valor de alto de línea a 5
 
 
 
 
 
+
+
+$pdf_name = "registro_" . $idRegistro . ".pdf";
+$path = "views/assets/pdfs/inclusion_social/" . $pdf_name;  // Define la ruta donde se guardará el PDF
+
+// Guarda el archivo en el servidor
+$pdf->Output($path, 'F'); // 'F' guarda el archivo en el servidor en la ruta especificada
+
+// Opcionalmente, también puedes mostrar el PDF en el navegador
 $pdf->Output($pdf_name, 'I');
 exit; // Asegúrate de terminar el script después de generar el PDF
 

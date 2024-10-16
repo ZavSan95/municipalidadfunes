@@ -196,7 +196,7 @@ if($(".inclusionTable").length > 0){
 
   var columns = [
      {"data":"id_registro"},
-     {"data":"fecha_registro"},
+     {"data":"date_created_registro"},
      {"data":"descripcion_restado"},
      {"data":"descripcion_prioridad"},
      {"data":"dni_registro"}, 
@@ -328,6 +328,8 @@ $(document).ready(function () {
           var reDirec = "salud_animal/tutores"
         }else if(table == "mascotas"){
           var reDirec = "salud_animal/mascotas"
+        }else if(table == "registros"){
+          var reDirec = "inclusion_social"
         }
 
         var data = new FormData();

@@ -20,23 +20,34 @@
 
     <?php 
         // Verifica si se está accediendo a generar_pdf.php
-        if (isset($_GET['registro'])) {
+        if (isset($_GET['registroPDF'])) {
+
             include 'modules/generar_pdf.php';
-        } else {
+
+        }else {
             // Resto de la lógica para manejar otras rutas
             if (!empty($routesArray[2])) {
+
                 if ($routesArray[2] == "gestion") {
+
                     include 'modules/gestion.php';
+
                 } else {
+
                     echo '
                         <script>
                             window.location = "' . $path . '404";
                         </script>
                     ';
+
                 }
+
             } else {
+
                 include 'modules/listado.php'; 
+
             }
+
         }
     ?>
     

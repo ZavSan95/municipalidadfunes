@@ -32,14 +32,14 @@ class DataTableController {
                 return;
             }
 
-            $select = "id_registro,fecha_registro,descripcion_restado,descripcion_prioridad,nombre_registro,dni_registro,descripcion_equipo";
+            $select = "id_registro,date_created_registro,descripcion_restado,descripcion_prioridad,nombre_registro,dni_registro,descripcion_equipo";
 
             // Search data
             if(!empty($_POST['search']['value'])) {
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["fecha_registro", "nombre_registro", "dni_registro", "descripcion_restado"];
+                    $linkTo = ["date_created_registro", "nombre_registro", "dni_registro", "descripcion_restado"];
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
                     $data = [];
@@ -92,10 +92,10 @@ class DataTableController {
                     
                     $actions = "
                     <div class='btn-group'>
-                <a href='/admin/inclusion_social/modules/generar_pdf.php?registro=".base64_encode($value->id_registro). "' target='_blank' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
+                        <a href='/admin/inclusion_social/modules/generar_pdf.php?registroPDF=".base64_encode($value->id_registro). "' target='_blank' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
                             <i class='fas fa-file-pdf text-white mr-1'></i>
                         </a>
-                        <a href='/admin/servicio_tecnico/gestion?registro=" . base64_encode($value->id_registro) . "' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
+                        <a href='/admin/inclusion_social/gestion?registro=" . base64_encode($value->id_registro) . "' class='btn btn-info border-0 rounded-pill mr-2 btn-sm'>
                             <i class='fas fa-pencil-alt text-white mr-1'></i>
                         </a>
                         <button class='btn btn-info border-0 rounded-pill mr-2 btn-sm deleteItem' 
@@ -110,7 +110,7 @@ class DataTableController {
 
                     $dataJSON['data'][] = [
                         "id_registro" => ($start + $key + 1),
-                        "fecha_registro" => $value->fecha_registro,
+                        "date_created_registro" => $value->date_created_registro,
                         "descripcion_restado" => $value->descripcion_restado,
                         "descripcion_prioridad" => $value->descripcion_prioridad,
                         "dni_registro" => $value->dni_registro,

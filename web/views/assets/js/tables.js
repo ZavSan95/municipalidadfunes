@@ -210,6 +210,30 @@ if($(".inclusionTable").length > 0){
 
 }
 
+/*=============================================
+Tabla para Turnos
+=============================================*/
+
+if($(".turnosTable").length > 0){
+
+  var url = "/ajax/data-turnos.ajax.php";
+
+  var columns = [
+     {"data":"id_turno"},
+     {"data":"fecha_turno"},
+     {"data":"inicio_turno"},
+     {"data":"descripcion_dependencia"},
+     {"data":"descripcion_servicio"}, 
+     {"data":"nombre_turno"},
+     {"data":"dni_turno"},
+     {"data":"actions", "orderable":false, "searchable":false}
+  ]
+
+  var order = [0,"desc"];
+  
+
+}
+
 
 
 

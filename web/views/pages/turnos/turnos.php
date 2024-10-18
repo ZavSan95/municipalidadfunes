@@ -36,7 +36,7 @@
                 </div>
                 <!-- end preloader -->
 
-                <iframe src="<?php echo $path;?>easyappointments/index.php" class="layout__turnos"></iframe>
+                <iframe src="http://appointments.com/appointments/index.php" class="layout__turnos"></iframe>
             </div>
         </div>
     </div>

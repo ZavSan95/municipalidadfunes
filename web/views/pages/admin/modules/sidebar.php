@@ -34,6 +34,33 @@
                 </li>
                 <?php endif; ?>
 
+                <!-- Verificación del rol antes de mostrar "Turnos" -->
+                <?php if (in_array($_SESSION['administrador']->rol_admin, ['admin', 'moderator'])) : ?>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-triangle-exclamation"></i>
+                        <p>
+                            Turnos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/turnos/calendario" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Calendario</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/turnos/listado" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Listado</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <?php endif; ?>
+
                 <!-- Verificación del rol antes de mostrar "Áreas" -->
                 <?php if (in_array($_SESSION['administrador']->rol_admin, ['admin', 'supervisor'])) : ?>
                 <li class="nav-item">
@@ -156,6 +183,8 @@
                     </a>
                 </li>
                 <?php endif; ?>
+
+                
 
                 <!-- Verificación del rol antes de mostrar "Comercios" -->
                 <?php if (in_array($_SESSION['administrador']->rol_admin, ['admin', 'comercio'])) : ?>

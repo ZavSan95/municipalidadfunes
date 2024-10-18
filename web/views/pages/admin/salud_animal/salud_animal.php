@@ -4,13 +4,6 @@ if(!isset($routesArray[2]) && empty($routesArray[2])){
 
 ?>
 
-
-
-
-
-
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -32,24 +25,6 @@ if(!isset($routesArray[2]) && empty($routesArray[2])){
     <!-- /.content-header -->
     
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php    

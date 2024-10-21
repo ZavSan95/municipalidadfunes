@@ -63,23 +63,11 @@ echo '<pre>';print_r($turno);echo '</pre>'
                         <div class="col-md-6">
                             <div class="card mb-3">
                                 <div class="card-body">
-                                <form method="POST" action="">
+
                                     <div class="form-group pb-3">
                                         <label for="id_dependencia_turno">Dependencia <sup class="text-danger font-weight-bold">*</sup></label>
-                                        <select id="id_dependencia_turno" name="id_dependencia_turno" class="form-control required" onchange="updateServicios()">
+                                        <select id="id_dependencia_turno" name="id_dependencia_turno" class="form-control required" onchange="">
                                             <option value="">Seleccione Dependencia</option>
-                                            <?php 
-                                            $url = "dependencias?select=id_dependencia,descripcion_dependencia";
-                                            $method = "GET";
-                                            $fields = array();
-                                            $dependencias = CurlController::request($url, $method, $fields);
-
-                                            if ($dependencias->status == 200) {
-                                                foreach ($dependencias->results as $value) {
-                                                    echo '<option value="'.$value->id_dependencia.'" '.((isset($_POST['id_dependencia_turno']) && $_POST['id_dependencia_turno'] == $value->id_dependencia) ? 'selected' : '').'>'.$value->descripcion_dependencia.'</option>';
-                                                }
-                                            }
-                                            ?>
                                         </select>
                                     </div>
 
@@ -87,33 +75,20 @@ echo '<pre>';print_r($turno);echo '</pre>'
                                         <label for="id_servicio_turno">Servicio <sup class="text-danger font-weight-bold">*</sup></label>
                                         <select id="id_servicio_turno" name="id_servicio_turno" class="form-control required">
                                             <option value="">Seleccione Servicio</option>
-                                            <?php 
-                                            // Solo carga servicios si se ha seleccionado una dependencia
-                                            if (isset($_POST['id_dependencia_turno']) && $_POST['id_dependencia_turno'] != '') {
-                                                $dependenciaId = $_POST['id_dependencia_turno'];
-                                                $url = "servicios?dependencia_id=" . $dependenciaId; // Ajusta la URL según tu API
-                                                $method = "GET";
-                                                $fields = array();
-                                                $servicios = CurlController::request($url, $method, $fields);
-
-                                                if ($servicios->status == 200) {
-
-                                                    $servicios = $servicios->results;
-
-                                                    foreach ($servicios as $value) {
-                                                        echo '<option value="'.$value->id_servicio.'" ' . 
-                                                        (($turno && $turno->id_servicio_turno == $value->id_servicio) ? 'selected' : '') . 
-                                                        '>'.$value->descripcion_servicio.'</option>';
-                                                    }
-                                                }
-                                            }
-                                            ?>
                                         </select>
                                     </div>
 
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+
                                     <div class="form-group pb-3">
                                         <label for="fecha_turno">Fecha <sup class="text-danger font-weight-bold">*</sup></label>
-                                        <select id="fecha_turno" name="fecha_turno" class="form-control required" onchange="updateHorarios()">
+                                        <select id="fecha_turno" name="fecha_turno" class="form-control required" onchange="handleFechaChange()">
                                             <option value="">Seleccione una fecha</option>
                                             <?php 
                                                 $turnoController = new TurnoController();
@@ -125,156 +100,15 @@ echo '<pre>';print_r($turno);echo '</pre>'
                                         </select>
                                     </div>
 
-                                </form>
 
-<script>
-function updateServicios() {
-    const dependenciaId = document.getElementById('id_dependencia_turno').value;
-
-    // Crear un formulario oculto
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = '';
-
-    // Agregar el campo de dependencia al formulario
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'id_dependencia_turno';
-    input.value = dependenciaId;
-    form.appendChild(input);
-
-    // Agregar un campo oculto para el submit
-    const submitInput = document.createElement('input');
-    submitInput.type = 'hidden';
-    submitInput.name = 'fetch_servicios'; // Cambia el nombre si es necesario
-    form.appendChild(submitInput);
-
-    // Enviar el formulario
-    document.body.appendChild(form);
-    form.submit();
-}
-
-function updateHorarios() {
-    const dependenciaId = document.getElementById('id_dependencia_turno').value;
-    const servicioId = document.getElementById('id_servicio_turno').value;
-    const fecha = document.getElementById('fecha_turno').value;
-
-    // Verificar que todos los valores necesarios están seleccionados
-    if (dependenciaId && servicioId && fecha) {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '';
-
-        // Agregar campos ocultos al formulario
-        const inputDependencia = document.createElement('input');
-        inputDependencia.type = 'hidden';
-        inputDependencia.name = 'id_dependencia_turno';
-        inputDependencia.value = dependenciaId;
-        form.appendChild(inputDependencia);
-
-        const inputServicio = document.createElement('input');
-        inputServicio.type = 'hidden';
-        inputServicio.name = 'id_servicio_turno';
-        inputServicio.value = servicioId;
-        form.appendChild(inputServicio);
-
-        const inputFecha = document.createElement('input');
-        inputFecha.type = 'hidden';
-        inputFecha.name = 'fecha_turno';
-        inputFecha.value = fecha;
-        form.appendChild(inputFecha);
-
-        const submitInput = document.createElement('input');
-        submitInput.type = 'hidden';
-        submitInput.name = 'submit_turno';
-        form.appendChild(submitInput);
-
-        // Enviar el formulario
-        document.body.appendChild(form);
-        form.submit();
-    } else {
-        alert("Por favor, asegúrese de que la dependencia y el servicio estén seleccionados.");
-    }
-}
-
-</script>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tarjeta donde se mostrarán los horarios -->
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                <div class='form-group pb-3'>
-                                    <label for='horario_turno'>Horario <sup class='text-danger font-weight-bold'>*</sup></label>
-                                    <select id='horario_turno' name='horario_turno' class='form-control required'>
-                                    <option value=''>Seleccione un horario</option>
-                                    <?php
-                                    // Mostrar los horarios disponibles en un select
-                                    if (isset($_POST['submit_turno'])) {
-                                        // Obtener los valores seleccionados
-                                        $id_dependencia = $_POST['id_dependencia_turno'];
-                                        $id_servicio = $_POST['id_servicio_turno'];
-                                        $fecha_turno = $_POST['fecha_turno']; // Obtener la fecha seleccionada
-
-                                        // Verificar si se seleccionaron dependencia, servicio y fecha
-                                        if ($id_dependencia && $id_servicio && $fecha_turno) {
-                                            // Obtener el horario de la dependencia
-                                            $url = "dependencias?linkTo=id_dependencia&equalTo=".$id_dependencia."&select=inicio_dependencia,fin_dependencia,duracion_dependencia";
-                                            $method = "GET";
-                                            $fields = array();
-                                            $horarios = CurlController::request($url, $method, $fields);
-
-                                            // Obtener turnos ya asignados para esa fecha
-                                            $urlTurnos = "turnos?linkTo=id_dependencia_turno,fecha_turno&equalTo={$id_dependencia},{$fecha_turno}&select=inicio_turno";
-                                            $turnos = CurlController::request($urlTurnos, $method, $fields);
-
-                                            $turnosOcupados = [];
-                                            if ($turnos->status == 200) {
-                                                foreach ($turnos->results as $turno) {
-                                                    // Asegúrate de tener el formato correcto
-                                                    $turnosOcupados[] = date('H:i', strtotime($turno->inicio_turno)); // Convertir a formato 'H:i'
-                                                }
-                                            }
-
-                                            if ($horarios->status == 200) {
-                                                $horarios = $horarios->results;
-
-                                                // Obtener inicio, fin y duración
-                                                $inicio = new DateTime($horarios[0]->inicio_dependencia);
-                                                $fin = new DateTime($horarios[0]->fin_dependencia);
-                                                $duracion = $horarios[0]->duracion_dependencia; // Duración en minutos
-
-                                                // Calcular horarios disponibles
-                                                $horariosDisponibles = [];
-                                                while ($inicio < $fin) {
-                                                    $horaFormato = $inicio->format('H:i');
-                                                    // Solo agregar si no está ocupado
-                                                    if (!in_array($horaFormato, $turnosOcupados)) {
-                                                        $horariosDisponibles[] = $horaFormato; // Agregar formato de hora
-                                                    }
-                                                    // Sumar la duración al horario actual
-                                                    $inicio->modify("+{$duracion} minutes");
-                                                }
-
-                                                // Mostrar el select con horarios disponibles
-                                                foreach ($horariosDisponibles as $horario) {
-                                                    echo '<option value="'.$horario.'">'.$horario.'</option>';
-                                                }
-                                            } else {
-                                                echo "<option value=''>Sin Turnos Disponibles</option>";
-                                            }
-                                        } else {
-                                            echo "<p>Por favor, seleccione tanto una dependencia como un servicio y una fecha.</p>";
-                                        }
-                                    }
-                                    ?>
-                                    
-                                    </select>
+                                    <div class='form-group pb-3'>
+                                        <label for='horario_turno'>Horario <sup class='text-danger font-weight-bold'>*</sup></label>
+                                        <select id='horario_turno' name='horario_turno' class='form-control required'>
+                                        <option value=''>Seleccione un horario</option>
+                                        
+                                        </select>
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -327,13 +161,160 @@ function updateHorarios() {
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <button type="submit" name="" class="btn btn-info">Guardar</button>
-                    </div>
-
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+
+<script>
+    async function apiRequest(url, method, fields) {
+    try {
+        // Define la configuración para el fetch
+        const options = {
+            method: method, // Método HTTP (GET, POST, PUT, etc.)
+            headers: {
+                'Authorization': 'SSDFzdg235dsgsdfAsa44SDFGDFDadg', // Token de autorización
+                'Content-Type': 'application/json', // Encabezado para indicar JSON
+            }
+        };
+
+        // Agregar el body si el método no es GET
+        if (method !== 'GET') {
+            options.body = JSON.stringify(fields); // Convierte los datos a JSON
+        }
+
+        // Realiza la solicitud
+        const response = await fetch(`http://testfunes.online/${url}`, options);
+        
+        // Comprueba si la respuesta es exitosa
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Convierte la respuesta a JSON
+        const data = await response.json();
+        return data; // Devuelve los datos JSON
+
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Lanza el error para manejarlo externamente si es necesario
+    }
+}
+
+// Función para cargar dependencias en el select
+function loadDependenciasIntoSelect(dependencias) {
+    const select = document.getElementById('id_dependencia_turno');
+    
+    // Limpia el select antes de agregar opciones
+    select.innerHTML = '<option value="">Seleccione Dependencia</option>';
+
+    dependencias.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id_dependencia; // ID de la dependencia
+        option.textContent = item.descripcion_dependencia; // Descripción como texto
+        select.appendChild(option);
+    });
+}
+
+// Uso del controlador
+apiRequest('dependencias?select=id_dependencia,descripcion_dependencia', 'GET', [])
+    .then(data => {
+        // Asegúrate de que data.results contenga los elementos que deseas
+        loadDependenciasIntoSelect(data.results); // Carga las dependencias en el select
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error);
+    });
+
+    // Función para cargar servicios en el select según la dependencia seleccionada
+async function loadServicios(dependenciaId) {
+    const url = `servicios?select=id_servicio,descripcion_servicio&id_area_servicio=${dependenciaId}`; // Genera la URL
+
+    try {
+        const data = await apiRequest(url, 'GET', []);
+        const select = document.getElementById('id_servicio_turno');
+        select.innerHTML = '<option value="">Seleccione Servicio</option>'; // Limpia las opciones anteriores
+
+        // Agrega las nuevas opciones de servicios
+        data.results.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.id_servicio; // ID del servicio
+            option.textContent = item.descripcion_servicio; // Descripción del servicio
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error al cargar los servicios:', error);
+    }
+}
+
+// Agrega el evento onchange al select de dependencias
+document.getElementById('id_dependencia_turno').addEventListener('change', function() {
+    const dependenciaId = this.value; // Obtiene el ID de la dependencia seleccionada
+    if (dependenciaId) {
+        loadServicios(dependenciaId); // Carga los servicios correspondientes
+    } else {
+        const selectServicios = document.getElementById('id_servicio_turno');
+        selectServicios.innerHTML = '<option value="">Seleccione Servicio</option>'; // Reinicia el select de servicios
+    }
+});
+
+async function loadHorarios(dependenciaId, servicioId, fecha) {
+    const urlDependencia = `dependencias?linkTo=id_dependencia&equalTo=${dependenciaId}`; // Suponiendo que puedes obtener los detalles de la dependencia por ID
+    const urlTurnos = `turnos?linkTo=id_dependencia_turno,id_servicio_turno,fecha_turno&equalTo=${dependenciaId},${servicioId},${fecha}`;
+
+    try {
+        // Primero, obtenemos los detalles de la dependencia
+        const dependencia = await apiRequest(urlDependencia, 'GET', []);
+        console.log(dependencia);
+        
+        // Desestructuramos los horarios de la dependencia
+        const { inicio_dependencia, fin_dependencia, duracion_dependencia } = dependencia.results[0];
+
+        // Calculamos todos los horarios posibles
+        const horariosPosibles = [];
+        let current = new Date(`1970-01-01T${inicio_dependencia}:00`);
+        const end = new Date(`1970-01-01T${fin_dependencia}:00`);
+
+        while (current <= end) {
+            horariosPosibles.push(current.toTimeString().split(' ')[0]); // Formato HH:mm:ss
+            current.setMinutes(current.getMinutes() + duracion_dependencia); // Aumentar por duración
+        }
+
+        // Obtenemos los turnos ya existentes
+        const turnos = await apiRequest(urlTurnos, 'GET', []);
+        console.log(turnos);
+        const horariosOcupados = turnos.results.map(turno => turno.inicio_turno); // Suponiendo que 'inicio_turno' es el horario ocupado
+
+        // Filtramos los horarios posibles para eliminar los ocupados
+        const horariosDisponibles = horariosPosibles.filter(horario => !horariosOcupados.includes(horario));
+
+        // Llenamos el select de horarios
+        const select = document.getElementById('horario_turno');
+        select.innerHTML = '<option value="">Seleccione Horario</option>'; // Reiniciar opciones
+
+        horariosDisponibles.forEach(horario => {
+            const option = document.createElement('option');
+            option.value = horario; // Usar el horario como valor
+            option.textContent = horario; // Mostrar el horario
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error al cargar los horarios:', error);
+    }
+}
+
+function handleFechaChange() {
+    const dependenciaId = document.getElementById('id_dependencia_turno').value;
+    const servicioId = document.getElementById('id_servicio_turno').value;
+    const fecha = document.getElementById('fecha_turno').value;
+
+    // Verificamos que todos los valores necesarios estén seleccionados
+    if (dependenciaId && servicioId && fecha) {
+        loadHorarios(dependenciaId, servicioId, fecha);
+    }
+}
+
+
+</script>

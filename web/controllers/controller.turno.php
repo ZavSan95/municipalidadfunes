@@ -25,7 +25,7 @@ class TurnoController{
         // Campos requeridos
         $camposRequeridos = [
             'id_dependencia_turno' => 'Dependencia',
-            'id_servicio-turno' => 'Servicio',
+            'id_servicio_turno' => 'Servicio',
             'fecha_turno' => 'Fecha del Turno',
             'horario_turno' => 'Horario del Turno',
             'nombre_turno' => 'Nombre y Apellido',
@@ -105,6 +105,7 @@ class TurnoController{
             =============================================*/
             if(isset($_POST['idTurno']) && !empty($_POST['idTurno'])){
 
+                echo '<pre>';print_r($_POST);echo'</pre>';
             }
 
             /*=============================================
@@ -156,7 +157,7 @@ class TurnoController{
                     $method = "POST";
     
                     $createData = CurlController::request($url, $method, $fields);
-                    echo '<pre>';print_r($createData);echo'</pre>';
+                    //echo '<pre>';print_r($createData);echo'</pre>';
                     if ($createData->status == 200) {
                         $log = new ControllerLog();
                         $log->register($_SESSION['administrador']->email_admin, "CREACION TURNO", null);
@@ -172,7 +173,7 @@ class TurnoController{
                                         confirmButtonColor: "#074A1F"
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            window.location.href = "/admin/turnos";
+                                            window.location.href = "/admin/turnos/listado";
                                         }
                                     });
                                 }

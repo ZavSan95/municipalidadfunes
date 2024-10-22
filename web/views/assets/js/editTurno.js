@@ -213,17 +213,17 @@ function handleFechaChange() {
 /*=============================================
 Cargo Dependencias, Servicios y Fechas
 =============================================*/
+
 let dependenciasInfo = null;
 let serviciosInfo = null;
 let fechasInfo = null;
 
-let dependenciaSelect = document.getElementById('id_dependencia_turno');
-let servicioSelect = document.getElementById('id_servicio_turno');
-let fechaSelect = document.getElementById('fecha_turno');
+const fechaSelect = document.getElementById('fecha_turno');
+const dependenciaSelect = document.getElementById('id_dependencia_turno');
+const servicioSelect = document.getElementById('id_servicio_turno');
 
-dependenciaSelect.disabled = true;
-servicioSelect.disabled = true;
-//fechaSelect.disabled = true;
+let dependenciaHidden = document.getElementById('dependenciaHidden');
+let servicioHidden = document.getElementById('servicioHidden');
 
 /*=============================================
 Selecciono la data que viene en el turno a editar
@@ -332,26 +332,36 @@ const selectData  = async () => {
 /*=============================================
 Cargo métodos
 =============================================*/
-turnoData();
-selectData();
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        // Primero esperamos a obtener los datos del turno
+        await turnoData(); 
 
-document.addEventListener("DOMContentLoaded", () => {
-    const dependenciaId = turnoInfo.id_dependencia_turno;
-    const servicioId = turnoInfo.id_servicio_turno;
-    const fecha = turnoInfo.fecha_turno;
+        // Luego aseguramos que turnoInfo tiene los datos necesarios
+        if (turnoInfo) {
 
-    loadHorarios(dependenciaId, servicioId, fecha).then(() => {
-        const selectHorario = document.getElementById('horario_turno');
-        const horarioSinSegundos = turnoInfo.inicio_turno.slice(0, 5); // Obtener solo HH:MM
+            dependenciaSelect.disabled = true;
+            servicioSelect.disabled = true;
 
-        // Verificar si hay opciones en el select y seleccionar la opción que coincide
-        const options = Array.from(selectHorario.options);
-        options.forEach(option => {
-            if (option.value  === horarioSinSegundos && fecha === turnoInfo.fecha_turno) {
-                option.selected = true; // Selecciona la opción si coincide
-            }
-        });
-    });
+            const dependenciaId = turnoInfo.id_dependencia_turno;
+            dependenciaHidden.value = dependenciaId;
+
+            const servicioId = turnoInfo.id_servicio_turno;
+            servicioHidden.value = servicioId;
+
+            const fecha = turnoInfo.fecha_turno;
+
+            // Ahora que tenemos turnoInfo, cargamos los horarios
+            await loadHorarios(dependenciaId, servicioId, fecha);
+
+            // Después de cargar los horarios, seleccionamos el horario correcto
+            selectData();
+        } else {
+            console.error('No se pudieron cargar los datos del turno.');
+        }
+    } catch (error) {
+        console.error('Error al cargar los métodos:', error);
+    }
 });
 
 

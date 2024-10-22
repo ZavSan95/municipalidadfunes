@@ -16,14 +16,14 @@ $turno = null;
 } else {
 $turno = null;
 }
-echo '<pre>';print_r($turno);echo '</pre>';
+//echo '<pre>';print_r($turno);echo '</pre>';
 
 ?>
 
 <div class="content">
     <div class="container">
         <div class="card">
-            <form method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+            <form method="post" class="needs-validation" novalidate enctype="multipart/form-data" id="formTurnos">
 
                 <?php if (!empty($turno)): ?>
                 <input type="hidden" name="idTurno" value="<?php echo base64_encode($turno->id_turno) ?>">
@@ -65,9 +65,10 @@ echo '<pre>';print_r($turno);echo '</pre>';
 
                                     <div class="form-group pb-3">
                                         <label for="id_dependencia_turno">Dependencia <sup class="text-danger font-weight-bold">*</sup></label>
-                                        <select id="id_dependencia_turno" name="id_dependencia_turno" class="form-control required" onchange="">
+                                        <select id="id_dependencia_turno" name="id_dependencia_turno" class="form-control required">
                                             <option value="">Seleccione Dependencia</option>
                                         </select>
+                                        <input type="hidden" id="dependenciaHidden" name="dependencia">
                                     </div>
 
                                     <div class="form-group pb-3">
@@ -75,6 +76,7 @@ echo '<pre>';print_r($turno);echo '</pre>';
                                         <select id="id_servicio_turno" name="id_servicio_turno" class="form-control required">
                                             <option value="">Seleccione Servicio</option>
                                         </select>
+                                        <input type="hidden" id="servicioHidden" name="servicio">
                                     </div>
 
                                 </div>
@@ -169,6 +171,7 @@ echo '<pre>';print_r($turno);echo '</pre>';
  }else{
 
     echo '<script type="text/javascript" src="' . $path . '/views/assets/js/editTurno.js"></script>';
+
  }
 
 ?>

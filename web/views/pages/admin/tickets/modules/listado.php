@@ -27,7 +27,7 @@ if (isset($_SESSION['administrador']->id_admin)) {
 $(document).ready(function() {
     $('#misTicketsTable').DataTable({
         "paging": true,  // Habilita la paginación
-        "lengthChange": true, // Habilita la opción para cambiar el número de registros por página
+        "lengthChange": false, // Habilita la opción para cambiar el número de registros por página
         "searching": true, // Habilita el campo de búsqueda
         "ordering": true, // Habilita la ordenación de columnas
         "info": true, // Muestra información sobre los resultados

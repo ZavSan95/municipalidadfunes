@@ -269,17 +269,20 @@ $(document).ready(function() {
               "sLast": "Último",
               "sNext": "Siguiente",
               "sPrevious": "Anterior"
-          },
+          }
       },
+      "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], 
+      
+      // Configuración de `dom` para incluir el selector de cantidad de filas y botones
+      "dom": '<"top"lfB>rt<"bottom"ip><"clear">', // 'l' para lengthMenu, 'f' para buscar, 'B' para botones, 'i' para info, 'p' para paginación
+      
       // Configuración de botones
-      "dom": 'Bfrtip', // Añadir botones en la parte superior
       "buttons": [
           {
               extend: 'excelHtml5',
               text: 'Exportar a Excel',
               title: 'Nombre del archivo',
               exportOptions: {
-                  // Puedes definir qué columnas exportar aquí
                   columns: ':not(:last-child)'
               }
           },
@@ -294,6 +297,7 @@ $(document).ready(function() {
       ]
   });
 });
+
 
 /*=============================================
 Eliminar Item
@@ -354,6 +358,8 @@ $(document).ready(function () {
           var reDirec = "salud_animal/mascotas"
         }else if(table == "registros"){
           var reDirec = "inclusion_social"
+        }else if(table == "turnos"){
+          var reDirec = "turnos/listado"
         }
 
         var data = new FormData();

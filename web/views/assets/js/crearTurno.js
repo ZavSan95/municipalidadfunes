@@ -163,17 +163,9 @@ document.addEventListener('DOMContentLoaded', loadDependenciasAndServicios);
         });
     }
 
-    // Evento change en id_servicio_turno
-    document.getElementById('id_servicio_turno').addEventListener('change', function() {
-        const servicioSeleccionado = this.value;
-        if (servicioSeleccionado) {
-            // Solo cargar fechas si hay un servicio seleccionado
-            cargarFechasHabiles();
-        } else {
-            // Limpiar el select de fechas si no hay un servicio seleccionado
-            document.getElementById('fecha_turno').innerHTML = '<option value="">Seleccione una fecha</option>';
-        }
-    });
+
+    
+    
 
 
 

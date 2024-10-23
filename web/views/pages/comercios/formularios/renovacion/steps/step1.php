@@ -1,8 +1,19 @@
 <div style="margin-bottom:16px;">
-    <label for="rubro">Seleccione Rubro*</label>
-    <select id="rubro" name="rubro" class="form-control required">
-        <option value="0" disabled selected>Seleccione Rubro*</option>
-        <option value="1">Rubro 1</option>
+    <label for="rubro">Rubro*</label>
+    <select name="id_rubro" class="form-control required">
+        <option value="">Seleccione Rubro</option>
+        <?php 
+        $url = "rubros?select=id_rubro,descripcion_rubro&orderBy=descripcion_rubro&orderMode=ASC";
+        $method = "GET";
+        $fields = array();
+        $rubros = CurlController::request($url,$method,$fields);
+        if($rubros->status == 200){
+            $rubros = $rubros->results;
+            foreach ($rubros as $value) {
+                echo '<option value="'.$value->id_rubro.'" ' .'>'.$value->descripcion_rubro.'</option>';
+            }
+        }
+    ?>
     </select>
 </div>
 

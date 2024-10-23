@@ -59,158 +59,20 @@
                     <!-- start tab content for TGI -->
                     <div class="tab-pane fade in active show" id="tab_four1">
                         <div class="d-flex flex-column justify-content-center align-items-center d-col">
-                            <h5>
-                                El trámite de Renovación de Habilitación Comercial consta de 2 pasos para personas
-                                físicas y de 3 pasos para personas jurídicas,
-                                recuerde que debe terminar de completar los formularios para que el trámite tenga
-                                validez.
-                            </h5>
-                            <button
-                                class="inicioTramite btn btn-extra-large btn-rounded with-rounded btn-base-color btn-box-shadow box-shadow-extra-large mt-20px sm-mt-0 pe-50px appear"
-                                data-formulario="formulario-renovacion">
-                                INICIAR TRÁMITE
-                            </button>
+                            <div id="info-renovacion">
+
+                                <h5>
+                                    El trámite de Renovación de Habilitación Comercial consta de 2 pasos para personas
+                                    físicas y de 3 pasos para personas jurídicas,
+                                    recuerde que debe terminar de completar los formularios para que el trámite tenga
+                                    validez.
+                                </h5>
+
+                            </div>
+                            <?php include 'formularios/renovacion/renovacion.php'; ?>
                         </div>
                     </div>
                     <!-- end tab content -->
-
-                    <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-
-                        const container = document.querySelector('#tramitesComercio');
-                        const contenidoContainerOrig = container.innerHTML;
-
-                        const buttonsInicio = document.querySelectorAll('.inicioTramite');
-                        console.log('Botones inicio:', buttonsInicio
-                        .length); // Ver cuántos botones se encuentran
-
-                        buttonsInicio.forEach(button => {
-                            console.log('Se ha encontrado un botón:',
-                            button); // Para verificar si se encuentran los botones
-                            button.addEventListener('click', (event) => {
-                                console.log('click al botón');
-                                const tipoFormulario = event.target.getAttribute(
-                                    'data-formulario');
-
-                                if (tipoFormulario == "formulario-renovacion") {
-                                    container.innerHTML = '';
-
-                                    container.innerHTML =
-                                        `<?php include 'formularios/renovacion/renovacion.php';  ?>`;
-
-                                    initializeFormSteps();
-
-
-                                }
-                            });
-                        });
-                    });
-
-                    function initializeFormSteps() {
-                        const formSteps = document.querySelectorAll('.form-step');
-                        const stepContainers = document.querySelectorAll('[id^="page-"]');
-                        let currentStepIndex = 0;
-
-                        function showStep(index) {
-                            formSteps.forEach((step, i) => {
-                                step.classList.toggle('d-none', i !== index);
-                                step.classList.toggle('active', i === index);
-                            });
-
-                            stepContainers.forEach((container, i) => {
-                                container.classList.toggle('active', i === index);
-                            });
-                        }
-
-                        function validateCurrentStep() {
-                            const currentStep = formSteps[currentStepIndex];
-                            let isValid = true;
-
-                            currentStep.querySelectorAll('.required').forEach(field => {
-                                const fieldValue = field.value.trim();
-                                const type = field.getAttribute('type');
-                                const textFormat = /^[a-zA-Z\s]+$/;
-                                const emailFormat = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                                const telFormat = /[0-9 -()+]+$/;
-
-                                if (fieldValue === '') {
-                                    field.classList.add('is-invalid');
-                                    isValid = false;
-                                } else if (type === 'text' && !textFormat.test(fieldValue)) {
-                                    field.classList.add('is-invalid');
-                                    isValid = false;
-                                } else if (type === 'email' && !emailFormat.test(fieldValue)) {
-                                    field.classList.add('is-invalid');
-                                    isValid = false;
-                                } else if (type === 'tel' && !telFormat.test(fieldValue)) {
-                                    field.classList.add('is-invalid');
-                                    isValid = false;
-                                } else {
-                                    field.classList.remove('is-invalid');
-                                    field.classList.add('is-valid');
-                                }
-                            });
-
-                            return isValid;
-                        }
-
-
-                        function handleNavigation(event) {
-                            const button = event.target;
-                            const action = button.getAttribute('data-action');
-                            const targetId = button.getAttribute('data-target');
-                            const tipoPersonaSelect = document.querySelector('#tipo_contribuyente');
-                            const tipoPersona = tipoPersonaSelect ? tipoPersonaSelect.value : null;
-
-                            if (currentStepIndex === 0 && action === 'next') {
-                                const pag2Fisica = document.querySelector('#paso2Fisica');
-                                const pag2Juridica = document.querySelector('#paso2Juridica');
-                                const pag3Juridica = document.querySelector('#paso3Juridica');
-
-                                if (tipoPersona === "1") {
-                                    pag2Fisica.style.display = 'block';
-                                    pag2Juridica.style.display = 'none';
-                                    pag3Juridica.style.display = 'none';
-                                } else if (tipoPersona === "2") {
-                                    pag2Fisica.style.display = 'none';
-                                    pag2Juridica.style.display = 'block';
-                                    pag3Juridica.style.display = 'block';
-                                }
-                            }
-
-                            if ((action === 'next' || action === 'submit') && !validateCurrentStep()) {
-                                return;
-                            }
-
-                            if (action === 'next') {
-                                currentStepIndex++;
-                            } else if (action === 'prev') {
-                                currentStepIndex--;
-                            } else if (action === 'submit') {
-                                if (validateCurrentStep()) {
-                                    document.getElementById('form-renovacion').submit();
-                                }
-                                return;
-                            }
-
-                            if (targetId) {
-                                currentStepIndex = Array.from(formSteps).findIndex(step => step.id === targetId);
-                            }
-
-                            if (currentStepIndex >= 0 && currentStepIndex < formSteps.length) {
-                                showStep(currentStepIndex);
-                            }
-                        }
-
-                        document.querySelectorAll('[data-action]').forEach(button => {
-                            button.addEventListener('click', handleNavigation);
-                        });
-
-                        showStep(currentStepIndex); // Inicializa con el primer paso
-                    }
-                    </script>
-
-
 
 
                     <div class="tab-pane fade" id="tab_four2">
@@ -239,3 +101,4 @@
         </div>
     </div>
 </section>
+

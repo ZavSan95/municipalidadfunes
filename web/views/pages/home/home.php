@@ -2,6 +2,9 @@
 <!-- Slides -->
 <?php include "modules/slides.php"; ?>
 
+<!-- Sticky -->
+<?php include 'modules/stickys.php'; ?>
+
 <!-- Header Security -->
 <?php include "modules/header_security.php"; ?>
 

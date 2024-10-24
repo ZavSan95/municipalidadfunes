@@ -59,16 +59,6 @@
                     <!-- start tab content for TGI -->
                     <div class="tab-pane fade in active show" id="tab_four1">
                         <div class="d-flex flex-column justify-content-center align-items-center d-col">
-                            <div id="info-renovacion">
-
-                                <h5>
-                                    El trámite de Renovación de Habilitación Comercial consta de 2 pasos para personas
-                                    físicas y de 3 pasos para personas jurídicas,
-                                    recuerde que debe terminar de completar los formularios para que el trámite tenga
-                                    validez.
-                                </h5>
-
-                            </div>
                             <?php include 'formularios/renovacion/renovacion.php'; ?>
                         </div>
                     </div>
@@ -101,4 +91,3 @@
         </div>
     </div>
 </section>
-
